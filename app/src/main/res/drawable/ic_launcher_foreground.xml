@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  108dp adaptive-icon canvas. Head and bust are cubics only; the neck gap is 4dp.
+  Optical center is y=53.25. The furthest point from (54,54) is 30.96dp, inside
+  the 33dp safe-zone radius.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,25.21 C61.12,25.21 66.89,30.98 66.89,38.1 C66.89,45.22 61.12,50.99 54,50.99 C46.88,50.99 41.11,45.22 41.11,38.1 C41.11,30.98 46.88,25.21 54,25.21 Z M54,54.99 C72.95,54.99 78.29,58.99 78.29,70.38 C78.29,77.34 69.55,81.28 54,81.28 C38.45,81.28 29.71,77.34 29.71,70.38 C29.71,58.99 35.05,54.99 54,54.99 Z" />
+</vector>

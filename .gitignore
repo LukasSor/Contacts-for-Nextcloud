@@ -1,0 +1,93 @@
+# Built app artifacts
+build/
+**/build/
+out/
+**/out/
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
+
+# Gradle
+.gradle/
+**/.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+
+# Local machine / SDK paths (never commit)
+local.properties
+**/local.properties
+
+# Android Studio / IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+.idea_modules/
+atlassian-ide-plugin.xml
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+# Kotlin
+.kotlin/
+**/.kotlin/
+
+# Android captures & profiling
+captures/
+*.hprof
+*.log
+
+# Signing & secrets
+*.jks
+*.keystore
+keystore.properties
+signing.properties
+google-services.json
+**/secrets.properties
+.env
+.env.*
+
+# NDK / native build
+.externalNativeBuild/
+.cxx/
+obj/
+
+# OS junk
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editor / tooling
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json.example
+*.swp
+*~
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+fastlane/test_output/
+
+# Android package metadata
+output-metadata.json
+
+# Nextcloud conflict copies
+* (conflicted copy *)
+
+# sqlite-jdbc unpacks its native library here when tests run
+/org/
+
+# Misc
+*.orig
+*.rej

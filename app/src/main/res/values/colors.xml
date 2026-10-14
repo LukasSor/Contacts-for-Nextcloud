@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Talk brand blue, shared with the launcher and splash. -->
+    <color name="colorPrimary">#0082C9</color>
+    <color name="colorPrimaryDark">#006AA3</color>
+    <color name="ic_launcher_background">#0082C9</color>
+</resources>

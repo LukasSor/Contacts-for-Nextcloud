@@ -1,0 +1,5 @@
+Contacts for Nextcloud is a contacts app for a Nextcloud server. It syncs your address book over CardDAV.
+
+Browse, add, and edit contacts on your phone. Phone numbers, email addresses, and other details stay in the address book on your server.
+
+It uses the same address book as Nextcloud Contacts on the web.

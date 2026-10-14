@@ -1,0 +1,25 @@
+name: Bug report
+description: Something in the app went wrong
+title: ""
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: input
+    id: android
+    attributes:
+      label: Android version
+      placeholder: "14"
+    validations:
+      required: true
+  - type: input
+    id: app
+    attributes:
+      label: App version
+      placeholder: "1.0"
+    validations:
+      required: true
