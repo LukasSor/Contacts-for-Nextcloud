@@ -8,7 +8,9 @@ import com.nextcloud.contacts.data.remoteUidForPush
 import com.nextcloud.contacts.data.RemoteContactIndex
 import com.nextcloud.contacts.data.local.ContactEntity
 import com.nextcloud.contacts.data.local.FingerprintContactRow
+import com.nextcloud.contacts.data.remote.davStatusCode
 import com.nextcloud.contacts.data.remote.failedPropstatCode
+import com.nextcloud.contacts.data.remote.syncReportCardIsGone
 import com.nextcloud.contacts.ui.viewmodel.detailFieldSaveNotifiesOnUploadFailure
 import com.nextcloud.contacts.ui.viewmodel.shouldRevertFavorite
 import com.nextcloud.contacts.util.parseIsoOrBasicLocalDate
@@ -279,6 +281,20 @@ class SyncQualityTest {
         assertTrue(fromServer.isFavorite)
         assertFalse(fromServer.dirty)
         assertEquals(1L, fromServer.lastModified)
+    }
+
+    @Test
+    fun syncReport404IsARemovedCardNotAFailedDownload() {
+        // "HTTP/1.1 404 Not Found".substringAfter(" ") is "1.1 404 Not Found", not 404.
+        assertEquals(404, davStatusCode("HTTP/1.1 404 Not Found"))
+        assertEquals(200, davStatusCode("HTTP/1.1 200 OK"))
+        assertEquals(204, davStatusCode("HTTP/2 204"))
+        assertNull(davStatusCode(""))
+        assertTrue(syncReportCardIsGone(status = 404, etag = null))
+        assertTrue(syncReportCardIsGone(status = 404, etag = "  "))
+        // A missing property inside propstat is 404 while the card etag is still present.
+        assertFalse(syncReportCardIsGone(status = 404, etag = "abc"))
+        assertFalse(syncReportCardIsGone(status = 200, etag = null))
     }
 
     @Test

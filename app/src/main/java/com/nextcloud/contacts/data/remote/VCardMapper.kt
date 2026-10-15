@@ -101,6 +101,7 @@ object VCardMapper {
         val abLabelGroupsWritten = mutableSetOf<String>()
         contact.phones.forEach { phone ->
             val telValue = phone.vcardRawValue.ifBlank { phone.value }
+            if (telValue.isBlank()) return@forEach
             val tel = Telephone(telValue)
             applyPhoneTypes(tel, phone)
             applyStoredVcardSyntax(tel, phone.vcardPropertyGroup, phone.vcardTypeParam, phone.vcardExtraParametersJson)
@@ -109,6 +110,7 @@ object VCardMapper {
         }
         contact.emails.forEach { email ->
             val mailValue = email.vcardRawValue.ifBlank { email.value }
+            if (mailValue.isBlank()) return@forEach
             val mail = Email(mailValue)
             applyEmailTypes(mail, email)
             applyStoredVcardSyntax(mail, email.vcardPropertyGroup, email.vcardTypeParam, email.vcardExtraParametersJson)
@@ -117,6 +119,7 @@ object VCardMapper {
         }
         contact.addresses.forEach { address ->
             val adr = addressFromEntity(address)
+            if (!addressHasComponents(adr)) return@forEach
             applyAddressTypes(adr, address)
             applyStoredVcardSyntax(
                 adr,
@@ -137,6 +140,7 @@ object VCardMapper {
         }
         contact.urls.forEach { url ->
             val linkValue = url.vcardRawValue.ifBlank { url.value }
+            if (linkValue.isBlank()) return@forEach
             val link = Url(linkValue)
             applyUrlTypes(link, url)
             applyStoredVcardSyntax(link, url.vcardPropertyGroup, url.vcardTypeParam, url.vcardExtraParametersJson)
@@ -155,6 +159,7 @@ object VCardMapper {
         }
         contact.socialProfiles.forEach { social ->
             val value = social.vcardRawValue.ifBlank { social.value }
+            if (value.isBlank()) return@forEach
             val property = vcard.addExtendedProperty("X-SOCIALPROFILE", value)
             applySocialTypes(property, social)
             applyStoredVcardSyntax(
@@ -167,6 +172,7 @@ object VCardMapper {
         }
         contact.cloudIds.forEach { cloud ->
             val value = cloud.vcardRawValue.ifBlank { cloud.value }
+            if (value.isBlank()) return@forEach
             val property = vcard.addExtendedProperty("CLOUD", value)
             applyCloudTypes(property, cloud)
             applyStoredVcardSyntax(
@@ -192,6 +198,7 @@ object VCardMapper {
         }
         contact.relatedNames.forEach { related ->
             val value = related.vcardRawValue.ifBlank { related.value }
+            if (value.isBlank()) return@forEach
             val rel = Related(value)
             applyRelatedTypes(rel, related)
             applyStoredVcardSyntax(
@@ -638,6 +645,7 @@ object VCardMapper {
         for (entry in property.parameters) {
             val key = entry.key
             if (key.equals("TYPE", ignoreCase = true)) continue
+            if (!parameterAllowedOnVCard4(key)) continue
             for (paramValue in entry.value) {
                 result.add(key.uppercase() to paramValue)
             }
@@ -651,6 +659,7 @@ object VCardMapper {
         for (entry in parameters) {
             val key = entry.key
             if (reserved.any { it.equals(key, ignoreCase = true) }) continue
+            if (!parameterAllowedOnVCard4(key)) continue
             for (paramValue in entry.value) {
                 result.add(key.uppercase() to paramValue)
             }
@@ -673,7 +682,7 @@ object VCardMapper {
             property.addParameter("TYPE", input.typeParam)
         }
         input.extraParameters.forEach { (name, value) ->
-            if (name.isBlank()) return@forEach
+            if (name.isBlank() || !parameterAllowedOnVCard4(name)) return@forEach
             property.addParameter(name, escapeVCardParameter(value))
         }
 
@@ -682,6 +691,16 @@ object VCardMapper {
             val abLabel = vcard.addExtendedProperty(X_ABLABEL_PROP, input.label)
             abLabel.group = group
         }
+    }
+
+    /**
+     * vCard 4.0 rejects these parameters. Nextcloud's v3 download still sends them
+     * (PHOTO ENCODING=b, QUOTED-PRINTABLE notes), and copying them onto the v4 PUT
+     * makes sabre return HTTP 415.
+     */
+    internal fun parameterAllowedOnVCard4(name: String): Boolean {
+        val upper = name.trim().uppercase()
+        return upper != "ENCODING" && upper != "CHARSET"
     }
 
     /** Escapes vCard parameter values so `;`, `,`, `\`, and newlines cannot break the line. */
@@ -1029,7 +1048,7 @@ object VCardMapper {
     ) {
         group.trim().takeIf { it.isNotBlank() }?.let { property.group = it }
         CustomFieldExtras.decode(extraParametersJson).forEach { (name, value) ->
-            if (name.isBlank()) return@forEach
+            if (name.isBlank() || !parameterAllowedOnVCard4(name)) return@forEach
             property.addParameter(name, escapeVCardParameter(value))
         }
     }
@@ -1169,19 +1188,31 @@ object VCardMapper {
         c: ContactEntity,
         scalar: Map<String, VCardSyntaxExtras>,
     ) {
-        fun raw(key: String, fallback: String): String =
-            scalar[key]?.rawValue?.trim()?.takeIf { it.isNotEmpty() } ?: fallback
-
         fun extras(key: String): VCardSyntaxExtras? = scalar[key]
 
-        val fn = raw("FN", c.displayName)
+        // The form edits the contact columns. A raw value imported earlier must not
+        // put the old property back after the field was cleared or changed.
+        fun raw(key: String, fallback: String): String =
+            scalarValueForUpload(key, scalar[key]?.rawValue.orEmpty(), fallback)
+
+        val fromContact = structuredNameFromContact(c)
+        val fromContactRaw = structuredNameToRaw(fromContact)
+        val nRaw = extras("N")?.rawValue?.trim().orEmpty()
+        val nameEditedInForm = nRaw.isNotEmpty() && nRaw != fromContactRaw
+        val nameFromParts = listOf(c.prefix, c.givenName, c.middleName, c.familyName, c.suffix)
+            .filter { it.isNotBlank() }
+            .joinToString(" ")
+        val fn = if (nameEditedInForm && nameFromParts.isNotBlank()) {
+            nameFromParts
+        } else {
+            raw("FN", c.displayName.ifBlank { nameFromParts })
+        }
         if (fn.isNotBlank()) {
             vcard.formattedName = FormattedName(fn).also { applyVcardSyntaxExtras(it, extras("FN")) }
         }
 
-        val nRaw = extras("N")?.rawValue?.trim().orEmpty()
         vcard.structuredName = (
-            if (nRaw.isNotEmpty()) structuredNameFromRaw(nRaw) else structuredNameFromContact(c)
+            if (nRaw.isNotEmpty() && !nameEditedInForm) structuredNameFromRaw(nRaw) else fromContact
             ).also { applyVcardSyntaxExtras(it, extras("N")) }
 
         val nickname = raw("NICKNAME", c.nickname)
@@ -1288,10 +1319,45 @@ object VCardMapper {
         value: String,
         extras: VCardSyntaxExtras?,
     ) {
-        if (value.isBlank() && extras?.hasPersistableMetadata() != true) return
+        if (value.isBlank()) return
         val property = vcard.setExtendedProperty(propertyName, value)
         applyVcardSyntaxExtras(property, extras)
     }
+
+    /**
+     * Form edits live on the contact columns. [storedRaw] is the value captured
+     * when the card was downloaded. A blank column means the field was removed.
+     * A different column means the form replaced it. ORG and groups keep the
+     * stored raw when it is only a formatting difference.
+     */
+    internal fun scalarValueForUpload(key: String, storedRaw: String, fallback: String): String {
+        val stored = storedRaw.trim()
+        val edited = fallback.trim()
+        if (edited.isEmpty()) return ""
+        if (stored.isEmpty() || stored == edited) return stored.ifEmpty { edited }
+        if (key == "ORG") {
+            val first = stored.split(';').firstOrNull()?.trim().orEmpty()
+            if (first == edited) return stored
+        }
+        if (key == "CATEGORIES" && sameList(stored, edited)) return stored
+        return edited
+    }
+
+    private fun sameList(stored: String, edited: String): Boolean {
+        fun parts(value: String) = value.split(',').map { it.trim() }.filter { it.isNotEmpty() }
+        return parts(stored) == parts(edited)
+    }
+
+    private fun addressHasComponents(address: Address): Boolean =
+        listOf(
+            address.poBox,
+            address.extendedAddress,
+            address.streetAddress,
+            address.locality,
+            address.region,
+            address.postalCode,
+            address.country,
+        ).any { !it.isNullOrBlank() }
 
     private fun genderFromRaw(raw: String): Gender = when (raw.uppercase()) {
         "M" -> Gender.male()
@@ -1349,7 +1415,7 @@ object VCardMapper {
             property.addParameter("TYPE", type)
         }
         extras.extraParameters.forEach { (name, value) ->
-            if (name.isBlank()) return@forEach
+            if (name.isBlank() || !parameterAllowedOnVCard4(name)) return@forEach
             property.addParameter(name, escapeVCardParameter(value))
         }
     }

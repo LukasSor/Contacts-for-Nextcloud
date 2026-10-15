@@ -6,6 +6,7 @@ import com.nextcloud.contacts.data.remote.DavXml.isEnd
 import com.nextcloud.contacts.data.remote.DavXml.isStart
 import com.nextcloud.contacts.data.remote.DavXml.readTextValue
 import com.nextcloud.contacts.data.remote.DavXml.tagName
+import android.util.Log
 import okhttp3.Credentials
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -419,13 +420,11 @@ class CardDavClient(
 
     private fun throwRequestError(action: String, response: Response): Nothing {
         val body = response.body?.string().orEmpty()
-        val detail = when {
-            response.code == 412 -> "data changed on server"
-            body.contains('<') -> ""
-            else -> body.take(120).trim()
-        }
+        val detail = serverErrorDetail(response.code, body)
         val suffix = if (detail.isBlank()) "" else ": $detail"
-        error("$action failed: HTTP ${response.code}$suffix")
+        val message = "$action failed: HTTP ${response.code}$suffix"
+        Log.w(TAG, "$message path=${response.request.url.encodedPath}")
+        error(message)
     }
 
     private fun formatEtag(etag: String): String =
@@ -471,8 +470,7 @@ class CardDavClient(
                     }
                     "href" -> if (inResponse) currentHref = parser.readTextValue()
                     "status" -> if (inResponse) {
-                        val statusText = parser.readTextValue()
-                        currentStatus = statusText.substringAfter(" ").toIntOrNull()
+                        currentStatus = davStatusCode(parser.readTextValue())
                     }
                     "getetag" -> if (inResponse) currentEtag = parser.readTextValue().trim('"')
                     "favorite" -> if (inResponse) {
@@ -482,7 +480,7 @@ class CardDavClient(
                 XmlPullParser.END_TAG -> if (parser.tagName() == "response" && inResponse) {
                     if (currentHref != null && isContactResource(currentHref, bookPath)) {
                         val href = canonicalStorageKey(currentHref!!)
-                        val deleted = currentStatus == 404
+                        val deleted = syncReportCardIsGone(currentStatus, currentEtag)
                         changes.add(
                             SyncChange(
                                 href = href,
@@ -590,10 +588,39 @@ class CardDavClient(
     )
 
     companion object {
+        private const val TAG = "CardDav"
         private val SUCCESS_CREATE_CODES = setOf(201, 204, 200)
         private val SUCCESS_UPDATE_CODES = setOf(200, 204)
     }
 }
+
+/**
+ * DAV status lines look like `HTTP/1.1 404 Not Found`. The code is the second
+ * token. The text after the first space is `1.1 404 Not Found`, which is not an int.
+ */
+internal fun davStatusCode(statusLine: String): Int? =
+    statusLine.trim().split(Regex("\\s+")).getOrNull(1)?.toIntOrNull()
+
+/**
+ * A sync-report 404 with no etag is a card the server removed.
+ * A propstat 404 for one missing property still carries the card etag.
+ */
+internal fun syncReportCardIsGone(status: Int?, etag: String?): Boolean =
+    status == 404 && etag.isNullOrBlank()
+
+/** Sabre wraps the real reason in XML. A body that merely contains `<` is not empty. */
+internal fun serverErrorDetail(code: Int, body: String): String {
+    if (code == 412) return "data changed on server"
+    val message = SABRE_MESSAGE.find(body)?.groupValues?.get(1)
+        ?.replace(Regex("<[^>]+>"), " ")
+        ?.replace(Regex("\\s+"), " ")
+        ?.trim()
+    if (!message.isNullOrBlank()) return message.take(300)
+    if (body.contains('<')) return ""
+    return body.take(120).trim()
+}
+
+private val SABRE_MESSAGE = Regex("""<s:message>(.*?)</s:message>""", RegexOption.DOT_MATCHES_ALL)
 
 internal fun failedPropstatCode(xml: String): Int? {
     for (block in PROPPATCH_PROPSTAT.findAll(xml)) {

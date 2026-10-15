@@ -99,6 +99,7 @@ class SyncManager(
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {
+            Log.w(TAG, "Sync failed", e)
             SyncResult.Error(e.message ?: context.getString(R.string.msg_sync_failed))
         }
     }
@@ -184,6 +185,7 @@ class SyncManager(
                 contact.remoteUrl == null ||
                 !shouldRecreateAfterUpdateNotFound(httpStatusFromClientError(e), contact.deleted)
             ) {
+                Log.w(TAG, "Upload rejected for uid=$uid structure=${vcardStructure(vcard)}", e)
                 throw e
             }
             // The server card is gone. Keep the local edit and create it again.
@@ -313,6 +315,20 @@ class SyncManager(
         return PullCount(pulled = pulled, failed = failed, favoritesListed = false)
     }
 
+    private suspend fun forgetMissingServerCard(
+        server: String,
+        storageKey: String,
+        index: RemoteContactIndex,
+    ): ApplyResult {
+        val existing = contactRepository.findByRemoteReference(server, storageKey, index)
+        if (existing != null && shouldSkipRemoteDelete(existing.dirty, existing.deleted)) {
+            return ApplyResult.Unchanged
+        }
+        contactRepository.removeByRemoteUrl(storageKey)
+        existing?.let { index.remove(it.id) }
+        return ApplyResult.Applied
+    }
+
     private suspend fun refreshFavorites(
         client: CardDavClient,
         server: String,
@@ -339,13 +355,7 @@ class SyncManager(
     ): ApplyResult {
         val storageKey = RemoteUrlNormalizer.storageKey(server, change.href)
         if (change.deleted) {
-            val existing = contactRepository.findByRemoteReference(server, storageKey, index)
-            if (existing != null && shouldSkipRemoteDelete(existing.dirty, existing.deleted)) {
-                return ApplyResult.Unchanged
-            }
-            contactRepository.removeByRemoteUrl(storageKey)
-            existing?.let { index.remove(it.id) }
-            return ApplyResult.Applied
+            return forgetMissingServerCard(server, storageKey, index)
         }
         val existing = contactRepository.findByRemoteReference(server, storageKey, index)
         if (existing?.dirty == true) {
@@ -366,7 +376,12 @@ class SyncManager(
         }
         val vcardText = try {
             client.downloadVCard(storageKey)
-        } catch (_: Exception) {
+        } catch (e: Exception) {
+            if (e is CancellationException) throw e
+            // The report still listed a card the server has already removed.
+            if (httpStatusFromClientError(e) == 404) {
+                return forgetMissingServerCard(server, storageKey, index)
+            }
             return ApplyResult.Failed
         }
         if (vcardText.isBlank()) return ApplyResult.Failed
@@ -564,6 +579,28 @@ internal fun shouldClearDirtyAfterFavoriteUpload(
 }
 
 private val HTTP_STATUS = Regex("""HTTP (\d{3})""")
+
+/** Property names and parameter names only, so a rejected PUT can be diagnosed without contact values. */
+internal fun vcardStructure(vcard: String): String = vcard
+    .lineSequence()
+    .map { it.trim() }
+    .filter { line ->
+        line.isNotEmpty() &&
+            !line.startsWith("BEGIN:", ignoreCase = true) &&
+            !line.startsWith("END:", ignoreCase = true) &&
+            !line[0].isWhitespace()
+    }
+    .map { line ->
+        val head = line.substringBefore(':')
+        val name = head.substringBefore(';')
+        val params = head.substringAfter(';', "")
+            .split(';')
+            .map { it.substringBefore('=').trim() }
+            .filter { it.isNotEmpty() }
+        if (params.isEmpty()) name else "$name[${params.joinToString(",")}]"
+    }
+    .joinToString(" ")
+    .take(500)
 
 private const val TAG = "SyncManager"
 

@@ -81,7 +81,7 @@ internal object VCardUnknownLineMapper {
         val property = RawProperty(line.propertyName, line.value)
         line.group.trim().takeIf { it.isNotBlank() }?.let { property.group = it }
         line.parameters.forEach { (name, value) ->
-            if (name.isBlank()) return@forEach
+            if (name.isBlank() || !VCardMapper.parameterAllowedOnVCard4(name)) return@forEach
             if (name.equals("TYPE", ignoreCase = true)) {
                 property.addParameter("TYPE", value)
             } else {

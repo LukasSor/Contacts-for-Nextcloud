@@ -3,12 +3,18 @@ package com.nextcloud.contacts.data.vcf
 import com.nextcloud.contacts.TestApplication
 import com.nextcloud.contacts.data.local.AddressEntity
 import com.nextcloud.contacts.data.local.ContactEntity
+import com.nextcloud.contacts.data.local.ContactScalarVcardExtras
 import com.nextcloud.contacts.data.local.ContactWithDetails
+import com.nextcloud.contacts.data.local.EmailEntity
 import com.nextcloud.contacts.data.local.PhoneEntity
+import com.nextcloud.contacts.data.local.RelatedEntity
+import com.nextcloud.contacts.data.local.UrlEntity
+import com.nextcloud.contacts.data.local.VCardSyntaxExtras
 import com.nextcloud.contacts.data.local.VCardUnknownLines
 import com.nextcloud.contacts.data.remote.VCardMapper
 import ezvcard.Ezvcard
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -132,5 +138,95 @@ class VCardDataSafetyTest {
         assertTrue(VCardUnknownLines.decode(parsed.contact.vcardUnknownLinesJson).none {
             it.propertyName.equals("TEL", ignoreCase = true)
         })
+    }
+
+    @Test
+    fun clearedFormFieldsAreNotReplacedByImportedRawValues() {
+        val scalar = mapOf(
+            "FN" to VCardSyntaxExtras(rawValue = "sw Aleks de ww es"),
+            "N" to VCardSyntaxExtras(rawValue = "ww;Aleks;de;sw;es"),
+            "NICKNAME" to VCardSyntaxExtras(rawValue = "xxd"),
+            "NOTE" to VCardSyntaxExtras(
+                rawValue = "xdfhhhs # gay",
+                extraParameters = listOf("ENCODING" to "QUOTED-PRINTABLE"),
+            ),
+            "TZ" to VCardSyntaxExtras(rawValue = "Africa/Asmara"),
+            "GENDER" to VCardSyntaxExtras(rawValue = "O"),
+            "CATEGORIES" to VCardSyntaxExtras(rawValue = "fffff,gg"),
+            "BDAY" to VCardSyntaxExtras(rawValue = "1990-01-02"),
+            "X-PHONETIC-FIRST-NAME" to VCardSyntaxExtras(rawValue = "fff"),
+            "X-PHONETIC-LAST-NAME" to VCardSyntaxExtras(rawValue = "cccc"),
+            "RELATIONSHIP" to VCardSyntaxExtras(rawValue = "parent"),
+        )
+        val contact = ContactWithDetails(
+            contact = ContactEntity(
+                displayName = "sw Aleks de ww es",
+                givenName = "Aleks",
+                vcardScalarExtrasJson = ContactScalarVcardExtras.encode(scalar),
+            ),
+            phones = listOf(
+                PhoneEntity(contactId = 0, type = "mobile", value = "+43 676 3519070"),
+            ),
+            emails = listOf(
+                EmailEntity(contactId = 0, type = "home", value = "", vcardPropertyGroup = "item1"),
+            ),
+            addresses = emptyList(),
+            urls = listOf(
+                UrlEntity(contactId = 0, type = "", value = "", vcardPropertyGroup = "item2"),
+            ),
+            imAccounts = emptyList(),
+            relatedNames = listOf(
+                RelatedEntity(contactId = 0, type = "parent", value = ""),
+            ),
+        )
+        val exported = VCardMapper.toVCard(contact)
+        assertTrue(exported.contains("FN:Aleks"))
+        assertTrue(exported.contains("N:;Aleks;;;"))
+        assertTrue(exported.contains("TEL"))
+        assertFalse(exported.contains("NICKNAME"))
+        assertFalse(exported.contains("NOTE"))
+        assertFalse(exported.contains("ENCODING"))
+        assertFalse(exported.contains("TZ:"))
+        assertFalse(exported.contains("GENDER"))
+        assertFalse(exported.contains("CATEGORIES"))
+        assertFalse(exported.contains("BDAY"))
+        assertFalse(exported.contains("X-PHONETIC"))
+        assertFalse(exported.contains("RELATIONSHIP"))
+        assertFalse(exported.contains("EMAIL"))
+        assertFalse(exported.contains("URL:"))
+        assertFalse(exported.contains("RELATED"))
+    }
+
+    @Test
+    fun v3PhotoEncodingIsNotCopiedOntoV4Upload() {
+        val vcardText = """
+            BEGIN:VCARD
+            VERSION:3.0
+            FN:Photo
+            N:Photo;;;;
+            PHOTO;ENCODING=b;TYPE=JPEG:/9j/AAEC
+            END:VCARD
+        """.trimIndent()
+        val parsed = VCardMapper.fromVCard(
+            vcardText,
+            "https://example.test/contacts/photo.vcf",
+            null,
+        )
+        val exported = VCardMapper.toVCard(
+            ContactWithDetails(
+                contact = parsed.contact,
+                phones = parsed.phones,
+                emails = parsed.emails,
+                addresses = parsed.addresses,
+                urls = parsed.urls,
+                imAccounts = parsed.imAccounts,
+                relatedNames = parsed.relatedNames,
+                customFields = parsed.customFields,
+            ),
+            photoBytes = parsed.photoBytes,
+        )
+        assertTrue(exported.contains("VERSION:4.0"))
+        assertTrue(exported.contains("PHOTO"))
+        assertFalse(exported.contains("ENCODING"))
     }
 }
