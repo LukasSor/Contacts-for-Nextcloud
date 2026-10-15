@@ -1,9 +1,21 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
 }
+
+val localProperties = Properties().apply {
+    val localPropertiesFile = rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        localPropertiesFile.inputStream().use { load(it) }
+    }
+}
+
+fun localProperty(name: String): String? =
+    localProperties.getProperty(name)?.takeIf { it.isNotBlank() }
 
 android {
     namespace = "com.nextcloud.contacts"
@@ -17,8 +29,18 @@ android {
         versionName = "1.0.1"
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = localProperty("RELEASE_STORE_FILE")?.let(::file)
+            storePassword = localProperty("RELEASE_STORE_PASSWORD")
+            keyAlias = localProperty("RELEASE_KEY_ALIAS")
+            keyPassword = localProperty("RELEASE_KEY_PASSWORD")
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
