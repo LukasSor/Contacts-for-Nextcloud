@@ -20,6 +20,7 @@ It is an unofficial Nextcloud Contacts app.
 <p align="center">
   <a href="https://github.com/LukasSor/Contacts-for-Nextcloud/releases"><img src="fastlane/metadata/android/en-US/images/badge_github.png" height="54" alt="Get it on GitHub"></a>
   <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/%7B%22id%22%3A%22com.nextcloud.contacts%22%2C%22url%22%3A%22https%3A%2F%2Fgithub.com%2FLukasSor%2FContacts-for-Nextcloud%22%2C%22author%22%3A%22LukasSor%22%2C%22name%22%3A%22Contacts%20for%20Nextcloud%22%7D"><img src="fastlane/metadata/android/en-US/images/badge_obtainium.png" height="54" alt="Get it on Obtainium"></a>
+  <a href="https://github-store.org/app?repo=LukasSor/Contacts-for-Nextcloud"><img src="https://raw.githubusercontent.com/kurikomi-labs/komi-store/main/media-resources/ghs_download_badge.png" height="54" alt="Get it on GitHub Store"></a>
 </p>
 
 ## Features
