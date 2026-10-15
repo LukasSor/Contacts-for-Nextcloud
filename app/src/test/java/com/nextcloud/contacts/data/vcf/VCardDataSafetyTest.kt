@@ -198,6 +198,72 @@ class VCardDataSafetyTest {
     }
 
     @Test
+    fun clearedPrefixAndSuffixDropStaleFormattedName() {
+        val scalar = mapOf(
+            "FN" to VCardSyntaxExtras(rawValue = "Sir Ada Augusta Lovelace Esq"),
+            "N" to VCardSyntaxExtras(rawValue = "Lovelace;Ada;Augusta;Sir;Esq"),
+        )
+        val aligned = VCardMapper.alignContactDisplayName(
+            prefix = "",
+            givenName = "Ada",
+            middleName = "Augusta",
+            familyName = "Lovelace",
+            suffix = "",
+            nickname = "",
+            organization = "",
+            storedDisplayName = "Sir Ada Augusta Lovelace Esq",
+            scalarExtras = scalar,
+        )
+        assertEquals("Ada Augusta Lovelace", aligned.displayName)
+        assertEquals("Ada Augusta Lovelace", aligned.scalarExtras.getValue("FN").rawValue)
+        assertEquals("Lovelace;Ada;Augusta;;", aligned.scalarExtras.getValue("N").rawValue)
+        assertFalse(aligned.displayName.contains("Sir"))
+        assertFalse(aligned.displayName.contains("Esq"))
+
+        val exported = VCardMapper.toVCard(
+            ContactWithDetails(
+                contact = ContactEntity(
+                    displayName = aligned.displayName,
+                    givenName = "Ada",
+                    middleName = "Augusta",
+                    familyName = "Lovelace",
+                    vcardScalarExtrasJson = ContactScalarVcardExtras.encode(aligned.scalarExtras),
+                ),
+                phones = emptyList(),
+                emails = emptyList(),
+                addresses = emptyList(),
+                urls = emptyList(),
+                imAccounts = emptyList(),
+                relatedNames = emptyList(),
+            ),
+        )
+        assertTrue(exported.contains("FN:Ada Augusta Lovelace"))
+        assertFalse(exported.contains("Sir"))
+        assertFalse(exported.contains("Esq"))
+    }
+
+    @Test
+    fun customFormattedNameStaysWhenStructuredNameIsUnchanged() {
+        val scalar = mapOf(
+            "FN" to VCardSyntaxExtras(rawValue = "Countess Ada"),
+            "N" to VCardSyntaxExtras(rawValue = "Lovelace;Ada;;;"),
+        )
+        val aligned = VCardMapper.alignContactDisplayName(
+            prefix = "",
+            givenName = "Ada",
+            middleName = "",
+            familyName = "Lovelace",
+            suffix = "",
+            nickname = "",
+            organization = "",
+            storedDisplayName = "Countess Ada",
+            scalarExtras = scalar,
+        )
+        assertEquals("Countess Ada", aligned.displayName)
+        assertEquals("Lovelace;Ada;;;", aligned.scalarExtras.getValue("N").rawValue)
+    }
+
+    @Test
     fun v3PhotoEncodingIsNotCopiedOntoV4Upload() {
         val vcardText = """
             BEGIN:VCARD

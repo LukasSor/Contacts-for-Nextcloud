@@ -118,6 +118,9 @@ interface ContactDao {
     @Query("SELECT COUNT(*) FROM contacts WHERE deleted = 0")
     suspend fun countActive(): Int
 
+    @Query("SELECT * FROM contacts WHERE deleted = 0")
+    suspend fun getActiveContacts(): List<ContactEntity>
+
     @Query("SELECT * FROM contacts WHERE dirty = 1 OR deleted = 1")
     suspend fun getPendingSync(): List<ContactEntity>
 

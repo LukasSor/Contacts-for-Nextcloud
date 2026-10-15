@@ -70,6 +70,11 @@ import java.time.YearMonth
 import java.time.temporal.Temporal
 import java.util.UUID
 
+internal data class AlignedContactName(
+    val displayName: String,
+    val scalarExtras: Map<String, VCardSyntaxExtras>,
+)
+
 object VCardMapper {
 
     /** Indexed per-address coordinates for multi-ADR round-trip (see [parseIndexedAddressGeos]). */
@@ -1366,6 +1371,73 @@ object VCardMapper {
         "N" -> Gender.none()
         "U" -> Gender.unknown()
         else -> Gender(raw)
+    }
+
+    /**
+     * List and detail use [storedDisplayName]. That value is the formatted name (FN).
+     * Clearing prefix or suffix updates the name fields, and the upload writes a new
+     * N and FN, but a saved FN was still preferred locally. When the stored N line
+     * still has a prefix or suffix the fields no longer have, rebuild the visible
+     * name from the fields so the old prefix and suffix do not stay on screen.
+     * A formatted name that still matches the structured name is left as-is.
+     */
+    internal fun alignContactDisplayName(
+        prefix: String,
+        givenName: String,
+        middleName: String,
+        familyName: String,
+        suffix: String,
+        nickname: String,
+        organization: String,
+        storedDisplayName: String,
+        scalarExtras: Map<String, VCardSyntaxExtras>,
+    ): AlignedContactName {
+        val partsName = listOf(prefix, givenName, middleName, familyName, suffix)
+            .filter { it.isNotBlank() }
+            .joinToString(" ")
+        val columnRaw = structuredNameRaw(familyName, givenName, middleName, prefix, suffix)
+        val nEntry = scalarExtras.entries.firstOrNull { it.key.equals("N", ignoreCase = true) }
+        val fnEntry = scalarExtras.entries.firstOrNull { it.key.equals("FN", ignoreCase = true) }
+        val nRaw = nEntry?.value?.rawValue?.trim().orEmpty()
+        val structuredChanged = nRaw.isNotEmpty() &&
+            structuredNameComponents(nRaw) != structuredNameComponents(columnRaw)
+        if (!structuredChanged) {
+            val fnRaw = fnEntry?.value?.rawValue?.trim().orEmpty()
+            val display = fnRaw.ifBlank { storedDisplayName.trim() }
+                .ifBlank { partsName }
+                .ifBlank { nickname.trim().ifBlank { organization.trim().ifBlank { "Unnamed" } } }
+            return AlignedContactName(display, scalarExtras)
+        }
+        val rebuilt = partsName.ifBlank {
+            nickname.trim().ifBlank { organization.trim().ifBlank { "Unnamed" } }
+        }
+        val next = scalarExtras.toMutableMap()
+        if (nEntry != null) {
+            next[nEntry.key] = nEntry.value.copy(rawValue = columnRaw)
+        }
+        if (fnEntry != null && fnEntry.value.rawValue.trim() != rebuilt) {
+            next[fnEntry.key] = fnEntry.value.copy(rawValue = rebuilt)
+        }
+        return AlignedContactName(rebuilt, next)
+    }
+
+    private fun structuredNameRaw(
+        familyName: String,
+        givenName: String,
+        middleName: String,
+        prefix: String,
+        suffix: String,
+    ): String = listOf(
+        familyName,
+        givenName,
+        if (middleName.isNotBlank()) middleName else "",
+        if (prefix.isNotBlank()) prefix else "",
+        if (suffix.isNotBlank()) suffix else "",
+    ).joinToString(";")
+
+    private fun structuredNameComponents(raw: String): List<String> {
+        val parts = raw.split(';')
+        return List(5) { index -> parts.getOrElse(index) { "" }.trim() }
     }
 
     private fun structuredNameFromContact(c: ContactEntity): StructuredName = StructuredName().apply {

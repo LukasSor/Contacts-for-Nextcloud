@@ -13,6 +13,7 @@ import com.nextcloud.contacts.data.local.ProviderIntegrationsCache
 import com.nextcloud.contacts.data.remote.CloudUser
 import com.nextcloud.contacts.data.local.ContactInput
 import com.nextcloud.contacts.data.local.ContactScalarVcardExtras
+import com.nextcloud.contacts.data.local.VCardSyntaxExtras
 import com.nextcloud.contacts.data.local.VCardUnknownLines
 import com.nextcloud.contacts.data.local.toCloudIdEntity
 import com.nextcloud.contacts.data.local.toEmailEntity
@@ -54,7 +55,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import java.util.UUID
+import java.util.concurrent.atomic.AtomicBoolean
 
 class ContactRepository(
     private val database: ContactsDatabase,
@@ -65,6 +69,9 @@ class ContactRepository(
     private val systemContactsExporter: SystemContactsExporter,
     private val contactDatesCalendarCoordinator: ContactDatesCalendarCoordinator,
 ) {
+
+    private val displayNameAlignment = Mutex()
+    private val displayNamesAligned = AtomicBoolean(false)
 
     private suspend fun syncDeviceIntegrations(contactId: Long) {
         systemContactsExporter.exportContact(contactId)
@@ -78,11 +85,12 @@ class ContactRepository(
 
     fun observeContacts(query: String): Flow<List<ContactWithDetails>> {
         val trimmed = query.trim()
-        return if (trimmed.isEmpty()) {
+        val rows = if (trimmed.isEmpty()) {
             contactDao.observeAll()
         } else {
             contactDao.search(trimmed)
         }
+        return rows.onStart { alignStaleDisplayNames() }
     }
 
     /** Lightweight list rows (no phones/emails/… joins) for the main LazyColumn. */
@@ -95,7 +103,7 @@ class ContactRepository(
         }
         // Hints query scans social/im/cloud tables; seed empty so the list flow is not blocked.
         return combine(
-            items,
+            items.onStart { alignStaleDisplayNames() },
             contactDao.observeNextcloudListHints().onStart { emit(emptyList()) },
         ) { list, hints ->
             applyNextcloudListFlags(list, hints)
@@ -139,9 +147,68 @@ class ContactRepository(
             )
         }
 
-    fun observeContact(id: Long): Flow<ContactWithDetails?> = contactDao.observeById(id)
+    fun observeContact(id: Long): Flow<ContactWithDetails?> =
+        contactDao.observeById(id).onStart { alignStaleDisplayNames() }
 
-    suspend fun getContact(id: Long): ContactWithDetails? = contactDao.getById(id)
+    suspend fun getContact(id: Long): ContactWithDetails? {
+        alignStaleDisplayNames()
+        return contactDao.getById(id)
+    }
+
+    /**
+     * A contact saved after prefix and suffix were cleared can still store the old
+     * formatted name. Refresh that name from the current fields once, without
+     * marking the row dirty, so sync does not upload it again.
+     */
+    private suspend fun alignStaleDisplayNames() {
+        if (displayNamesAligned.get()) return
+        displayNameAlignment.withLock {
+            if (displayNamesAligned.get()) return
+            val updates = contactDao.getActiveContacts().mapNotNull { contact ->
+                val extras = ContactScalarVcardExtras.decode(contact.vcardScalarExtrasJson)
+                val aligned = VCardMapper.alignContactDisplayName(
+                    prefix = contact.prefix,
+                    givenName = contact.givenName,
+                    middleName = contact.middleName,
+                    familyName = contact.familyName,
+                    suffix = contact.suffix,
+                    nickname = contact.nickname,
+                    organization = contact.organization,
+                    storedDisplayName = contact.displayName,
+                    scalarExtras = extras,
+                )
+                val nameChanged = aligned.displayName != contact.displayName
+                val extrasChanged = scalarRawChanged(extras, aligned.scalarExtras)
+                if (!nameChanged && !extrasChanged) {
+                    null
+                } else {
+                    contact.copy(
+                        displayName = aligned.displayName,
+                        vcardScalarExtrasJson = if (extrasChanged) {
+                            ContactScalarVcardExtras.encode(aligned.scalarExtras)
+                        } else {
+                            contact.vcardScalarExtrasJson
+                        },
+                    )
+                }
+            }
+            if (updates.isNotEmpty()) {
+                database.withTransaction {
+                    contactDao.updateContacts(updates)
+                }
+            }
+            displayNamesAligned.set(true)
+        }
+    }
+
+    private fun scalarRawChanged(
+        current: Map<String, VCardSyntaxExtras>,
+        aligned: Map<String, VCardSyntaxExtras>,
+    ): Boolean {
+        fun raw(map: Map<String, VCardSyntaxExtras>, key: String) =
+            map.entries.firstOrNull { it.key.equals(key, ignoreCase = true) }?.value?.rawValue
+        return raw(current, "N") != raw(aligned, "N") || raw(current, "FN") != raw(aligned, "FN")
+    }
 
     /** UID first. A display name is used only when exactly one contact has it. */
     suspend fun findContactIdForManager(uid: String?, displayName: String): Long? {
@@ -1430,9 +1497,19 @@ class ContactRepository(
         editFieldSyntaxEnabled: Boolean = existing?.editFieldSyntaxEnabled ?: false,
     ): ContactEntity {
         val base = existing ?: ContactEntity(remoteUid = remoteUid)
+        val aligned = VCardMapper.alignContactDisplayName(
+            prefix = input.prefix,
+            givenName = input.givenName,
+            middleName = input.middleName,
+            familyName = input.familyName,
+            suffix = input.suffix,
+            nickname = input.nickname,
+            organization = input.organization,
+            storedDisplayName = input.displayName,
+            scalarExtras = input.scalarVcardExtras,
+        )
         return base.copy(
-            displayName = input.scalarVcardExtras["FN"]?.rawValue?.trim()?.takeIf { it.isNotEmpty() }
-                ?: input.displayName,
+            displayName = aligned.displayName,
             prefix = input.prefix,
             givenName = input.givenName,
             middleName = input.middleName,
@@ -1458,7 +1535,7 @@ class ContactRepository(
             managersName = input.managersName,
             managersUid = input.managersUid,
             relationshipToYou = input.relationshipToYou,
-            vcardScalarExtrasJson = ContactScalarVcardExtras.encode(input.scalarVcardExtras),
+            vcardScalarExtrasJson = ContactScalarVcardExtras.encode(aligned.scalarExtras),
             vcardUnknownLinesJson = input.vcardUnknownLinesJson.ifBlank {
                 existing?.vcardUnknownLinesJson.orEmpty()
             },
