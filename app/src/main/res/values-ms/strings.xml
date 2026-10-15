@@ -311,6 +311,10 @@
     <string name="photon_url_placeholder">https://photon.komoot.io</string>
     <string name="setting_photon_hint">Lalai ialah API Photon awam. Guna pelayan lain jika mahu.</string>
     <string name="section_advanced">Lanjutan</string>
+    <string name="section_about">Perihal</string>
+    <string name="setting_source_code">Kod sumber</string>
+    <string name="setting_issues">Isu</string>
+    <string name="setting_license">Lesen</string>
     <string name="setting_vcard_mode">Mod vCard</string>
     <string name="setting_vcard_mode_summary">Sunting kenalan sebagai sifat vCard.</string>
     <string name="mode_simple">Ringkas</string>

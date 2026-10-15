@@ -311,6 +311,10 @@
     <string name="photon_url_placeholder">https://photon.komoot.io</string>
     <string name="setting_photon_hint">По подразбиране е публичният Photon API. Може друг сървър.</string>
     <string name="section_advanced">Разширени</string>
+    <string name="section_about">Относно</string>
+    <string name="setting_source_code">Изходен код</string>
+    <string name="setting_issues">Проблеми</string>
+    <string name="setting_license">Лиценз</string>
     <string name="setting_vcard_mode">vCard режим</string>
     <string name="setting_vcard_mode_summary">Редакция на контактите като vCard свойства.</string>
     <string name="mode_simple">Опростен</string>

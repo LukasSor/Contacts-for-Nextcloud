@@ -311,6 +311,10 @@
     <string name="photon_url_placeholder">https://photon.komoot.io</string>
     <string name="setting_photon_hint">Alapból a nyilvános Photon API. Használhat másik szervert.</string>
     <string name="section_advanced">Speciális</string>
+    <string name="section_about">Névjegy</string>
+    <string name="setting_source_code">Forráskód</string>
+    <string name="setting_issues">Hibák</string>
+    <string name="setting_license">Licenc</string>
     <string name="setting_vcard_mode">vCard mód</string>
     <string name="setting_vcard_mode_summary">Névjegyek szerkesztése vCard-tulajdonságokként.</string>
     <string name="mode_simple">Egyszerű</string>

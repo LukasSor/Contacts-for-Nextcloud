@@ -311,6 +311,10 @@
     <string name="photon_url_placeholder">https://photon.komoot.io</string>
     <string name="setting_photon_hint">Pagal nutylėjimą viešas Photon API. Galite kitą serverį.</string>
     <string name="section_advanced">Išplėstiniai</string>
+    <string name="section_about">Apie</string>
+    <string name="setting_source_code">Pirminis kodas</string>
+    <string name="setting_issues">Problemos</string>
+    <string name="setting_license">Licencija</string>
     <string name="setting_vcard_mode">vCard režimas</string>
     <string name="setting_vcard_mode_summary">Redaguoti kontaktus kaip vCard savybes.</string>
     <string name="mode_simple">Paprastas</string>

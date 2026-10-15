@@ -311,6 +311,10 @@
     <string name="photon_url_placeholder">https://photon.komoot.io</string>
     <string name="setting_photon_hint">Implicit API-ul Photon public. Poți folosi alt server.</string>
     <string name="section_advanced">Avansat</string>
+    <string name="section_about">Despre</string>
+    <string name="setting_source_code">Cod sursă</string>
+    <string name="setting_issues">Probleme</string>
+    <string name="setting_license">Licență</string>
     <string name="setting_vcard_mode">Mod vCard</string>
     <string name="setting_vcard_mode_summary">Editează contactele ca proprietăți vCard.</string>
     <string name="mode_simple">Simplu</string>

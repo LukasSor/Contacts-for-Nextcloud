@@ -49,6 +49,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.BugReport
+import androidx.compose.material.icons.filled.Code
+import androidx.compose.material.icons.filled.Description
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -640,10 +643,49 @@ fun SettingsScreen(
                 },
             )
 
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = stringResource(R.string.section_about),
+                style = MaterialTheme.typography.titleSmall,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                color = MaterialTheme.colorScheme.primary,
+            )
+            ListItem(
+                modifier = Modifier.clickable(role = Role.Button) {
+                    context.openViewUrl(ABOUT_SOURCE_CODE_URL)
+                },
+                headlineContent = { Text(stringResource(R.string.setting_source_code)) },
+                leadingContent = {
+                    Icon(Icons.Filled.Code, contentDescription = null)
+                },
+            )
+            ListItem(
+                modifier = Modifier.clickable(role = Role.Button) {
+                    context.openViewUrl(ABOUT_ISSUES_URL)
+                },
+                headlineContent = { Text(stringResource(R.string.setting_issues)) },
+                leadingContent = {
+                    Icon(Icons.Filled.BugReport, contentDescription = null)
+                },
+            )
+            ListItem(
+                modifier = Modifier.clickable(role = Role.Button) {
+                    context.openViewUrl(ABOUT_LICENSE_URL)
+                },
+                headlineContent = { Text(stringResource(R.string.setting_license)) },
+                leadingContent = {
+                    Icon(Icons.Filled.Description, contentDescription = null)
+                },
+            )
+
             Spacer(modifier = Modifier.height(24.dp))
         }
     }
 }
+
+private const val ABOUT_SOURCE_CODE_URL = "https://github.com/LukasSor/Contacts-for-Nextcloud"
+private const val ABOUT_ISSUES_URL = "https://github.com/LukasSor/Contacts-for-Nextcloud/issues"
+private const val ABOUT_LICENSE_URL = "https://github.com/LukasSor/Contacts-for-Nextcloud/blob/main/LICENSE"
 
 private fun Context.openAppLanguageSettings() {
     startActivity(
@@ -651,6 +693,12 @@ private fun Context.openAppLanguageSettings() {
             data = Uri.fromParts("package", packageName, null)
         },
     )
+}
+
+private fun Context.openViewUrl(url: String) {
+    runCatching {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+    }
 }
 
 @Composable

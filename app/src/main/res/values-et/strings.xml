@@ -311,6 +311,10 @@
     <string name="photon_url_placeholder">https://photon.komoot.io</string>
     <string name="setting_photon_hint">Vaikimisi avalik Photon API. Soovi korral teine server.</string>
     <string name="section_advanced">Täpsem</string>
+    <string name="section_about">Teave</string>
+    <string name="setting_source_code">Lähtekood</string>
+    <string name="setting_issues">Probleemid</string>
+    <string name="setting_license">Litsents</string>
     <string name="setting_vcard_mode">vCard-režiim</string>
     <string name="setting_vcard_mode_summary">Muuda kontakte vCardi omadustena.</string>
     <string name="mode_simple">Lihtne</string>

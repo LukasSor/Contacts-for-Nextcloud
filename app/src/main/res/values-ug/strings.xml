@@ -311,6 +311,10 @@
     <string name="photon_url_placeholder">https://photon.komoot.io</string>
     <string name="setting_photon_hint">سۈكۈتتىكىسى ئاممىۋى Photon API. خالىسىڭىز باشقا مۇلازىمېتىر.</string>
     <string name="section_advanced">ئىلغار</string>
+    <string name="section_about">ھەققىدە</string>
+    <string name="setting_source_code">مەنبە كودى</string>
+    <string name="setting_issues">مەسىلىلەر</string>
+    <string name="setting_license">ئىجازەتنامە</string>
     <string name="setting_vcard_mode">vCard ھالىتى</string>
     <string name="setting_vcard_mode_summary">ئالاقىداشلارنى vCard خاسلىقى سۈپىتىدە تەھرىرلەيدۇ.</string>
     <string name="mode_simple">ئاددىي</string>

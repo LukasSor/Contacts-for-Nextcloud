@@ -311,6 +311,10 @@
     <string name="photon_url_placeholder">https://photon.komoot.io</string>
     <string name="setting_photon_hint">Sjálfgefið er opið Photon-API. Notaðu annan þjón ef þú vilt.</string>
     <string name="section_advanced">Ítarlegt</string>
+    <string name="section_about">Um</string>
+    <string name="setting_source_code">Frumkóði</string>
+    <string name="setting_issues">Vandamál</string>
+    <string name="setting_license">Leyfi</string>
     <string name="setting_vcard_mode">vCard-hamur</string>
     <string name="setting_vcard_mode_summary">Breyta tengiliðum sem vCard-eiginleikum.</string>
     <string name="mode_simple">Einfalt</string>

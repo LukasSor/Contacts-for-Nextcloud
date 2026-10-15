@@ -311,6 +311,10 @@
     <string name="photon_url_placeholder">https://photon.komoot.io</string>
     <string name="setting_photon_hint">Zadano je javni Photon API. Možete koristiti drugi poslužitelj.</string>
     <string name="section_advanced">Napredno</string>
+    <string name="section_about">O aplikaciji</string>
+    <string name="setting_source_code">Izvorni kod</string>
+    <string name="setting_issues">Problemi</string>
+    <string name="setting_license">Licenca</string>
     <string name="setting_vcard_mode">vCard način</string>
     <string name="setting_vcard_mode_summary">Uređujte kontakte kao vCard svojstva.</string>
     <string name="mode_simple">Jednostavno</string>

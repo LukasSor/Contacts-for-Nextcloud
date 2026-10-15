@@ -311,6 +311,10 @@
     <string name="photon_url_placeholder">https://photon.komoot.io</string>
     <string name="setting_photon_hint">Publikt Photon-API som standard. Använd en annan server om du vill.</string>
     <string name="section_advanced">Avancerat</string>
+    <string name="section_about">Om</string>
+    <string name="setting_source_code">Källkod</string>
+    <string name="setting_issues">Problem</string>
+    <string name="setting_license">Licens</string>
     <string name="setting_vcard_mode">vCard-läge</string>
     <string name="setting_vcard_mode_summary">Redigera kontakter som vCard-egenskaper.</string>
     <string name="mode_simple">Enkel</string>

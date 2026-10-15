@@ -311,6 +311,10 @@
     <string name="photon_url_placeholder">https://photon.komoot.io</string>
     <string name="setting_photon_hint">Domyślnie publiczne API Photon. Użyj innego serwera, jeśli chcesz.</string>
     <string name="section_advanced">Zaawansowane</string>
+    <string name="section_about">O aplikacji</string>
+    <string name="setting_source_code">Kod źródłowy</string>
+    <string name="setting_issues">Problemy</string>
+    <string name="setting_license">Licencja</string>
     <string name="setting_vcard_mode">Tryb vCard</string>
     <string name="setting_vcard_mode_summary">Edytuj kontakty jako właściwości vCard.</string>
     <string name="mode_simple">Prosty</string>

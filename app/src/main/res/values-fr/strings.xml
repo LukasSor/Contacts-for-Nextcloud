@@ -311,6 +311,10 @@
     <string name="photon_url_placeholder">https://photon.komoot.io</string>
     <string name="setting_photon_hint">API Photon publique par défaut. Utilisez un autre serveur si vous voulez.</string>
     <string name="section_advanced">Avancé</string>
+    <string name="section_about">À propos</string>
+    <string name="setting_source_code">Code source</string>
+    <string name="setting_issues">Problèmes</string>
+    <string name="setting_license">Licence</string>
     <string name="setting_vcard_mode">Mode vCard</string>
     <string name="setting_vcard_mode_summary">Modifier les contacts comme propriétés vCard.</string>
     <string name="mode_simple">Simple</string>

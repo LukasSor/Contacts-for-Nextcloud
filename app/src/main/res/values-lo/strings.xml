@@ -311,6 +311,10 @@
     <string name="photon_url_placeholder">https://photon.komoot.io</string>
     <string name="setting_photon_hint">ຄ່າເລີ່ມຕົ້ນແມ່ນ API Photon ສາທາລະນະ. ປ່ຽນເຊີບເວີໄດ້.</string>
     <string name="section_advanced">ຂັ້ນສູງ</string>
+    <string name="section_about">ກ່ຽວກັບ</string>
+    <string name="setting_source_code">ລະຫັດຕົ້ນສະບັບ</string>
+    <string name="setting_issues">ບັນຫາ</string>
+    <string name="setting_license">ໃບອະນຸຍາດ</string>
     <string name="setting_vcard_mode">ໂໝດ vCard</string>
     <string name="setting_vcard_mode_summary">ແກ້ໄຂຕິດຕໍ່ເປັນຄຸນສົມບັດ vCard.</string>
     <string name="mode_simple">ງ່າຍ</string>

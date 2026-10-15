@@ -311,6 +311,10 @@
     <string name="photon_url_placeholder">https://photon.komoot.io</string>
     <string name="setting_photon_hint">Chaguo-msingi ni API ya Photon ya umma. Tumia seva nyingine ukitaka.</string>
     <string name="section_advanced">Ya kina</string>
+    <string name="section_about">Kuhusu</string>
+    <string name="setting_source_code">Msimbo wa chanzo</string>
+    <string name="setting_issues">Masuala</string>
+    <string name="setting_license">Leseni</string>
     <string name="setting_vcard_mode">Hali ya vCard</string>
     <string name="setting_vcard_mode_summary">Hariri mawasiliano kama sifa za vCard.</string>
     <string name="mode_simple">Rahisi</string>

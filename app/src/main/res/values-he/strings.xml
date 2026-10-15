@@ -311,6 +311,10 @@
     <string name="photon_url_placeholder">https://photon.komoot.io</string>
     <string name="setting_photon_hint">כברירת מחדל Photon ציבורי. אפשר שרת אחר.</string>
     <string name="section_advanced">מתקדם</string>
+    <string name="section_about">אודות</string>
+    <string name="setting_source_code">קוד המקור</string>
+    <string name="setting_issues">בעיות</string>
+    <string name="setting_license">רישיון</string>
     <string name="setting_vcard_mode">מצב vCard</string>
     <string name="setting_vcard_mode_summary">עריכת אנשי קשר כמאפייני vCard.</string>
     <string name="mode_simple">פשוט</string>

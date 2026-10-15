@@ -311,6 +311,10 @@
     <string name="photon_url_placeholder">https://photon.komoot.io</string>
     <string name="setting_photon_hint">پیش‌فرض API عمومی Photon. در صورت تمایل سرور دیگر.</string>
     <string name="section_advanced">پیشرفته</string>
+    <string name="section_about">درباره</string>
+    <string name="setting_source_code">کد منبع</string>
+    <string name="setting_issues">مشکلات</string>
+    <string name="setting_license">مجوز</string>
     <string name="setting_vcard_mode">حالت vCard</string>
     <string name="setting_vcard_mode_summary">ویرایش مخاطبین به‌عنوان ویژگی‌های vCard.</string>
     <string name="mode_simple">ساده</string>

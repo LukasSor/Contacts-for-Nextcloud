@@ -311,6 +311,10 @@
     <string name="photon_url_placeholder">https://photon.komoot.io</string>
     <string name="setting_photon_hint">기본은 공개 Photon API. 다른 서버도 쓸 수 있습니다.</string>
     <string name="section_advanced">고급</string>
+    <string name="section_about">정보</string>
+    <string name="setting_source_code">소스 코드</string>
+    <string name="setting_issues">문제</string>
+    <string name="setting_license">라이선스</string>
     <string name="setting_vcard_mode">vCard 모드</string>
     <string name="setting_vcard_mode_summary">연락처를 vCard 속성으로 편집합니다.</string>
     <string name="mode_simple">간단히</string>

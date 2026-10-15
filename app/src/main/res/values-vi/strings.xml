@@ -311,6 +311,10 @@
     <string name="photon_url_placeholder">https://photon.komoot.io</string>
     <string name="setting_photon_hint">Mặc định API Photon công khai. Có thể dùng máy chủ khác.</string>
     <string name="section_advanced">Nâng cao</string>
+    <string name="section_about">Giới thiệu</string>
+    <string name="setting_source_code">Mã nguồn</string>
+    <string name="setting_issues">Sự cố</string>
+    <string name="setting_license">Giấy phép</string>
     <string name="setting_vcard_mode">Chế độ vCard</string>
     <string name="setting_vcard_mode_summary">Sửa danh bạ như thuộc tính vCard.</string>
     <string name="mode_simple">Gọn</string>

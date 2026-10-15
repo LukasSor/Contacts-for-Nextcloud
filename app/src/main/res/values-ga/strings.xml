@@ -311,6 +311,10 @@
     <string name="photon_url_placeholder">https://photon.komoot.io</string>
     <string name="setting_photon_hint">Photon API poiblí de réir réamhshocraithe. Freastalaí eile más mian leat.</string>
     <string name="section_advanced">Casta</string>
+    <string name="section_about">Maidir</string>
+    <string name="setting_source_code">Cód foinse</string>
+    <string name="setting_issues">Fadhbanna</string>
+    <string name="setting_license">Ceadúnas</string>
     <string name="setting_vcard_mode">Mód vCard</string>
     <string name="setting_vcard_mode_summary">Cuir teagmhálaithe in eagar mar airíonna vCard.</string>
     <string name="mode_simple">Simplí</string>
