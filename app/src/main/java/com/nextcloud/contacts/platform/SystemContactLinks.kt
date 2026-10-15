@@ -25,9 +25,21 @@ class SystemContactLinks(context: Context) {
 
     suspend fun setLink(appContactId: Long, rawContactId: Long) {
         dataStore.edit { prefs ->
+            val previous = prefs[rawKey(appContactId)]
+            if (previous != null && previous != rawContactId) {
+                prefs.remove(reverseKey(previous))
+            }
             prefs[rawKey(appContactId)] = rawContactId
             prefs[reverseKey(rawContactId)] = appContactId
         }
+    }
+
+    /** Raw contact ids currently linked to an app contact. */
+    suspend fun linkedRawContactIds(): Set<Long> {
+        val prefs = dataStore.data.first()
+        return prefs.asMap().mapNotNull { (key, value) ->
+            if (key.name.startsWith("app_") && value is Long) value else null
+        }.toSet()
     }
 
     suspend fun removeAppContact(appContactId: Long) {
