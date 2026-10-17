@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Hiện bảng chữ cái trong danh sách khi cuộn.</string>
     <string name="setting_website_logos">Logo trang web</string>
     <string name="setting_website_logos_summary">Lấy biểu tượng trang web và hiện cạnh liên kết.</string>
+    <string name="setting_large_favorites">Yêu thích lớn</string>
+    <string name="setting_large_favorites_summary">Hiện hai thẻ yêu thích lớn trên mỗi hàng.</string>
     <string name="section_calendar">Lịch</string>
     <string name="section_places">Địa điểm</string>
     <string name="setting_location_recommendations">Gợi ý địa điểm</string>

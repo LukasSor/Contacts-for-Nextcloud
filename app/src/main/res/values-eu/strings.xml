@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Korritzean alfabetoa erakusten du zerrendan.</string>
     <string name="setting_website_logos">Webguneen logotipoak</string>
     <string name="setting_website_logos_summary">Webgunearen ikonoa hartu eta estekaren ondoan erakusten du.</string>
+    <string name="setting_large_favorites">Gogoko handiak</string>
+    <string name="setting_large_favorites_summary">Bi gogoko-txartel handi erakusten ditu errenkada bakoitzean.</string>
     <string name="section_calendar">Egutegia</string>
     <string name="section_places">Lekuak</string>
     <string name="setting_location_recommendations">Leku-iradokizunak</string>

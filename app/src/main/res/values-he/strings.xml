@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">מציג את האלפבית ברשימה בזמן גלילה.</string>
     <string name="setting_website_logos">סמלי אתרים</string>
     <string name="setting_website_logos_summary">טוען סמל מהאתר ומציג אותו ליד הקישור.</string>
+    <string name="setting_large_favorites">מועדפים גדולים</string>
+    <string name="setting_large_favorites_summary">מציג שני כרטיסי מועדפים גדולים בכל שורה.</string>
     <string name="section_calendar">לוח שנה</string>
     <string name="section_places">מקומות</string>
     <string name="setting_location_recommendations">המלצות מיקום</string>

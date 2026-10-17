@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Huonyesha alfabeti kwenye orodha unaposogeza.</string>
     <string name="setting_website_logos">Washa nembo za tovuti</string>
     <string name="setting_website_logos_summary">Huchukua ikoni kutoka tovuti na kuionyesha kando ya kiungo.</string>
+    <string name="setting_large_favorites">Vipendwa vikubwa</string>
+    <string name="setting_large_favorites_summary">Huonyesha kadi mbili kubwa za vipendwa katika kila safu.</string>
     <string name="section_calendar">Kalenda</string>
     <string name="section_places">Maeneo</string>
     <string name="setting_location_recommendations">Mapendekezo ya eneo</string>

@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Visar alfabetet i kontaktlistan när du rullar.</string>
     <string name="setting_website_logos">Webbplatslogotyper</string>
     <string name="setting_website_logos_summary">Hämtar favicon från webbplatsen och visar den bredvid länken.</string>
+    <string name="setting_large_favorites">Stora favoriter</string>
+    <string name="setting_large_favorites_summary">Visar två stora favoritkort på varje rad.</string>
     <string name="section_calendar">Kalender</string>
     <string name="section_places">Platser</string>
     <string name="setting_location_recommendations">Platsförslag</string>

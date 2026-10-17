@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">滚动联系人列表时显示字母。</string>
     <string name="setting_website_logos">网站图标</string>
     <string name="setting_website_logos_summary">获取网站图标并显示在链接旁。</string>
+    <string name="setting_large_favorites">大号收藏</string>
+    <string name="setting_large_favorites_summary">每行显示两张大的收藏卡片。</string>
     <string name="section_calendar">日历</string>
     <string name="section_places">地点</string>
     <string name="setting_location_recommendations">地点建议</string>

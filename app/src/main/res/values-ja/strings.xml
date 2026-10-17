@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">スクロール中、連絡先一覧に文字を表示します。</string>
     <string name="setting_website_logos">サイトのロゴ</string>
     <string name="setting_website_logos_summary">サイトのファビコンを取得し、リンクの横に表示します。</string>
+    <string name="setting_large_favorites">大きなお気に入り</string>
+    <string name="setting_large_favorites_summary">各行に大きなお気に入りカードを2枚表示します。</string>
     <string name="section_calendar">カレンダー</string>
     <string name="section_places">場所</string>
     <string name="setting_location_recommendations">場所の候補</string>

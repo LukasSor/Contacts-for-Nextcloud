@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Affiche l\'alphabet dans la liste pendant le défilement.</string>
     <string name="setting_website_logos">Logos de sites</string>
     <string name="setting_website_logos_summary">Récupère le favicon du site et l\'affiche à côté du lien.</string>
+    <string name="setting_large_favorites">Grands favoris</string>
+    <string name="setting_large_favorites_summary">Affiche deux grandes cartes de favoris par ligne.</string>
     <string name="section_calendar">Agenda</string>
     <string name="section_places">Lieux</string>
     <string name="setting_location_recommendations">Suggestions de lieu</string>

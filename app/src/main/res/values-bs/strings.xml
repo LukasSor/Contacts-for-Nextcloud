@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Tokom pomicanja prikazuje abecedu na spisku kontakata.</string>
     <string name="setting_website_logos">Logotipi web-stranica</string>
     <string name="setting_website_logos_summary">Preuzima ikonu web-stranice i prikazuje je uz vezu.</string>
+    <string name="setting_large_favorites">Veliki omiljeni</string>
+    <string name="setting_large_favorites_summary">Prikazuje dvije velike kartice omiljenih u svakom redu.</string>
     <string name="section_calendar">Kalendar</string>
     <string name="section_places">Mjesta</string>
     <string name="setting_location_recommendations">Prijedlozi mjesta</string>

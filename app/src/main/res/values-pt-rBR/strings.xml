@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Mostra o alfabeto na lista ao rolar.</string>
     <string name="setting_website_logos">Logotipos de sites</string>
     <string name="setting_website_logos_summary">Busca o favicon do site e mostra ao lado do link.</string>
+    <string name="setting_large_favorites">Favoritos grandes</string>
+    <string name="setting_large_favorites_summary">Mostra dois cartões grandes de favoritos por linha.</string>
     <string name="section_calendar">Calendário</string>
     <string name="section_places">Lugares</string>
     <string name="setting_location_recommendations">Sugestões de local</string>

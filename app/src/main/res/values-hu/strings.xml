@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Görgetés közben mutatja az ábécét a névjegylistában.</string>
     <string name="setting_website_logos">Weboldal-logók</string>
     <string name="setting_website_logos_summary">Lekéri a weboldal ikonját, és a hivatkozás mellett mutatja.</string>
+    <string name="setting_large_favorites">Nagy kedvencek</string>
+    <string name="setting_large_favorites_summary">Soronként két nagy kedvenckártyát mutat.</string>
     <string name="section_calendar">Naptár</string>
     <string name="section_places">Helyek</string>
     <string name="setting_location_recommendations">Helyjavaslatok</string>

@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Kerimisel näitab tähestikku nimekirjas.</string>
     <string name="setting_website_logos">Veebilehtede logod</string>
     <string name="setting_website_logos_summary">Laadib saidi ikooni ja näitab seda lingi kõrval.</string>
+    <string name="setting_large_favorites">Suured lemmikud</string>
+    <string name="setting_large_favorites_summary">Näitab kahte suurt lemmikukaarti igas reas.</string>
     <string name="section_calendar">Kalender</string>
     <string name="section_places">Kohad</string>
     <string name="setting_location_recommendations">Aadressisoovitused</string>

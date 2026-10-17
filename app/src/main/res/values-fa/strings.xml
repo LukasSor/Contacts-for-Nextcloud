@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">هنگام پیمایش حروف الفبا را در فهرست نشان می‌دهد.</string>
     <string name="setting_website_logos">نشان‌های وب‌سایت</string>
     <string name="setting_website_logos_summary">نماد سایت را می‌گیرد و کنار پیوند نشان می‌دهد.</string>
+    <string name="setting_large_favorites">علاقه‌مندی‌های بزرگ</string>
+    <string name="setting_large_favorites_summary">در هر ردیف دو کارت بزرگ علاقه‌مندی نشان می‌دهد.</string>
     <string name="section_calendar">تقویم</string>
     <string name="section_places">مکان‌ها</string>
     <string name="setting_location_recommendations">پیشنهاد مکان</string>

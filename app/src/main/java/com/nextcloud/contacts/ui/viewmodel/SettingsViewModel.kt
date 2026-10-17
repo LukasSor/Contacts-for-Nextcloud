@@ -52,6 +52,7 @@ private data class ThemeAppearancePrefs(
     val calendarEventDescriptionMode: CalendarEventDescriptionMode,
     val showScrollLetters: Boolean,
     val avatarFrameStyle: AvatarFrameStyle,
+    val largeFavorites: Boolean,
 )
 
 private data class PreferencesSnapshot(
@@ -64,6 +65,7 @@ private data class PreferencesSnapshot(
     val calendarEventDescriptionMode: CalendarEventDescriptionMode,
     val showScrollLetters: Boolean,
     val avatarFrameStyle: AvatarFrameStyle,
+    val largeFavorites: Boolean,
     val exportToDeviceContacts: Boolean,
     val autoLinkMessengers: Boolean,
     val hideLinkSuggestions: Boolean,
@@ -87,6 +89,7 @@ data class SettingsUiState(
     val nextcloudCalendarAvailable: Boolean? = null,
     val showScrollLetters: Boolean = true,
     val avatarFrameStyle: AvatarFrameStyle = AvatarFrameStyle.ORGANIC,
+    val largeFavorites: Boolean = false,
     val exportToDeviceContacts: Boolean = false,
     val autoLinkMessengers: Boolean = false,
     val hideLinkSuggestions: Boolean = false,
@@ -172,8 +175,9 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
             combine(
                 container.userPreferences.showScrollLetters,
                 container.userPreferences.avatarFrameStyle,
-            ) { scrollLetters, avatarFrame ->
-                scrollLetters to avatarFrame
+                container.userPreferences.largeFavorites,
+            ) { scrollLetters, avatarFrame, largeFavorites ->
+                Triple(scrollLetters, avatarFrame, largeFavorites)
             },
         ) { themePrefs, calendarPrefs, scrollAndAvatar ->
             ThemeAppearancePrefs(
@@ -186,6 +190,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
                 calendarEventDescriptionMode = calendarPrefs.calendarEventDescriptionMode,
                 showScrollLetters = scrollAndAvatar.first,
                 avatarFrameStyle = scrollAndAvatar.second,
+                largeFavorites = scrollAndAvatar.third,
             )
         },
         combine(
@@ -220,6 +225,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
             calendarEventDescriptionMode = themePrefs.calendarEventDescriptionMode,
             showScrollLetters = themePrefs.showScrollLetters,
             avatarFrameStyle = themePrefs.avatarFrameStyle,
+            largeFavorites = themePrefs.largeFavorites,
             exportToDeviceContacts = exportAndMessaging.first,
             autoLinkMessengers = exportAndMessaging.second,
             hideLinkSuggestions = exportAndMessaging.third,
@@ -260,6 +266,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
             nextcloudCalendarAvailable = nextcloudCalendarAvailable,
             showScrollLetters = prefs.showScrollLetters,
             avatarFrameStyle = prefs.avatarFrameStyle,
+            largeFavorites = prefs.largeFavorites,
             exportToDeviceContacts = prefs.exportToDeviceContacts,
             autoLinkMessengers = prefs.autoLinkMessengers,
             hideLinkSuggestions = prefs.hideLinkSuggestions,
@@ -309,6 +316,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
             nextcloudCalendarAvailable = container.userPreferences.getCachedNextcloudCalendarAvailable(),
             showScrollLetters = seededPreferences.showScrollLetters,
             avatarFrameStyle = seededPreferences.avatarFrameStyle,
+            largeFavorites = seededPreferences.largeFavorites,
             exportToDeviceContacts = seededPreferences.exportToDeviceContacts,
             autoLinkMessengers = seededPreferences.autoLinkMessengers,
             hideLinkSuggestions = seededPreferences.hideLinkSuggestions,
@@ -457,6 +465,10 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
 
     fun setShowScrollLetters(enabled: Boolean) {
         viewModelScope.launch { container.userPreferences.setShowScrollLetters(enabled) }
+    }
+
+    fun setLargeFavorites(enabled: Boolean) {
+        viewModelScope.launch { container.userPreferences.setLargeFavorites(enabled) }
     }
 
     fun setOrganicAvatarFrame(enabled: Boolean) {

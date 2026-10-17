@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Amosa o alfabeto na lista ao desprazar.</string>
     <string name="setting_website_logos">Logotipos de sitios web</string>
     <string name="setting_website_logos_summary">Obtén a icona do sitio e amósaa xunto á ligazón.</string>
+    <string name="setting_large_favorites">Favoritos grandes</string>
+    <string name="setting_large_favorites_summary">Mostra dúas tarxetas grandes de favoritos por fila.</string>
     <string name="section_calendar">Calendario</string>
     <string name="section_places">Lugares</string>
     <string name="setting_location_recommendations">Suxestións de lugar</string>

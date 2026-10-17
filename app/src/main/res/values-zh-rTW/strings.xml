@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">捲動聯絡人列表時顯示字母。</string>
     <string name="setting_website_logos">網站圖示</string>
     <string name="setting_website_logos_summary">取得網站圖示並顯示在連結旁。</string>
+    <string name="setting_large_favorites">大型最愛</string>
+    <string name="setting_large_favorites_summary">每列顯示兩張大型最愛卡片。</string>
     <string name="section_calendar">日曆</string>
     <string name="section_places">地點</string>
     <string name="setting_location_recommendations">地點建議</string>

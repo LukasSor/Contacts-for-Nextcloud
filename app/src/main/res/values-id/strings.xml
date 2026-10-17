@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Menampilkan alfabet di daftar saat menggulir.</string>
     <string name="setting_website_logos">Logo situs</string>
     <string name="setting_website_logos_summary">Mengambil ikon situs dan menampilkannya di samping tautan.</string>
+    <string name="setting_large_favorites">Favorit besar</string>
+    <string name="setting_large_favorites_summary">Menampilkan dua kartu favorit besar di tiap baris.</string>
     <string name="section_calendar">Kalender</string>
     <string name="section_places">Tempat</string>
     <string name="setting_location_recommendations">Rekomendasi lokasi</string>

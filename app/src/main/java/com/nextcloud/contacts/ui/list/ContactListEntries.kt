@@ -40,6 +40,17 @@ sealed interface ContactListEntry {
         // Same content type for every row. Corner shape is cheap; a new composition is not.
         override val contentType: String = "contact_row"
     }
+
+    /** One lazy row of one or two favorite cards. A leftover card stays one column wide. */
+    @Immutable
+    data class FavoriteCardRow(
+        val contacts: List<ContactListItem>,
+        val indexInGroup: Int,
+        val groupSize: Int,
+        override val key: String,
+    ) : ContactListEntry {
+        override val contentType: String = "favorite_card_row"
+    }
 }
 
 /** Room order, no section headers. First paint while grouping is still running. */
@@ -138,9 +149,57 @@ private fun buildFlatSortedEntries(
     }
 }
 
+/**
+ * Turns favorite list rows into two-up cards. Letter rows stay as they are.
+ * Returns [entries] unchanged when there is no favorites block.
+ */
+fun withLargeFavoriteCards(entries: List<ContactListEntry>): List<ContactListEntry> {
+    if (entries.none { it is ContactListEntry.ContactRow && it.sectionId == "favorites" }) {
+        return entries
+    }
+    return buildList {
+        var index = 0
+        while (index < entries.size) {
+            val entry = entries[index]
+            if (entry is ContactListEntry.ContactRow && entry.sectionId == "favorites") {
+                val start = index
+                while (
+                    index < entries.size &&
+                    (entries[index] as? ContactListEntry.ContactRow)?.sectionId == "favorites"
+                ) {
+                    index++
+                }
+                val favorites = entries.subList(start, index).map { row ->
+                    (row as ContactListEntry.ContactRow).contact
+                }
+                val rows = favorites.chunked(2)
+                rows.forEachIndexed { rowIndex, pair ->
+                    add(
+                        ContactListEntry.FavoriteCardRow(
+                            contacts = pair,
+                            indexInGroup = rowIndex,
+                            groupSize = rows.size,
+                            key = "favorite_cards_" + pair.joinToString("_") { it.id.toString() },
+                        ),
+                    )
+                }
+            } else {
+                add(entry)
+                index++
+            }
+        }
+    }
+}
+
 /** Contact ids in visual list order (favorites → A → Z), for avatar prefetch. */
 fun contactIdsInVisualOrder(entries: List<ContactListEntry>): List<Long> {
-    return entries.mapNotNull { (it as? ContactListEntry.ContactRow)?.contact?.id }
+    return entries.flatMap { entry ->
+        when (entry) {
+            is ContactListEntry.ContactRow -> listOf(entry.contact.id)
+            is ContactListEntry.FavoriteCardRow -> entry.contacts.map { it.id }
+            else -> emptyList()
+        }
+    }
 }
 
 /** Contact-row ordinal at or before each lazy index, or -1. Built once per list snapshot. */
@@ -148,8 +207,10 @@ fun lazyIndexToContactOrdinal(entries: List<ContactListEntry>): IntArray {
     val ordinals = IntArray(entries.size)
     var ordinal = -1
     for (i in entries.indices) {
-        if (entries[i] is ContactListEntry.ContactRow) {
-            ordinal++
+        ordinal += when (val entry = entries[i]) {
+            is ContactListEntry.ContactRow -> 1
+            is ContactListEntry.FavoriteCardRow -> entry.contacts.size
+            else -> 0
         }
         ordinals[i] = ordinal
     }

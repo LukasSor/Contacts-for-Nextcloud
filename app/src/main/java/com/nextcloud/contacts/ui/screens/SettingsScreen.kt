@@ -493,6 +493,18 @@ fun SettingsScreen(
                 },
             )
             ListItem(
+                headlineContent = { Text(stringResource(R.string.setting_large_favorites)) },
+                supportingContent = {
+                    Text(stringResource(R.string.setting_large_favorites_summary))
+                },
+                trailingContent = {
+                    Switch(
+                        checked = state.largeFavorites,
+                        onCheckedChange = viewModel::setLargeFavorites,
+                    )
+                },
+            )
+            ListItem(
                 headlineContent = { Text(stringResource(R.string.setting_organic_frame)) },
                 supportingContent = { Text(stringResource(R.string.setting_organic_frame_summary)) },
                 trailingContent = {

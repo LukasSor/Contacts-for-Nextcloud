@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Näyttää aakkoset yhteystietoluettelossa vieritettäessä.</string>
     <string name="setting_website_logos">Sivustojen logot</string>
     <string name="setting_website_logos_summary">Hakee sivuston kuvakkeen ja näyttää sen linkin vieressä.</string>
+    <string name="setting_large_favorites">Suuret suosikit</string>
+    <string name="setting_large_favorites_summary">Näyttää kaksi suurta suosikkikorttia kullakin rivillä.</string>
     <string name="section_calendar">Kalenteri</string>
     <string name="section_places">Paikat</string>
     <string name="setting_location_recommendations">Paikkaehdotukset</string>

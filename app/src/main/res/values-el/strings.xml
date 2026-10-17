@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Δείχνει το αλφάβητο στη λίστα επαφών ενώ κάνετε κύλιση.</string>
     <string name="setting_website_logos">Λογότυπα ιστοσελίδων</string>
     <string name="setting_website_logos_summary">Λαμβάνει το εικονίδιο της ιστοσελίδας και το δείχνει δίπλα στον σύνδεσμο.</string>
+    <string name="setting_large_favorites">Μεγάλα αγαπημένα</string>
+    <string name="setting_large_favorites_summary">Δείχνει δύο μεγάλες κάρτες αγαπημένων σε κάθε σειρά.</string>
     <string name="section_calendar">Ημερολόγιο</string>
     <string name="section_places">Τόποι</string>
     <string name="setting_location_recommendations">Προτάσεις τόπων</string>

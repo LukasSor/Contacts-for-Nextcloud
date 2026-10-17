@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Med drsenjem pokaže abecedo na seznamu.</string>
     <string name="setting_website_logos">Logotipi spletnih strani</string>
     <string name="setting_website_logos_summary">Pridobi ikono spletne strani in jo pokaže ob povezavi.</string>
+    <string name="setting_large_favorites">Veliki priljubljeni</string>
+    <string name="setting_large_favorites_summary">Prikaže dve veliki kartici priljubljenih v vsaki vrstici.</string>
     <string name="section_calendar">Koledar</string>
     <string name="section_places">Kraji</string>
     <string name="setting_location_recommendations">Predlogi naslovov</string>

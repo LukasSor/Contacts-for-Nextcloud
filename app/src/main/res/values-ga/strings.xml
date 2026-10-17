@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Taispeánann an aibítir ar an liosta agus tú ag scrollú.</string>
     <string name="setting_website_logos">Lógónna suíomhanna</string>
     <string name="setting_website_logos_summary">Faigheann an deilbhín ón suíomh agus taispeánann é in aice leis an nasc.</string>
+    <string name="setting_large_favorites">Ceanáin mhóra</string>
+    <string name="setting_large_favorites_summary">Taispeánann dhá chárta mhóra ceanán i ngach ró.</string>
     <string name="section_calendar">Féilire</string>
     <string name="section_places">Áiteanna</string>
     <string name="setting_location_recommendations">Moltaí suímh</string>

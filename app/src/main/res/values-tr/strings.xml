@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Kaydırırken kişi listesinde alfabeyi gösterir.</string>
     <string name="setting_website_logos">Site logoları</string>
     <string name="setting_website_logos_summary">Siteden favicon alır ve bağlantının yanında gösterir.</string>
+    <string name="setting_large_favorites">Büyük sık kullanılanlar</string>
+    <string name="setting_large_favorites_summary">Her satırda iki büyük sık kullanılan kartı gösterir.</string>
     <string name="section_calendar">Takvim</string>
     <string name="section_places">Yerler</string>
     <string name="setting_location_recommendations">Yer önerileri</string>

@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Aylantirganda kontaktlar roʻyxatida alifboni koʻrsatadi.</string>
     <string name="setting_website_logos">Sayt logotiplarini yoqish</string>
     <string name="setting_website_logos_summary">Sayt belgisini olib, havola yonida koʻrsatadi.</string>
+    <string name="setting_large_favorites">Katta saralanganlar</string>
+    <string name="setting_large_favorites_summary">Har bir qatorda ikkita katta saralangan karta koʻrsatadi.</string>
     <string name="section_calendar">Taqvim</string>
     <string name="section_places">Joylar</string>
     <string name="setting_location_recommendations">Joy tavsiyalari</string>

@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">سىيرىغاندا ئالاقىداش تىزىملىكىدە ئېلىپبەنى كۆرسىتىدۇ.</string>
     <string name="setting_website_logos">تور بەت بەلگىلىرىنى ئاچ</string>
     <string name="setting_website_logos_summary">تور بەتتىن سىنبەلگە ئېلىپ ئۇلانمىنىڭ يېنىدا كۆرسىتىدۇ.</string>
+    <string name="setting_large_favorites">چوڭ ياقتۇرىدىغانلار</string>
+    <string name="setting_large_favorites_summary">ھەر قۇردا ئىككى چوڭ ياقتۇرىدىغان كارتا كۆرسىتىدۇ.</string>
     <string name="section_calendar">كالېندار</string>
     <string name="section_places">جايلار</string>
     <string name="setting_location_recommendations">ئورۇن تەۋسىيە</string>

@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Arată alfabetul în lista de contacte în timp ce derulezi.</string>
     <string name="setting_website_logos">Sigle de site</string>
     <string name="setting_website_logos_summary">Preia pictograma site-ului și o arată lângă link.</string>
+    <string name="setting_large_favorites">Favorite mari</string>
+    <string name="setting_large_favorites_summary">Afișează două carduri mari de favorite pe fiecare rând.</string>
     <string name="section_calendar">Calendar</string>
     <string name="section_places">Locuri</string>
     <string name="setting_location_recommendations">Recomandări de locuri</string>

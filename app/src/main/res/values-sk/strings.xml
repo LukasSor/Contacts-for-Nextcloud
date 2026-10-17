@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Pri posúvaní ukáže v zozname abecedu.</string>
     <string name="setting_website_logos">Logá webstránok</string>
     <string name="setting_website_logos_summary">Načíta ikonu webstránky a ukáže ju pri odkaze.</string>
+    <string name="setting_large_favorites">Veľké obľúbené</string>
+    <string name="setting_large_favorites_summary">Zobrazí dve veľké karty obľúbených v každom riadku.</string>
     <string name="section_calendar">Kalendár</string>
     <string name="section_places">Miesta</string>
     <string name="setting_location_recommendations">Návrhy miest</string>

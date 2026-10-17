@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Při posouvání ukáže v seznamu abecedu.</string>
     <string name="setting_website_logos">Loga webů</string>
     <string name="setting_website_logos_summary">Načte favicon webu a ukáže ho vedle odkazu.</string>
+    <string name="setting_large_favorites">Velké oblíbené</string>
+    <string name="setting_large_favorites_summary">Zobrazí dvě velké karty oblíbených v každém řádku.</string>
     <string name="section_calendar">Kalendář</string>
     <string name="section_places">Místa</string>
     <string name="setting_location_recommendations">Návrhy míst</string>

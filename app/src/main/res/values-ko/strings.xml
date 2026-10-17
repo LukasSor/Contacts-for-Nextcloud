@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">스크롤하는 동안 연락처 목록에 문자를 표시합니다.</string>
     <string name="setting_website_logos">웹사이트 로고</string>
     <string name="setting_website_logos_summary">웹사이트 파비콘을 가져와 링크 옆에 표시합니다.</string>
+    <string name="setting_large_favorites">큰 즐겨찾기</string>
+    <string name="setting_large_favorites_summary">각 행에 큰 즐겨찾기 카드 2장을 표시합니다.</string>
     <string name="section_calendar">달력</string>
     <string name="section_places">장소</string>
     <string name="setting_location_recommendations">위치 추천</string>

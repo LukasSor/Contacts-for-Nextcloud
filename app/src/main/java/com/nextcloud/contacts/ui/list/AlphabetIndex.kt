@@ -228,6 +228,12 @@ fun buildAlphabetIndexModel(entries: List<ContactListEntry>): AlphabetIndexModel
                     sections.add(AlphabetIndexSection(currentGlyph, index))
                 }
             }
+            is ContactListEntry.FavoriteCardRow -> {
+                if (currentGlyph.isEmpty()) {
+                    currentGlyph = FAVORITES_INDEX_GLYPH
+                    sections.add(AlphabetIndexSection(currentGlyph, index))
+                }
+            }
         }
         glyphs.add(currentGlyph)
     }

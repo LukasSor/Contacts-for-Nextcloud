@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Показує абетку в списку контактів під час прокрутки.</string>
     <string name="setting_website_logos">Логотипи сайтів</string>
     <string name="setting_website_logos_summary">Завантажує favicon сайту і показує його біля посилання.</string>
+    <string name="setting_large_favorites">Велике обране</string>
+    <string name="setting_large_favorites_summary">Показує дві великі картки обраного в кожному рядку.</string>
     <string name="section_calendar">Календар</string>
     <string name="section_places">Місця</string>
     <string name="setting_location_recommendations">Пропозиції місць</string>

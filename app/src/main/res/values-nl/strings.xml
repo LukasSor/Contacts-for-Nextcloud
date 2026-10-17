@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Toont het alfabet in de lijst tijdens het scrollen.</string>
     <string name="setting_website_logos">Websitelogo\'s</string>
     <string name="setting_website_logos_summary">Haalt het favicon van de website op en toont het naast de link.</string>
+    <string name="setting_large_favorites">Grote favorieten</string>
+    <string name="setting_large_favorites_summary">Toont twee grote favorietenkaarten per rij.</string>
     <string name="section_calendar">Agenda</string>
     <string name="section_places">Plaatsen</string>
     <string name="setting_location_recommendations">Locatievoorstellen</string>

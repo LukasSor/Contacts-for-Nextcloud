@@ -66,6 +66,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -80,6 +81,7 @@ import com.nextcloud.contacts.ui.list.ContactListEntry
 import com.nextcloud.contacts.ui.list.buildAlphabetIndexModel
 import com.nextcloud.contacts.ui.list.contactIdsInVisualOrder
 import com.nextcloud.contacts.ui.list.lazyIndexToContactOrdinal
+import com.nextcloud.contacts.ui.list.withLargeFavoriteCards
 import com.nextcloud.contacts.ui.util.rememberDeviceContactsImportAction
 import com.nextcloud.contacts.ui.viewmodel.ContactListSortField
 import com.nextcloud.contacts.ui.navigation.ContactListPendingGroupFilter
@@ -97,6 +99,10 @@ private val LetterGroupSpacing = 20.dp
 
 /** Fixed height so a fling does not remeasure every row. */
 private val ContactRowHeight = 64.dp
+
+private val LargeFavoriteAvatarSize = 96.dp
+private val LargeFavoriteCardMinHeight = 176.dp
+private val LargeFavoriteCardShape = RoundedCornerShape(GroupCornerOuter)
 
 // One shape instance per position. Allocating per row shows up while flinging.
 private val ShapeSingle = RoundedCornerShape(GroupCornerOuter)
@@ -144,6 +150,9 @@ fun ContactListScreen(
     )
     val container = (context.applicationContext as ContactsApp).container
     val showScrollLetters by container.userPreferences.showScrollLetters.collectAsState(initial = true)
+    val largeFavorites by container.userPreferences.largeFavorites.collectAsState(
+        initial = container.userPreferences.snapshot().largeFavorites,
+    )
 
     if (isContactsReady) {
         SideEffect { onContactsReady() }
@@ -305,6 +314,7 @@ fun ContactListScreen(
                     filtersActive = filterState.hasActiveFilters,
                     sortField = filterState.sortField,
                     showScrollLetters = showScrollLetters,
+                    largeFavorites = largeFavorites,
                     onContactClick = onContactClick,
                     onImportFromDevice = importFromDevice,
                     isImporting = isImporting,
@@ -412,6 +422,7 @@ private fun ContactList(
     filtersActive: Boolean = false,
     sortField: ContactListSortField = ContactListSortField.DISPLAY_NAME,
     showScrollLetters: Boolean = true,
+    largeFavorites: Boolean = false,
     onContactClick: (Long) -> Unit,
     onImportFromDevice: (() -> Unit)? = null,
     isImporting: Boolean = false,
@@ -419,12 +430,15 @@ private fun ContactList(
     modifier: Modifier = Modifier,
 ) {
     val listModifier = modifier.fillMaxSize()
+    val shownEntries = remember(entries, largeFavorites) {
+        if (largeFavorites) withLargeFavoriteCards(entries) else entries
+    }
     // Default nested prefetch is smaller than the avatar warm window.
     val listState = rememberLazyListState(
         prefetchStrategy = remember { LazyListPrefetchStrategy(nestedPrefetchItemCount = 12) },
     )
-    val contactIds = remember(entries) { contactIdsInVisualOrder(entries) }
-    val contactOrdinalByLazyIndex = remember(entries) { lazyIndexToContactOrdinal(entries) }
+    val contactIds = remember(shownEntries) { contactIdsInVisualOrder(shownEntries) }
+    val contactOrdinalByLazyIndex = remember(shownEntries) { lazyIndexToContactOrdinal(shownEntries) }
 
     LaunchedEffect(listState, contactIds, contactOrdinalByLazyIndex, onPrefetchAhead) {
         if (contactIds.isEmpty()) return@LaunchedEffect
@@ -453,7 +467,7 @@ private fun ContactList(
     // Blank until grouping finishes. Empty entries here are not "no contacts".
     if (!listPresentationReady) {
         Box(modifier = listModifier)
-    } else if (entries.isEmpty()) {
+    } else if (shownEntries.isEmpty()) {
         Box(
             modifier = listModifier
                 .fillMaxWidth()
@@ -486,7 +500,7 @@ private fun ContactList(
             }
         }
     } else {
-        val sectionIndex = remember(entries) { buildAlphabetIndexModel(entries) }
+        val sectionIndex = remember(shownEntries) { buildAlphabetIndexModel(shownEntries) }
 
         Box(modifier = listModifier) {
             LazyColumn(
@@ -501,7 +515,7 @@ private fun ContactList(
                 ),
             ) {
                 items(
-                    items = entries,
+                    items = shownEntries,
                     key = { it.key },
                     contentType = { it.contentType },
                 ) { entry ->
@@ -509,6 +523,16 @@ private fun ContactList(
                         is ContactListEntry.FavoritesHeader -> {
                             FavoritesHeader(
                                 modifier = Modifier.padding(bottom = 6.dp),
+                            )
+                        }
+                        is ContactListEntry.FavoriteCardRow -> {
+                            val isLastInGroup = entry.indexInGroup == entry.groupSize - 1
+                            FavoriteCardsRow(
+                                entry = entry,
+                                onContactClick = onContactClick,
+                                modifier = Modifier.padding(
+                                    bottom = if (isLastInGroup) LetterGroupSpacing else 8.dp,
+                                ),
                             )
                         }
                         is ContactListEntry.LetterHeader -> {
@@ -581,6 +605,73 @@ private fun LetterHeader(letter: String, modifier: Modifier = Modifier) {
         color = MaterialTheme.colorScheme.primary,
         modifier = modifier.padding(start = 4.dp, top = 4.dp, end = 4.dp),
     )
+}
+
+/** Two favorite cards. A single leftover keeps one column and does not stretch. */
+@Composable
+private fun FavoriteCardsRow(
+    entry: ContactListEntry.FavoriteCardRow,
+    onContactClick: (Long) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.Top,
+    ) {
+        entry.contacts.forEach { contact ->
+            LargeFavoriteCard(
+                displayName = contact.displayName,
+                contactId = contact.id,
+                onClick = { onContactClick(contact.id) },
+                modifier = Modifier.weight(1f),
+            )
+        }
+        if (entry.contacts.size == 1) {
+            Spacer(modifier = Modifier.weight(1f))
+        }
+    }
+}
+
+@Composable
+private fun LargeFavoriteCard(
+    displayName: String,
+    contactId: Long,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Surface(
+        modifier = modifier
+            .heightIn(min = LargeFavoriteCardMinHeight)
+            .clickable(onClick = onClick),
+        shape = LargeFavoriteCardShape,
+        color = MaterialTheme.colorScheme.surfaceContainerHigh,
+        tonalElevation = 0.dp,
+        shadowElevation = 0.dp,
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 12.dp, vertical = 16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ) {
+            ContactAvatar(
+                contactId = contactId,
+                displayName = displayName,
+                size = LargeFavoriteAvatarSize,
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            Text(
+                text = displayName,
+                style = MaterialTheme.typography.titleMedium,
+                textAlign = TextAlign.Center,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
+    }
 }
 
 /** One lazy item per contact. No elevation — a shadow repaints for the whole fling. */

@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Pokazuje alfabet na liście kontaktów podczas przewijania.</string>
     <string name="setting_website_logos">Logotypy stron</string>
     <string name="setting_website_logos_summary">Pobiera favicon strony i pokazuje go obok linku.</string>
+    <string name="setting_large_favorites">Duże ulubione</string>
+    <string name="setting_large_favorites_summary">Pokazuje dwie duże karty ulubionych w każdym wierszu.</string>
     <string name="section_calendar">Kalendarz</string>
     <string name="section_places">Miejsca</string>
     <string name="setting_location_recommendations">Sugestie miejsc</string>

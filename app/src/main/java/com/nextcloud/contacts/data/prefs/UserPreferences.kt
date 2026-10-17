@@ -46,6 +46,7 @@ data class UserPreferencesSnapshot(
     val lastSyncTime: Long?,
     val contactEditFieldMode: ContactEditFieldMode,
     val fieldSyntaxEnabled: Boolean,
+    val largeFavorites: Boolean = false,
 )
 
 class UserPreferences(private val context: Context) {
@@ -151,6 +152,7 @@ class UserPreferences(private val context: Context) {
                 else -> ContactEditFieldMode.SIMPLE
             },
             fieldSyntaxEnabled = prefs[KEY_FIELD_SYNTAX] ?: false,
+            largeFavorites = prefs[KEY_LARGE_FAVORITES] ?: false,
         )
     }
 
@@ -198,6 +200,10 @@ class UserPreferences(private val context: Context) {
 
     val showScrollLetters: Flow<Boolean> = context.dataStore.data.map { prefs ->
         prefs[KEY_SHOW_SCROLL_LETTERS] ?: true
+    }
+
+    val largeFavorites: Flow<Boolean> = context.dataStore.data.map { prefs ->
+        prefs[KEY_LARGE_FAVORITES] ?: false
     }
 
     val avatarFrameStyle: Flow<AvatarFrameStyle> = context.dataStore.data.map { prefs ->
@@ -320,6 +326,12 @@ class UserPreferences(private val context: Context) {
     suspend fun setShowScrollLetters(enabled: Boolean) {
         context.dataStore.edit { prefs ->
             prefs[KEY_SHOW_SCROLL_LETTERS] = enabled
+        }
+    }
+
+    suspend fun setLargeFavorites(enabled: Boolean) {
+        context.dataStore.edit { prefs ->
+            prefs[KEY_LARGE_FAVORITES] = enabled
         }
     }
 
@@ -474,6 +486,7 @@ class UserPreferences(private val context: Context) {
         private val KEY_CALENDAR_EVENT_DESCRIPTION_MODE =
             stringPreferencesKey("calendar_event_description_mode")
         private val KEY_SHOW_SCROLL_LETTERS = booleanPreferencesKey("show_scroll_letters")
+        private val KEY_LARGE_FAVORITES = booleanPreferencesKey("large_favorites")
         private val KEY_AVATAR_FRAME = stringPreferencesKey("avatar_frame")
         private val KEY_AUTO_LINK_MESSENGERS = booleanPreferencesKey("auto_link_messengers")
         private val KEY_HIDE_LINK_SUGGESTIONS = booleanPreferencesKey("hide_link_suggestions")

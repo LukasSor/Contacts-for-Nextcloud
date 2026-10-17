@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Rāda alfabētu sarakstā, kamēr ritināt.</string>
     <string name="setting_website_logos">Vietņu logotipi</string>
     <string name="setting_website_logos_summary">Iegūst ikonu no vietnes un rāda to blakus saitei.</string>
+    <string name="setting_large_favorites">Liela izlase</string>
+    <string name="setting_large_favorites_summary">Katrā rindā rāda divas lielas izlases kartītes.</string>
     <string name="section_calendar">Kalendārs</string>
     <string name="section_places">Vietas</string>
     <string name="setting_location_recommendations">Vietu ieteikumi</string>

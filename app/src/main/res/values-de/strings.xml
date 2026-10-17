@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Zeigt das Alphabet in der Kontaktliste beim Scrollen.</string>
     <string name="setting_website_logos">Webseiten-Logos</string>
     <string name="setting_website_logos_summary">Lädt das Favicon der Webseite und zeigt es neben dem Link.</string>
+    <string name="setting_large_favorites">Große Favoriten</string>
+    <string name="setting_large_favorites_summary">Zeigt zwei große Favoritenkarten pro Zeile.</string>
     <string name="section_calendar">Kalender</string>
     <string name="section_places">Orte</string>
     <string name="setting_location_recommendations">Ortsvorschläge</string>

@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Shfaq alfabetin te lista e kontakteve kur lëviz.</string>
     <string name="setting_website_logos">Aktivizo logot e faqeve</string>
     <string name="setting_website_logos_summary">Merr ikonën e faqes dhe e shfaq pranë lidhjes.</string>
+    <string name="setting_large_favorites">Të preferuarat e mëdha</string>
+    <string name="setting_large_favorites_summary">Shfaq dy karta të mëdha të preferuarash në çdo rresht.</string>
     <string name="section_calendar">Kalendar</string>
     <string name="section_places">Vende</string>
     <string name="setting_location_recommendations">Sugjerime vendndodhjeje</string>

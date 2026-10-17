@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">გადაადგილებისას ანბანს აჩვენებს კონტაქტების სიაზე.</string>
     <string name="setting_website_logos">ვებ-საიტის ლოგოები</string>
     <string name="setting_website_logos_summary">იღებს საიტის ხატულას და აჩვენებს ბმულის გვერდით.</string>
+    <string name="setting_large_favorites">დიდი რჩეულები</string>
+    <string name="setting_large_favorites_summary">თითო რიგში ორ დიდ რჩეულ ბარათს აჩვენებს.</string>
     <string name="section_calendar">კალენდარი</string>
     <string name="section_places">ადგილები</string>
     <string name="setting_location_recommendations">ადგილის შეთავაზებები</string>

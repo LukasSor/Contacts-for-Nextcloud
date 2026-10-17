@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Пры пракрутцы паказвае алфавіт у спісе.</string>
     <string name="setting_website_logos">Лагатыпы сайтаў</string>
     <string name="setting_website_logos_summary">Бярэ значок сайта і паказвае яго побач са спасылкай.</string>
+    <string name="setting_large_favorites">Вялікае абранае</string>
+    <string name="setting_large_favorites_summary">Паказвае дзве вялікія карткі абранага ў кожным радку.</string>
     <string name="section_calendar">Каляндар</string>
     <string name="section_places">Месцы</string>
     <string name="setting_location_recommendations">Прапановы месцаў</string>

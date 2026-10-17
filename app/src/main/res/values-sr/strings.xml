@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Приказује азбуку на листи при клизању.</string>
     <string name="setting_website_logos">Логотипи сајтова</string>
     <string name="setting_website_logos_summary">Преузима икону сајта и приказује је поред везе.</string>
+    <string name="setting_large_favorites">Велики омиљени</string>
+    <string name="setting_large_favorites_summary">Приказује две велике картице омиљених у сваком реду.</string>
     <string name="section_calendar">Календар</string>
     <string name="section_places">Места</string>
     <string name="setting_location_recommendations">Предлози адреса</string>

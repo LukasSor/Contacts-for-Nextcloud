@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">يعرض الحروف في قائمة جهات الاتصال أثناء التمرير.</string>
     <string name="setting_website_logos">شعارات المواقع</string>
     <string name="setting_website_logos_summary">يجلب أيقونة الموقع ويعرضها بجانب الرابط.</string>
+    <string name="setting_large_favorites">المفضلة الكبيرة</string>
+    <string name="setting_large_favorites_summary">يعرض بطاقتين كبيرتين للمفضلة في كل صف.</string>
     <string name="section_calendar">التقويم</string>
     <string name="section_places">الأماكن</string>
     <string name="setting_location_recommendations">اقتراحات الأماكن</string>

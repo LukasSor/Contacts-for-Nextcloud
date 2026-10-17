@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">ສະແດງຕົວອັກສອນໃນລາຍຊື່ເວລາເລື່ອນ.</string>
     <string name="setting_website_logos">ເປີດໂລໂກ້ເວັບໄຊ</string>
     <string name="setting_website_logos_summary">ດຶງໄອຄອນຈາກເວັບໄຊແລ້ວສະແດງຂ້າງລິ້ງ.</string>
+    <string name="setting_large_favorites">ທີ່ມັກໃຫຍ່</string>
+    <string name="setting_large_favorites_summary">ສະແດງບັດທີ່ມັກໃຫຍ່ສອງໃບໃນແຕ່ລະແຖວ.</string>
     <string name="section_calendar">ປະຕິທິນ</string>
     <string name="section_places">ສະຖານທີ່</string>
     <string name="setting_location_recommendations">ແນະນຳສະຖານທີ່</string>

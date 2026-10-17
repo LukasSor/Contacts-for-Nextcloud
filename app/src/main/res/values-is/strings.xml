@@ -303,6 +303,8 @@
     <string name="setting_scroll_letters_summary">Sýnir stafrófið á tengiliðalistanum við flettingu.</string>
     <string name="setting_website_logos">Virkja vefmerki</string>
     <string name="setting_website_logos_summary">Sækir táknmynd vefsvæðis og sýnir hana við tengilinn.</string>
+    <string name="setting_large_favorites">Stór eftirlæti</string>
+    <string name="setting_large_favorites_summary">Sýnir tvö stór eftirlætiskort í hverri röð.</string>
     <string name="section_calendar">Dagatal</string>
     <string name="section_places">Staðir</string>
     <string name="setting_location_recommendations">Staðartillögur</string>
