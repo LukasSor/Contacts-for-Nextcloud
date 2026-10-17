@@ -180,6 +180,9 @@ class ContactEditViewModel(
     private val _saved = MutableStateFlow(false)
     val saved: StateFlow<Boolean> = _saved.asStateFlow()
 
+    private val _deleted = MutableStateFlow(false)
+    val deleted: StateFlow<Boolean> = _deleted.asStateFlow()
+
     private val _existingGroups = MutableStateFlow<List<String>>(emptyList())
     val existingGroups: StateFlow<List<String>> = _existingGroups.asStateFlow()
 
@@ -1220,7 +1223,7 @@ class ContactEditViewModel(
         viewModelScope.launch {
             repository.deleteContact(contactId)
             SyncWorker.syncNow(getApplication(), localSave = true)
-            _saved.value = true
+            _deleted.value = true
         }
     }
 

@@ -123,6 +123,7 @@ import com.nextcloud.contacts.ui.viewmodel.visibleSocialProfileIndices
 fun ContactEditScreen(
     onBack: () -> Unit,
     onSaved: () -> Unit,
+    onDeleted: () -> Unit,
     viewModel: ContactEditViewModel = viewModel(),
 ) {
     val state by viewModel.state.collectAsState()
@@ -132,6 +133,8 @@ fun ContactEditScreen(
     val showWorkFields = fieldMode.includesWorkFields()
     val showFullFields = fieldMode.includesFullFields()
     val saved by viewModel.saved.collectAsState()
+    val deleted by viewModel.deleted.collectAsState()
+    var navigatedAfterDelete by remember { mutableStateOf(false) }
     val existingGroups by viewModel.existingGroups.collectAsState()
     val cloudUserSearch by viewModel.cloudUserSearch.collectAsState()
     val crossLinkPrompt by viewModel.crossLinkPrompt.collectAsState()
@@ -146,6 +149,12 @@ fun ContactEditScreen(
 
     LaunchedEffect(saved) {
         if (saved) onSaved()
+    }
+    LaunchedEffect(deleted) {
+        if (deleted && !navigatedAfterDelete) {
+            navigatedAfterDelete = true
+            onDeleted()
+        }
     }
 
     crossLinkPrompt?.let { prompt ->

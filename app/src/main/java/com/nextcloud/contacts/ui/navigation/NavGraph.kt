@@ -284,6 +284,14 @@ fun ContactsNavHost(
             ContactEditScreen(
                 onBack = { navController.popBackStack() },
                 onSaved = { navController.popBackStack() },
+                onDeleted = {
+                    // Edit sits on the detail screen. Pop both so a deleted contact
+                    // is not left as an empty detail page.
+                    if (navController.currentDestination?.route != Routes.CONTACTS) {
+                        val poppedToList = navController.popBackStack(Routes.CONTACTS, inclusive = false)
+                        if (!poppedToList) navController.popBackStack()
+                    }
+                },
             )
         }
 
