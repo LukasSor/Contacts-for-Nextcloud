@@ -466,4 +466,39 @@
     <string name="msg_insert_contact_failed">Non se puido engadir o contacto</string>
     <string name="login_http_failed">Fallou o inicio de sesión: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Organizar</string>
+    <string name="organize_bin_summary">Contactos eliminados hai pouco</string>
+    <string name="organize_import_summary">Importar, exportar e contactos do teléfono</string>
+    <string name="organize_calendar_summary">Aniversarios, cabodanos e pasamentos</string>
+    <string name="organize_merge_summary">Atopar e fusionar duplicados</string>
+    <string name="section_emergency_contacts">Contactos de emerxencia</string>
+    <string name="emergency_contacts_opens_phone">Abre os contactos de emerxencia do teléfono</string>
+    <string name="msg_emergency_unavailable">Non se puideron abrir os contactos de emerxencia</string>
+    <string name="empty_no_emergency_contacts">Ningún contacto de emerxencia</string>
+    <string name="section_bin">Papeleira</string>
+    <string name="empty_bin">Ningún contacto eliminado</string>
+    <string name="bin_kept_days">Gárdase 3 días.</string>
+    <string name="action_restore">Restaurar</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">%d día restante</item>
+        <item quantity="other">%d días restantes</item>
+    </plurals>
+    <string name="msg_contact_restored">Contacto restaurado</string>
+    <string name="msg_restore_failed">Non se puido restaurar o contacto</string>
+    <string name="section_merge_fix">Fusionar e corrixir</string>
+    <string name="empty_no_duplicates">Sen duplicados</string>
+    <string name="action_merge">Fusionar</string>
+    <string name="action_swap">Intercambiar</string>
+    <string name="merge_kept">Conservado</string>
+    <string name="merge_other">Outro</string>
+    <string name="dialog_merge_contacts">Fusionar os contactos?</string>
+    <string name="dialog_merge_contacts_body">Conserva o contacto da esquerda e elimina o da dereita.</string>
+    <string name="merge_same_phone">Mesmo teléfono</string>
+    <string name="merge_same_email">Mesmo correo</string>
+    <string name="merge_same_name">Mesmo nome</string>
+    <string name="msg_contacts_merged">Contactos fusionados</string>
+    <string name="msg_merge_failed">Non se puideron fusionar os contactos</string>
+    <string name="field_photo">Foto</string>
+    <string name="merge_both_kept">Ambos conservados</string>
 </resources>

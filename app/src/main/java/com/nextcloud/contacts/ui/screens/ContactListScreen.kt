@@ -32,6 +32,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.FilterList
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Star
@@ -125,6 +126,7 @@ private val ShapeMiddle = RoundedCornerShape(GroupCornerInner)
 fun ContactListScreen(
     onContactClick: (Long) -> Unit,
     onAddContact: () -> Unit,
+    onOpenOrganize: () -> Unit,
     onOpenSettings: () -> Unit,
     isPickerMode: Boolean = false,
     onContactsReady: () -> Unit = {},
@@ -193,6 +195,12 @@ fun ContactListScreen(
                 title = { Text(if (isPickerMode) stringResource(R.string.screen_choose_contact) else stringResource(R.string.screen_contacts)) },
                 actions = {
                     if (!isPickerMode) {
+                        IconButton(onClick = onOpenOrganize) {
+                            Icon(
+                                Icons.AutoMirrored.Filled.MenuBook,
+                                contentDescription = stringResource(R.string.screen_organize),
+                            )
+                        }
                         IconButton(onClick = onOpenSettings) {
                             Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.cd_settings))
                         }

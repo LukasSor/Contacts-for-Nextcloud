@@ -466,4 +466,39 @@
     <string name="msg_insert_contact_failed">Tókst ekki að bæta við tengilið</string>
     <string name="login_http_failed">Innskráning mistókst: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Skipuleggja</string>
+    <string name="organize_bin_summary">Nýlega eyddir tengiliðir</string>
+    <string name="organize_import_summary">Innflutningur, útflutningur og símatengiliðir</string>
+    <string name="organize_calendar_summary">Afmælisdagar, afmæli og andlát</string>
+    <string name="organize_merge_summary">Finna og sameina tvítekningar</string>
+    <string name="section_emergency_contacts">Neyðartengiliðir</string>
+    <string name="emergency_contacts_opens_phone">Opnar neyðartengiliði síma</string>
+    <string name="msg_emergency_unavailable">Ekki tókst að opna neyðartengiliði</string>
+    <string name="empty_no_emergency_contacts">Engir neyðartengiliðir</string>
+    <string name="section_bin">Rusl</string>
+    <string name="empty_bin">Engir eyddir tengiliðir</string>
+    <string name="bin_kept_days">Geymt í 3 daga.</string>
+    <string name="action_restore">Endurheimta</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">%d dagur eftir</item>
+        <item quantity="other">%d dagar eftir</item>
+    </plurals>
+    <string name="msg_contact_restored">Tengiliður endurheimtur</string>
+    <string name="msg_restore_failed">Ekki tókst að endurheimta tengilið</string>
+    <string name="section_merge_fix">Sameina og laga</string>
+    <string name="empty_no_duplicates">Engar tvítekningar</string>
+    <string name="action_merge">Sameina</string>
+    <string name="action_swap">Skipta</string>
+    <string name="merge_kept">Heldur</string>
+    <string name="merge_other">Hitt</string>
+    <string name="dialog_merge_contacts">Sameina tengiliði?</string>
+    <string name="dialog_merge_contacts_body">Heldur tengiliðnum vinstra megin og eyðir þeim hægra megin.</string>
+    <string name="merge_same_phone">Sami sími</string>
+    <string name="merge_same_email">Sama netfang</string>
+    <string name="merge_same_name">Sama nafn</string>
+    <string name="msg_contacts_merged">Tengiliðir sameinaðir</string>
+    <string name="msg_merge_failed">Ekki tókst að sameina tengiliði</string>
+    <string name="field_photo">Mynd</string>
+    <string name="merge_both_kept">Bæði heldur</string>
 </resources>

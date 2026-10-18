@@ -451,4 +451,38 @@
     <string name="msg_insert_contact_failed">Kenalan tidak dapat ditambah</string>
     <string name="login_http_failed">Log masuk gagal: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Susun</string>
+    <string name="organize_bin_summary">Kenalan dipadam baru-baru ini</string>
+    <string name="organize_import_summary">Import, eksport dan kenalan telefon</string>
+    <string name="organize_calendar_summary">Hari lahir, ulang tahun dan kematian</string>
+    <string name="organize_merge_summary">Cari dan gabungkan pendua</string>
+    <string name="section_emergency_contacts">Kenalan kecemasan</string>
+    <string name="emergency_contacts_opens_phone">Membuka kenalan kecemasan telefon</string>
+    <string name="msg_emergency_unavailable">Kenalan kecemasan tidak dapat dibuka</string>
+    <string name="empty_no_emergency_contacts">Tiada kenalan kecemasan</string>
+    <string name="section_bin">Tong sampah</string>
+    <string name="empty_bin">Tiada kenalan dipadam</string>
+    <string name="bin_kept_days">Disimpan 3 hari.</string>
+    <string name="action_restore">Pulihkan</string>
+    <plurals name="bin_days_left">
+        <item quantity="other">%d hari lagi</item>
+    </plurals>
+    <string name="msg_contact_restored">Kenalan dipulihkan</string>
+    <string name="msg_restore_failed">Kenalan tidak dapat dipulihkan</string>
+    <string name="section_merge_fix">Gabung dan betulkan</string>
+    <string name="empty_no_duplicates">Tiada pendua</string>
+    <string name="action_merge">Gabung</string>
+    <string name="action_swap">Tukar</string>
+    <string name="merge_kept">Kekal</string>
+    <string name="merge_other">Lain</string>
+    <string name="dialog_merge_contacts">Gabungkan kenalan?</string>
+    <string name="dialog_merge_contacts_body">Menyimpan kenalan kiri dan memadam kenalan kanan.</string>
+    <string name="merge_same_phone">Telefon sama</string>
+    <string name="merge_same_email">E-mel sama</string>
+    <string name="merge_same_name">Nama sama</string>
+    <string name="msg_contacts_merged">Kenalan digabung</string>
+    <string name="msg_merge_failed">Kenalan tidak dapat digabung</string>
+    <string name="field_photo">Foto</string>
+    <string name="merge_both_kept">Kedua-duanya kekal</string>
 </resources>

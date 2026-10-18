@@ -481,4 +481,40 @@
     <string name="msg_insert_contact_failed">Não foi possível adicionar o contacto</string>
     <string name="login_http_failed">Falha ao iniciar sessão: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Organizar</string>
+    <string name="organize_bin_summary">Contactos apagados recentemente</string>
+    <string name="organize_import_summary">Importar, exportar e contactos do telefone</string>
+    <string name="organize_calendar_summary">Datas de nascimento, aniversários e falecimentos</string>
+    <string name="organize_merge_summary">Encontrar e fundir duplicados</string>
+    <string name="section_emergency_contacts">Contactos de emergência</string>
+    <string name="emergency_contacts_opens_phone">Abre os contactos de emergência do telefone</string>
+    <string name="msg_emergency_unavailable">Não foi possível abrir os contactos de emergência</string>
+    <string name="empty_no_emergency_contacts">Nenhum contacto de emergência</string>
+    <string name="section_bin">Reciclagem</string>
+    <string name="empty_bin">Nenhum contacto apagado</string>
+    <string name="bin_kept_days">Mantido 3 dias.</string>
+    <string name="action_restore">Restaurar</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">%d dia restante</item>
+        <item quantity="many">%d dias restantes</item>
+        <item quantity="other">%d dias restantes</item>
+    </plurals>
+    <string name="msg_contact_restored">Contacto restaurado</string>
+    <string name="msg_restore_failed">Não foi possível restaurar o contacto</string>
+    <string name="section_merge_fix">Fundir e corrigir</string>
+    <string name="empty_no_duplicates">Sem duplicados</string>
+    <string name="action_merge">Fundir</string>
+    <string name="action_swap">Trocar</string>
+    <string name="merge_kept">Mantido</string>
+    <string name="merge_other">Outro</string>
+    <string name="dialog_merge_contacts">Fundir contactos?</string>
+    <string name="dialog_merge_contacts_body">Mantém o contacto da esquerda e apaga o da direita.</string>
+    <string name="merge_same_phone">Mesmo telefone</string>
+    <string name="merge_same_email">Mesmo e-mail</string>
+    <string name="merge_same_name">Mesmo nome</string>
+    <string name="msg_contacts_merged">Contactos fundidos</string>
+    <string name="msg_merge_failed">Não foi possível fundir os contactos</string>
+    <string name="field_photo">Fotografia</string>
+    <string name="merge_both_kept">Ambos mantidos</string>
 </resources>

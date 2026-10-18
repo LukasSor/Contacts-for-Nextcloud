@@ -451,4 +451,38 @@
     <string name="msg_insert_contact_failed">Kontakt qoʻshilmadi</string>
     <string name="login_http_failed">Kirish amalga oshmadi: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Tartibla</string>
+    <string name="organize_bin_summary">Yaqinda oʻchirilgan kontaktlar</string>
+    <string name="organize_import_summary">Import, eksport va telefon kontaktlari</string>
+    <string name="organize_calendar_summary">Tugʻilgan kunlar, yubileylar va vafot</string>
+    <string name="organize_merge_summary">Takrorlarni topish va birlashtirish</string>
+    <string name="section_emergency_contacts">Favqulodda kontaktlar</string>
+    <string name="emergency_contacts_opens_phone">Telefonning favqulodda kontaktlarini ochadi</string>
+    <string name="msg_emergency_unavailable">Favqulodda kontaktlarni ochib boʻlmadi</string>
+    <string name="empty_no_emergency_contacts">Favqulodda kontakt yoʻq</string>
+    <string name="section_bin">Savat</string>
+    <string name="empty_bin">Oʻchirilgan kontakt yoʻq</string>
+    <string name="bin_kept_days">3 kun saqlanadi.</string>
+    <string name="action_restore">Tiklash</string>
+    <plurals name="bin_days_left">
+        <item quantity="other">%d kun qoldi</item>
+    </plurals>
+    <string name="msg_contact_restored">Kontakt tiklandi</string>
+    <string name="msg_restore_failed">Kontaktni tiklab boʻlmadi</string>
+    <string name="section_merge_fix">Birlashtirish va tuzatish</string>
+    <string name="empty_no_duplicates">Takror yoʻq</string>
+    <string name="action_merge">Birlashtirish</string>
+    <string name="action_swap">Almashtirish</string>
+    <string name="merge_kept">Qoladi</string>
+    <string name="merge_other">Boshqa</string>
+    <string name="dialog_merge_contacts">Kontaktlar birlashtirilsinmi?</string>
+    <string name="dialog_merge_contacts_body">Chapdagi kontakt qoladi, oʻngdagi oʻchadi.</string>
+    <string name="merge_same_phone">Bir xil telefon</string>
+    <string name="merge_same_email">Bir xil e-pochta</string>
+    <string name="merge_same_name">Bir xil nom</string>
+    <string name="msg_contacts_merged">Kontaktlar birlashtirildi</string>
+    <string name="msg_merge_failed">Kontaktlarni birlashtirib boʻlmadi</string>
+    <string name="field_photo">Foto</string>
+    <string name="merge_both_kept">Ikkalasi qoladi</string>
 </resources>

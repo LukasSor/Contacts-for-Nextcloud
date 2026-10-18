@@ -466,4 +466,39 @@
     <string name="msg_insert_contact_failed">Contatto non aggiunto</string>
     <string name="login_http_failed">Accesso non riuscito: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Organizza</string>
+    <string name="organize_bin_summary">Contatti eliminati di recente</string>
+    <string name="organize_import_summary">Importa, esporta e contatti del telefono</string>
+    <string name="organize_calendar_summary">Compleanni, anniversari e decessi</string>
+    <string name="organize_merge_summary">Trova e unisci i duplicati</string>
+    <string name="section_emergency_contacts">Contatti di emergenza</string>
+    <string name="emergency_contacts_opens_phone">Apre i contatti di emergenza del telefono</string>
+    <string name="msg_emergency_unavailable">Impossibile aprire i contatti di emergenza</string>
+    <string name="empty_no_emergency_contacts">Nessun contatto di emergenza</string>
+    <string name="section_bin">Cestino</string>
+    <string name="empty_bin">Nessun contatto eliminato</string>
+    <string name="bin_kept_days">Conservato 3 giorni.</string>
+    <string name="action_restore">Ripristina</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">%d giorno rimasto</item>
+        <item quantity="other">%d giorni rimasti</item>
+    </plurals>
+    <string name="msg_contact_restored">Contatto ripristinato</string>
+    <string name="msg_restore_failed">Impossibile ripristinare il contatto</string>
+    <string name="section_merge_fix">Unisci e correggi</string>
+    <string name="empty_no_duplicates">Nessun duplicato</string>
+    <string name="action_merge">Unisci</string>
+    <string name="action_swap">Scambia</string>
+    <string name="merge_kept">Resta</string>
+    <string name="merge_other">Altro</string>
+    <string name="dialog_merge_contacts">Unire i contatti?</string>
+    <string name="dialog_merge_contacts_body">Tiene il contatto a sinistra ed elimina quello a destra.</string>
+    <string name="merge_same_phone">Stesso tel.</string>
+    <string name="merge_same_email">Stessa e-mail</string>
+    <string name="merge_same_name">Stesso nome</string>
+    <string name="msg_contacts_merged">Contatti uniti</string>
+    <string name="msg_merge_failed">Impossibile unire i contatti</string>
+    <string name="field_photo">Foto</string>
+    <string name="merge_both_kept">Entrambi restano</string>
 </resources>

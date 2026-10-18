@@ -466,4 +466,39 @@
     <string name="msg_insert_contact_failed">Контактът не се добави</string>
     <string name="login_http_failed">Входът не успя: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Организиране</string>
+    <string name="organize_bin_summary">Наскоро изтрити контакти</string>
+    <string name="organize_import_summary">Внос, износ и телефонни контакти</string>
+    <string name="organize_calendar_summary">Рождени дни, годишнини и смърт</string>
+    <string name="organize_merge_summary">Намери и слей дубликати</string>
+    <string name="section_emergency_contacts">Спешни контакти</string>
+    <string name="emergency_contacts_opens_phone">Отваря спешните контакти на телефона</string>
+    <string name="msg_emergency_unavailable">Спешните контакти не се отвориха</string>
+    <string name="empty_no_emergency_contacts">Няма спешни контакти</string>
+    <string name="section_bin">Кошче</string>
+    <string name="empty_bin">Няма изтрити контакти</string>
+    <string name="bin_kept_days">Пази се 3 дни.</string>
+    <string name="action_restore">Възстанови</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">още %d ден</item>
+        <item quantity="other">още %d дни</item>
+    </plurals>
+    <string name="msg_contact_restored">Контактът е възстановен</string>
+    <string name="msg_restore_failed">Контактът не се възстанови</string>
+    <string name="section_merge_fix">Сливане и поправка</string>
+    <string name="empty_no_duplicates">Няма дубликати</string>
+    <string name="action_merge">Слей</string>
+    <string name="action_swap">Размяна</string>
+    <string name="merge_kept">Остава</string>
+    <string name="merge_other">Друг</string>
+    <string name="dialog_merge_contacts">Сливане на контакти?</string>
+    <string name="dialog_merge_contacts_body">Запазва контакта вляво и изтрива контакта вдясно.</string>
+    <string name="merge_same_phone">Същият телефон</string>
+    <string name="merge_same_email">Същият имейл</string>
+    <string name="merge_same_name">Същото име</string>
+    <string name="msg_contacts_merged">Контактите са слети</string>
+    <string name="msg_merge_failed">Контактите не се сляха</string>
+    <string name="field_photo">Снимка</string>
+    <string name="merge_both_kept">И двете остават</string>
 </resources>

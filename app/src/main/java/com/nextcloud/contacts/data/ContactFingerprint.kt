@@ -28,15 +28,25 @@ object ContactFingerprint {
     )
 
     private fun build(name: String, phones: List<String>, emails: List<String>): String {
-        val phoneKey = phones.filter { it.isNotBlank() }.sorted().joinToString("|")
-        val emailKey = emails.filter { it.isNotBlank() }.sorted().joinToString("|")
-        val nameKey = name.lowercase().trim()
+        val phoneKey = phones.map { normalizedPhone(it) }.filter { it.isNotBlank() }.sorted().joinToString("|")
+        val emailKey = emails.map { normalizedEmail(it) }.filter { it.isNotBlank() }.sorted().joinToString("|")
+        val nameKey = normalizedDisplayName(name)
         return "$nameKey::$phoneKey::$emailKey"
     }
 
-    private fun normalizePhone(value: String): String =
-        value.filter { it.isDigit() || it == '+' }
+    private fun normalizePhone(value: String): String = normalizedPhone(value)
 }
+
+/** Same phone and email cleanup the sync fingerprint already uses. */
+fun normalizedPhone(value: String): String =
+    value.filter { it.isDigit() || it == '+' }
+
+fun normalizedEmail(value: String): String =
+    value.lowercase().trim()
+
+/** Full display name. A shared first name is not this key. */
+fun normalizedDisplayName(value: String): String =
+    value.trim().lowercase()
 
 /**
  * Name, phones, and emails only — the same key as [ContactFingerprint].

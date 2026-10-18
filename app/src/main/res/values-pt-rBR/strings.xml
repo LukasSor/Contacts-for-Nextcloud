@@ -466,4 +466,39 @@
     <string name="msg_insert_contact_failed">Contato não adicionado</string>
     <string name="login_http_failed">Falha no login: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Organizar</string>
+    <string name="organize_bin_summary">Contatos excluídos recentemente</string>
+    <string name="organize_import_summary">Importar, exportar e contatos do telefone</string>
+    <string name="organize_calendar_summary">Aniversários, datas especiais e óbitos</string>
+    <string name="organize_merge_summary">Encontrar e mesclar duplicatas</string>
+    <string name="section_emergency_contacts">Contatos de emergência</string>
+    <string name="emergency_contacts_opens_phone">Abre os contatos de emergência do telefone</string>
+    <string name="msg_emergency_unavailable">Não foi possível abrir os contatos de emergência</string>
+    <string name="empty_no_emergency_contacts">Nenhum contato de emergência</string>
+    <string name="section_bin">Lixeira</string>
+    <string name="empty_bin">Nenhum contato excluído</string>
+    <string name="bin_kept_days">Mantido por 3 dias.</string>
+    <string name="action_restore">Restaurar</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">%d dia restante</item>
+        <item quantity="other">%d dias restantes</item>
+    </plurals>
+    <string name="msg_contact_restored">Contato restaurado</string>
+    <string name="msg_restore_failed">Não foi possível restaurar o contato</string>
+    <string name="section_merge_fix">Mesclar e corrigir</string>
+    <string name="empty_no_duplicates">Nenhuma duplicata</string>
+    <string name="action_merge">Mesclar</string>
+    <string name="action_swap">Trocar</string>
+    <string name="merge_kept">Mantido</string>
+    <string name="merge_other">Outro</string>
+    <string name="dialog_merge_contacts">Mesclar contatos?</string>
+    <string name="dialog_merge_contacts_body">Mantém o contato da esquerda e exclui o da direita.</string>
+    <string name="merge_same_phone">Mesmo tel.</string>
+    <string name="merge_same_email">Mesmo e-mail</string>
+    <string name="merge_same_name">Mesmo nome</string>
+    <string name="msg_contacts_merged">Contatos mesclados</string>
+    <string name="msg_merge_failed">Não foi possível mesclar os contatos</string>
+    <string name="field_photo">Foto</string>
+    <string name="merge_both_kept">Ambos mantidos</string>
 </resources>

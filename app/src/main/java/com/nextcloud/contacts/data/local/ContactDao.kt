@@ -121,8 +121,31 @@ interface ContactDao {
     @Query("SELECT * FROM contacts WHERE deleted = 0")
     suspend fun getActiveContacts(): List<ContactEntity>
 
-    @Query("SELECT * FROM contacts WHERE dirty = 1 OR deleted = 1")
+    @Query("SELECT * FROM contacts WHERE deleted = 1 ORDER BY lastModified DESC, id DESC")
+    fun observeDeleted(): Flow<List<ContactEntity>>
+
+    /**
+     * Uploads and server deletes still to send.
+     * A soft-deleted row whose server card is already gone is only waiting out the bin window.
+     */
+    @Query(
+        """
+        SELECT * FROM contacts
+        WHERE dirty = 1 OR (deleted = 1 AND remoteUrl IS NOT NULL)
+        """,
+    )
     suspend fun getPendingSync(): List<ContactEntity>
+
+    /** Server delete already succeeded. Ready to drop once the bin window has passed. */
+    @Query(
+        """
+        SELECT * FROM contacts
+        WHERE deleted = 1
+          AND remoteUrl IS NULL
+          AND lastModified <= :deletedAtOrBefore
+        """,
+    )
+    suspend fun getBinContactsReadyToPurge(deletedAtOrBefore: Long): List<ContactEntity>
 
     @Query("SELECT * FROM contacts WHERE remoteUrl = :remoteUrl LIMIT 1")
     suspend fun getByRemoteUrl(remoteUrl: String): ContactEntity?
@@ -140,6 +163,20 @@ interface ContactDao {
 
     @Query("SELECT * FROM contacts WHERE deleted = 0 AND remoteUrl IS NOT NULL")
     suspend fun getAllServerLinkedContacts(): List<ContactEntity>
+
+    @Query("SELECT * FROM contacts WHERE deleted = 1 AND remoteUrl IS NOT NULL")
+    suspend fun getDeletedServerLinkedContacts(): List<ContactEntity>
+
+    @Query(
+        """
+        SELECT * FROM contacts
+        WHERE deleted = 1 AND remoteUrl LIKE '%' || :fileName
+        """,
+    )
+    suspend fun findDeletedByRemoteFileName(fileName: String): List<ContactEntity>
+
+    @Query("SELECT * FROM contacts WHERE remoteUid = :uid AND deleted = 1 LIMIT 1")
+    suspend fun findDeletedByRemoteUid(uid: String): ContactEntity?
 
     @Query("SELECT * FROM contacts WHERE remoteUid = :uid AND deleted = 0 LIMIT 1")
     suspend fun getByRemoteUid(uid: String): ContactEntity?

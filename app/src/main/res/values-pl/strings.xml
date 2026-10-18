@@ -496,4 +496,41 @@
     <string name="msg_insert_contact_failed">Nie dodano kontaktu</string>
     <string name="login_http_failed">Logowanie nieudane: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Porządkuj</string>
+    <string name="organize_bin_summary">Ostatnio usunięte kontakty</string>
+    <string name="organize_import_summary">Import, eksport i kontakty telefonu</string>
+    <string name="organize_calendar_summary">Urodziny, rocznice i zgony</string>
+    <string name="organize_merge_summary">Znajdź i scal duplikaty</string>
+    <string name="section_emergency_contacts">Kontakty alarmowe</string>
+    <string name="emergency_contacts_opens_phone">Otwiera kontakty alarmowe telefonu</string>
+    <string name="msg_emergency_unavailable">Nie można otworzyć kontaktów alarmowych</string>
+    <string name="empty_no_emergency_contacts">Brak kontaktów alarmowych</string>
+    <string name="section_bin">Kosz</string>
+    <string name="empty_bin">Brak usuniętych kontaktów</string>
+    <string name="bin_kept_days">Trzymane 3 dni.</string>
+    <string name="action_restore">Przywróć</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">został %d dzień</item>
+        <item quantity="few">zostały %d dni</item>
+        <item quantity="many">zostało %d dni</item>
+        <item quantity="other">zostało %d dnia</item>
+    </plurals>
+    <string name="msg_contact_restored">Kontakt przywrócony</string>
+    <string name="msg_restore_failed">Nie można przywrócić kontaktu</string>
+    <string name="section_merge_fix">Scal i popraw</string>
+    <string name="empty_no_duplicates">Brak duplikatów</string>
+    <string name="action_merge">Scal</string>
+    <string name="action_swap">Zamień</string>
+    <string name="merge_kept">Zostaje</string>
+    <string name="merge_other">Drugi</string>
+    <string name="dialog_merge_contacts">Scalić kontakty?</string>
+    <string name="dialog_merge_contacts_body">Zostawia kontakt po lewej i usuwa ten po prawej.</string>
+    <string name="merge_same_phone">Ten sam tel.</string>
+    <string name="merge_same_email">Ten sam e-mail</string>
+    <string name="merge_same_name">Ta sama nazwa</string>
+    <string name="msg_contacts_merged">Kontakty scalone</string>
+    <string name="msg_merge_failed">Nie można scalić kontaktów</string>
+    <string name="field_photo">Zdjęcie</string>
+    <string name="merge_both_kept">Oba zostają</string>
 </resources>

@@ -466,4 +466,39 @@
     <string name="msg_insert_contact_failed">Kunde inte lägga till kontakt</string>
     <string name="login_http_failed">Inloggningen misslyckades: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Ordna</string>
+    <string name="organize_bin_summary">Nyligen borttagna kontakter</string>
+    <string name="organize_import_summary">Import, export och telefonkontakter</string>
+    <string name="organize_calendar_summary">Födelsedagar, jubileer och dödsfall</string>
+    <string name="organize_merge_summary">Hitta och slå ihop dubbletter</string>
+    <string name="section_emergency_contacts">Nödkontakter</string>
+    <string name="emergency_contacts_opens_phone">Öppnar telefonens nödkontakter</string>
+    <string name="msg_emergency_unavailable">Kunde inte öppna nödkontakter</string>
+    <string name="empty_no_emergency_contacts">Inga nödkontakter</string>
+    <string name="section_bin">Papperskorg</string>
+    <string name="empty_bin">Inga borttagna kontakter</string>
+    <string name="bin_kept_days">Behålls i 3 dagar.</string>
+    <string name="action_restore">Återställ</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">%d dag kvar</item>
+        <item quantity="other">%d dagar kvar</item>
+    </plurals>
+    <string name="msg_contact_restored">Kontakt återställd</string>
+    <string name="msg_restore_failed">Kunde inte återställa kontakt</string>
+    <string name="section_merge_fix">Slå ihop och rätta</string>
+    <string name="empty_no_duplicates">Inga dubbletter</string>
+    <string name="action_merge">Slå ihop</string>
+    <string name="action_swap">Byt</string>
+    <string name="merge_kept">Behålls</string>
+    <string name="merge_other">Andra</string>
+    <string name="dialog_merge_contacts">Slå ihop kontakter?</string>
+    <string name="dialog_merge_contacts_body">Behåller kontakten till vänster och tar bort den till höger.</string>
+    <string name="merge_same_phone">Samma telefon</string>
+    <string name="merge_same_email">Samma e-post</string>
+    <string name="merge_same_name">Samma namn</string>
+    <string name="msg_contacts_merged">Kontakter ihopslagna</string>
+    <string name="msg_merge_failed">Kunde inte slå ihop kontakter</string>
+    <string name="field_photo">Foto</string>
+    <string name="merge_both_kept">Båda behålls</string>
 </resources>

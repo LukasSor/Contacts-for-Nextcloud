@@ -58,7 +58,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -68,22 +67,12 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.nextcloud.contacts.ContactsApp
 import com.nextcloud.contacts.data.prefs.AvatarFrameStyle
-import com.nextcloud.contacts.data.prefs.CalendarEventDescriptionMode
-import com.nextcloud.contacts.data.prefs.ContactDatesDestination
 import com.nextcloud.contacts.data.prefs.ContactEditFieldMode
 import com.nextcloud.contacts.data.prefs.ThemeMode
 import com.nextcloud.contacts.ui.components.AppSnackbarHost
 import com.nextcloud.contacts.ui.components.ObserveUiNotices
-import com.nextcloud.contacts.ui.util.rememberDeviceContactsImportAction
 import com.nextcloud.contacts.ui.util.rememberReadContactsPermissionAction
-import com.nextcloud.contacts.ui.util.rememberVcfExportDocumentAction
-import com.nextcloud.contacts.ui.util.rememberVcfImportDocumentAction
-import com.nextcloud.contacts.platform.CalendarPermissionRequester
-import com.nextcloud.contacts.platform.ContactCalendarEventKind
-import com.nextcloud.contacts.ui.util.rememberCalendarPermissionAction
-import com.nextcloud.contacts.ui.util.rememberWriteContactsExportAction
 import com.nextcloud.contacts.ui.viewmodel.SettingsViewModel
 import java.net.URI
 
@@ -106,12 +95,7 @@ fun SettingsScreen(
 ) {
     val state by viewModel.uiState.collectAsState()
     val context = LocalContext.current
-    val container = (context.applicationContext as ContactsApp).container
     val snackbarHostState = remember { SnackbarHostState() }
-    val importFromDevice = rememberDeviceContactsImportAction(
-        onGranted = viewModel::importFromDevice,
-        onDenied = { viewModel.showMessage(context.getString(R.string.msg_contacts_permission)) },
-    )
     var contactsPermissionRevision by remember { mutableIntStateOf(0) }
     val readContactsGranted = remember(contactsPermissionRevision, context) {
         ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CONTACTS) ==
@@ -124,71 +108,6 @@ fun SettingsScreen(
         },
         onDenied = { contactsPermissionRevision++ },
     )
-    val enableDeviceExport = rememberWriteContactsExportAction(
-        requester = container.contactsPermissionRequester,
-        onGranted = { viewModel.setExportToDeviceContacts(true) },
-        onDenied = {
-            viewModel.showMessage(
-                context.getString(R.string.msg_contacts_settings_phonebook),
-            )
-        },
-    )
-    val exportContactsVcf = rememberVcfExportDocumentAction(
-        onUriReady = viewModel::exportContactsToVcf,
-    )
-    val importContactsVcf = rememberVcfImportDocumentAction(
-        onTextRead = viewModel::importContactsFromVcf,
-        onReadFailed = { viewModel.showMessage(context.getString(R.string.msg_could_not_read_file)) },
-    )
-    val importExportBusy = state.isSyncing || state.isImporting || state.isExportingVcf
-    data class PendingKindDestination(
-        val kind: ContactCalendarEventKind,
-        val destination: ContactDatesDestination,
-    )
-
-    var pendingKindDestination by remember { mutableStateOf<PendingKindDestination?>(null) }
-    val applyKindDestination = rememberCalendarPermissionAction(
-        requester = container.calendarPermissionRequester,
-        onGranted = {
-            pendingKindDestination?.let { (kind, destination) ->
-                viewModel.setKindDestination(kind, destination)
-            }
-            pendingKindDestination = null
-        },
-        onDenied = {
-            val kind = pendingKindDestination?.kind
-            pendingKindDestination = null
-            val message = when (kind) {
-                ContactCalendarEventKind.BIRTHDAY ->
-                    context.getString(R.string.msg_calendar_birthdays)
-                ContactCalendarEventKind.ANNIVERSARY ->
-                    context.getString(R.string.msg_calendar_anniversaries)
-                ContactCalendarEventKind.DEATH ->
-                    context.getString(R.string.msg_calendar_deaths)
-                null -> null
-            }
-            message?.let(viewModel::showMessage)
-        },
-    )
-    fun selectedDestination(kind: ContactCalendarEventKind): ContactDatesDestination = when (kind) {
-        ContactCalendarEventKind.BIRTHDAY -> state.birthdaysDestination
-        ContactCalendarEventKind.ANNIVERSARY -> state.anniversariesDestination
-        ContactCalendarEventKind.DEATH -> state.datesOfDeathDestination
-    }
-    fun requestKindDestination(kind: ContactCalendarEventKind, destination: ContactDatesDestination) {
-        if (destination == selectedDestination(kind)) {
-            val missingCalendarPermission = destination.includesSystem() &&
-                !CalendarPermissionRequester.hasCalendarPermissions(context)
-            if (!missingCalendarPermission) return
-        }
-        if (destination.includesSystem()) {
-            pendingKindDestination = PendingKindDestination(kind, destination)
-            applyKindDestination()
-        } else {
-            viewModel.setKindDestination(kind, destination)
-        }
-    }
-
     LaunchedEffect(state.message) {
         state.message?.let {
             snackbarHostState.showSnackbar(it)
@@ -200,7 +119,6 @@ fun SettingsScreen(
 
     LaunchedEffect(Unit) {
         viewModel.refreshProviderAccounts()
-        viewModel.refreshNextcloudCalendarAvailability()
     }
 
     Scaffold(
@@ -326,65 +244,6 @@ fun SettingsScreen(
             }
 
             Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = stringResource(R.string.section_import_device),
-                style = MaterialTheme.typography.titleSmall,
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                color = MaterialTheme.colorScheme.primary,
-            )
-            ListItem(
-                headlineContent = { Text(stringResource(R.string.setting_show_in_phone)) },
-                supportingContent = {
-                    Text(stringResource(R.string.setting_show_in_phone_summary))
-                },
-                trailingContent = {
-                    Switch(
-                        checked = state.exportToDeviceContacts,
-                        onCheckedChange = { enabled ->
-                            if (enabled) {
-                                enableDeviceExport()
-                            } else {
-                                viewModel.setExportToDeviceContacts(false)
-                            }
-                        },
-                    )
-                },
-            )
-            ListItem(
-                modifier = Modifier.clickable(enabled = !importExportBusy) { exportContactsVcf() },
-                headlineContent = { Text(stringResource(R.string.setting_export_contacts)) },
-                supportingContent = {
-                    Text(stringResource(R.string.setting_export_contacts_summary))
-                },
-                trailingContent = {
-                    if (state.isExportingVcf) {
-                        ButtonProgressIndicator()
-                    }
-                },
-            )
-            ListItem(
-                modifier = Modifier.clickable(enabled = !importExportBusy) { importContactsVcf() },
-                headlineContent = { Text(stringResource(R.string.setting_import_contacts)) },
-                supportingContent = {
-                    Text(stringResource(R.string.setting_import_contacts_summary))
-                },
-                trailingContent = {
-                    if (state.isImporting) {
-                        ButtonProgressIndicator()
-                    }
-                },
-            )
-            OutlinedButton(
-                onClick = importFromDevice,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                enabled = !importExportBusy,
-            ) {
-                Text(stringResource(R.string.import_from_device))
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
             Text(
                 text = stringResource(R.string.section_visible_accounts),
                 style = MaterialTheme.typography.titleSmall,
@@ -550,53 +409,6 @@ fun SettingsScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = stringResource(R.string.section_calendar),
-                style = MaterialTheme.typography.titleSmall,
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                color = MaterialTheme.colorScheme.primary,
-            )
-            ListItem(
-                headlineContent = { Text(stringResource(R.string.field_birthday)) },
-                supportingContent = {
-                    ContactDatesDestinationSegmentedControl(
-                        selected = state.birthdaysDestination,
-                        nextcloudCalendarAvailable = state.nextcloudCalendarAvailable,
-                        onSelected = { requestKindDestination(ContactCalendarEventKind.BIRTHDAY, it) },
-                    )
-                },
-            )
-            ListItem(
-                headlineContent = { Text(stringResource(R.string.field_anniversary)) },
-                supportingContent = {
-                    ContactDatesDestinationSegmentedControl(
-                        selected = state.anniversariesDestination,
-                        nextcloudCalendarAvailable = state.nextcloudCalendarAvailable,
-                        onSelected = { requestKindDestination(ContactCalendarEventKind.ANNIVERSARY, it) },
-                    )
-                },
-            )
-            ListItem(
-                headlineContent = { Text(stringResource(R.string.field_date_of_death)) },
-                supportingContent = {
-                    ContactDatesDestinationSegmentedControl(
-                        selected = state.datesOfDeathDestination,
-                        nextcloudCalendarAvailable = state.nextcloudCalendarAvailable,
-                        onSelected = { requestKindDestination(ContactCalendarEventKind.DEATH, it) },
-                    )
-                },
-            )
-            ListItem(
-                headlineContent = { Text(stringResource(R.string.label_description)) },
-                supportingContent = {
-                    CalendarEventDescriptionSegmentedControl(
-                        selected = state.calendarEventDescriptionMode,
-                        onSelected = viewModel::setCalendarEventDescriptionMode,
-                    )
-                },
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
                 text = stringResource(R.string.section_places),
                 style = MaterialTheme.typography.titleSmall,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
@@ -746,64 +558,6 @@ private fun ContactFormFieldModeControl(
         ContactEditFieldMode.SIMPLE to stringResource(R.string.mode_simple),
         ContactEditFieldMode.WORK to stringResource(R.string.type_work),
         ContactEditFieldMode.FULL to stringResource(R.string.mode_full),
-    )
-    SingleChoiceSegmentedButtonRow(modifier = modifier.fillMaxWidth()) {
-        options.forEachIndexed { index, (mode, label) ->
-            SegmentedButton(
-                shape = SegmentedButtonDefaults.itemShape(
-                    index = index,
-                    count = options.size,
-                ),
-                onClick = { onSelected(mode) },
-                selected = selected == mode,
-                label = { Text(label) },
-            )
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun ContactDatesDestinationSegmentedControl(
-    selected: ContactDatesDestination,
-    nextcloudCalendarAvailable: Boolean?,
-    onSelected: (ContactDatesDestination) -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    val options = buildList {
-        add(ContactDatesDestination.NONE to stringResource(R.string.type_none))
-        add(ContactDatesDestination.SYSTEM to stringResource(R.string.dest_system))
-        if (nextcloudCalendarAvailable == true) {
-            add(ContactDatesDestination.NEXTCLOUD to "Nextcloud")
-            add(ContactDatesDestination.BOTH to stringResource(R.string.dest_both))
-        }
-    }
-    SingleChoiceSegmentedButtonRow(modifier = modifier.fillMaxWidth()) {
-        options.forEachIndexed { index, (destination, label) ->
-            SegmentedButton(
-                shape = SegmentedButtonDefaults.itemShape(
-                    index = index,
-                    count = options.size,
-                ),
-                onClick = { onSelected(destination) },
-                selected = selected == destination,
-                label = { Text(label) },
-            )
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun CalendarEventDescriptionSegmentedControl(
-    selected: CalendarEventDescriptionMode,
-    onSelected: (CalendarEventDescriptionMode) -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    val options = listOf(
-        CalendarEventDescriptionMode.DEFAULT to stringResource(R.string.desc_default),
-        CalendarEventDescriptionMode.NOTES to stringResource(R.string.desc_notes),
-        CalendarEventDescriptionMode.DETAILS to stringResource(R.string.desc_details),
     )
     SingleChoiceSegmentedButtonRow(modifier = modifier.fillMaxWidth()) {
         options.forEachIndexed { index, (mode, label) ->

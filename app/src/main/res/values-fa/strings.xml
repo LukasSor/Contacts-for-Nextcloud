@@ -466,4 +466,39 @@
     <string name="msg_insert_contact_failed">افزودن مخاطب ممکن نشد</string>
     <string name="login_http_failed">ورود ناموفق: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">سازماندهی</string>
+    <string name="organize_bin_summary">مخاطبین تازه حذف‌شده</string>
+    <string name="organize_import_summary">وارد کردن، خروجی و مخاطبین تلفن</string>
+    <string name="organize_calendar_summary">تولد، سالگرد و فوت</string>
+    <string name="organize_merge_summary">تکراری‌ها را پیدا و ادغام کن</string>
+    <string name="section_emergency_contacts">مخاطبین اضطراری</string>
+    <string name="emergency_contacts_opens_phone">مخاطبین اضطراری تلفن را باز می‌کند</string>
+    <string name="msg_emergency_unavailable">مخاطبین اضطراری باز نشد</string>
+    <string name="empty_no_emergency_contacts">مخاطب اضطراری نیست</string>
+    <string name="section_bin">سطل زباله</string>
+    <string name="empty_bin">مخاطب حذف‌شده نیست</string>
+    <string name="bin_kept_days">۳ روز نگه داشته می‌شود.</string>
+    <string name="action_restore">بازیابی</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">%d روز مانده</item>
+        <item quantity="other">%d روز مانده</item>
+    </plurals>
+    <string name="msg_contact_restored">مخاطب بازیابی شد</string>
+    <string name="msg_restore_failed">مخاطب بازیابی نشد</string>
+    <string name="section_merge_fix">ادغام و اصلاح</string>
+    <string name="empty_no_duplicates">تکراری نیست</string>
+    <string name="action_merge">ادغام</string>
+    <string name="action_swap">جابه‌جایی</string>
+    <string name="merge_kept">می‌ماند</string>
+    <string name="merge_other">دیگر</string>
+    <string name="dialog_merge_contacts">مخاطبین ادغام شوند؟</string>
+    <string name="dialog_merge_contacts_body">مخاطب چپ می‌ماند و مخاطب راست حذف می‌شود.</string>
+    <string name="merge_same_phone">تلفن یکسان</string>
+    <string name="merge_same_email">ایمیل یکسان</string>
+    <string name="merge_same_name">نام یکسان</string>
+    <string name="msg_contacts_merged">مخاطبین ادغام شدند</string>
+    <string name="msg_merge_failed">مخاطبین ادغام نشدند</string>
+    <string name="field_photo">عکس</string>
+    <string name="merge_both_kept">هر دو می‌مانند</string>
 </resources>

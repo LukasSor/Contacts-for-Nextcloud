@@ -466,4 +466,39 @@
     <string name="msg_insert_contact_failed">Contact niet toegevoegd</string>
     <string name="login_http_failed">Inloggen mislukt: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Ordenen</string>
+    <string name="organize_bin_summary">Onlangs verwijderde contacten</string>
+    <string name="organize_import_summary">Importeren, exporteren en telefooncontacten</string>
+    <string name="organize_calendar_summary">Verjaardagen, jubilea en overlijdens</string>
+    <string name="organize_merge_summary">Duplicaten zoeken en samenvoegen</string>
+    <string name="section_emergency_contacts">Noodcontacten</string>
+    <string name="emergency_contacts_opens_phone">Opent de noodcontacten van de telefoon</string>
+    <string name="msg_emergency_unavailable">Kan noodcontacten niet openen</string>
+    <string name="empty_no_emergency_contacts">Geen noodcontacten</string>
+    <string name="section_bin">Prullenbak</string>
+    <string name="empty_bin">Geen verwijderde contacten</string>
+    <string name="bin_kept_days">3 dagen bewaard.</string>
+    <string name="action_restore">Herstellen</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">nog %d dag</item>
+        <item quantity="other">nog %d dagen</item>
+    </plurals>
+    <string name="msg_contact_restored">Contact hersteld</string>
+    <string name="msg_restore_failed">Kan contact niet herstellen</string>
+    <string name="section_merge_fix">Samenvoegen en corrigeren</string>
+    <string name="empty_no_duplicates">Geen duplicaten</string>
+    <string name="action_merge">Samenvoegen</string>
+    <string name="action_swap">Wissel</string>
+    <string name="merge_kept">Blijft</string>
+    <string name="merge_other">Andere</string>
+    <string name="dialog_merge_contacts">Contacten samenvoegen?</string>
+    <string name="dialog_merge_contacts_body">Houdt het linkercontact en verwijdert het rechter.</string>
+    <string name="merge_same_phone">Zelfde tel.</string>
+    <string name="merge_same_email">Zelfde e-mail</string>
+    <string name="merge_same_name">Zelfde naam</string>
+    <string name="msg_contacts_merged">Contacten samengevoegd</string>
+    <string name="msg_merge_failed">Kan contacten niet samenvoegen</string>
+    <string name="field_photo">Foto</string>
+    <string name="merge_both_kept">Beide blijven</string>
 </resources>

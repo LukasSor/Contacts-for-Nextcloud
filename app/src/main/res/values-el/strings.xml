@@ -466,4 +466,39 @@
         <item quantity="other">Βρέθηκαν %d επαφές στον διακομιστή, αλλά δεν εισήχθησαν</item>
     </plurals>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Οργάνωση</string>
+    <string name="organize_bin_summary">Πρόσφατα διαγραμμένες επαφές</string>
+    <string name="organize_import_summary">Εισαγωγή, εξαγωγή και επαφές τηλεφώνου</string>
+    <string name="organize_calendar_summary">Γενέθλια, επέτειοι και θάνατοι</string>
+    <string name="organize_merge_summary">Βρείτε και συγχωνεύστε διπλότυπα</string>
+    <string name="section_emergency_contacts">Επαφές έκτακτης ανάγκης</string>
+    <string name="emergency_contacts_opens_phone">Ανοίγει τις επαφές έκτακτης ανάγκης του τηλεφώνου</string>
+    <string name="msg_emergency_unavailable">Δεν άνοιξαν οι επαφές έκτακτης ανάγκης</string>
+    <string name="empty_no_emergency_contacts">Καμία επαφή έκτακτης ανάγκης</string>
+    <string name="section_bin">Κάδος</string>
+    <string name="empty_bin">Καμία διαγραμμένη επαφή</string>
+    <string name="bin_kept_days">Διατηρείται 3 ημέρες.</string>
+    <string name="action_restore">Επαναφορά</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">ακόμα %d ημέρα</item>
+        <item quantity="other">ακόμα %d ημέρες</item>
+    </plurals>
+    <string name="msg_contact_restored">Η επαφή επαναφέρθηκε</string>
+    <string name="msg_restore_failed">Δεν έγινε επαναφορά της επαφής</string>
+    <string name="section_merge_fix">Συγχώνευση και διόρθωση</string>
+    <string name="empty_no_duplicates">Κανένα διπλότυπο</string>
+    <string name="action_merge">Συγχώνευση</string>
+    <string name="action_swap">Εναλλαγή</string>
+    <string name="merge_kept">Μένει</string>
+    <string name="merge_other">Άλλο</string>
+    <string name="dialog_merge_contacts">Συγχώνευση επαφών;</string>
+    <string name="dialog_merge_contacts_body">Κρατά την αριστερή επαφή και διαγράφει τη δεξιά.</string>
+    <string name="merge_same_phone">Ίδιο τηλέφωνο</string>
+    <string name="merge_same_email">Ίδιο ηλ. ταχυδρομείο</string>
+    <string name="merge_same_name">Ίδιο όνομα</string>
+    <string name="msg_contacts_merged">Οι επαφές συγχωνεύτηκαν</string>
+    <string name="msg_merge_failed">Δεν έγινε συγχώνευση επαφών</string>
+    <string name="field_photo">Φωτογραφία</string>
+    <string name="merge_both_kept">Και τα δύο μένουν</string>
 </resources>

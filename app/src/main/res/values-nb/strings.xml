@@ -466,4 +466,39 @@
         <item quantity="other">Fant %d kontakter på serveren, men kunne ikke importere dem</item>
     </plurals>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Organiser</string>
+    <string name="organize_bin_summary">Nylig slettede kontakter</string>
+    <string name="organize_import_summary">Import, eksport og telefonkontakter</string>
+    <string name="organize_calendar_summary">Bursdager, jubileer og dødsfall</string>
+    <string name="organize_merge_summary">Finn og slå sammen duplikater</string>
+    <string name="section_emergency_contacts">Nødkontakter</string>
+    <string name="emergency_contacts_opens_phone">Åpner telefonens nødkontakter</string>
+    <string name="msg_emergency_unavailable">Kunne ikke åpne nødkontakter</string>
+    <string name="empty_no_emergency_contacts">Ingen nødkontakter</string>
+    <string name="section_bin">Papirkurv</string>
+    <string name="empty_bin">Ingen slettede kontakter</string>
+    <string name="bin_kept_days">Beholdes i 3 dager.</string>
+    <string name="action_restore">Gjenopprett</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">%d dag igjen</item>
+        <item quantity="other">%d dager igjen</item>
+    </plurals>
+    <string name="msg_contact_restored">Kontakt gjenopprettet</string>
+    <string name="msg_restore_failed">Kunne ikke gjenopprette kontakt</string>
+    <string name="section_merge_fix">Slå sammen og rett</string>
+    <string name="empty_no_duplicates">Ingen duplikater</string>
+    <string name="action_merge">Slå sammen</string>
+    <string name="action_swap">Bytt</string>
+    <string name="merge_kept">Beholdt</string>
+    <string name="merge_other">Annen</string>
+    <string name="dialog_merge_contacts">Slå sammen kontakter?</string>
+    <string name="dialog_merge_contacts_body">Beholder kontakten til venstre og sletter den til høyre.</string>
+    <string name="merge_same_phone">Samme telefon</string>
+    <string name="merge_same_email">Samme e-post</string>
+    <string name="merge_same_name">Samme navn</string>
+    <string name="msg_contacts_merged">Kontakter slått sammen</string>
+    <string name="msg_merge_failed">Kunne ikke slå sammen kontakter</string>
+    <string name="field_photo">Bilde</string>
+    <string name="merge_both_kept">Begge beholdt</string>
 </resources>

@@ -496,4 +496,41 @@
     <string name="msg_insert_contact_failed">Не ўдалося дадаць кантакт</string>
     <string name="login_http_failed">Уваход не ўдаўся: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Упарадкаваць</string>
+    <string name="organize_bin_summary">Нядаўна выдаленыя кантакты</string>
+    <string name="organize_import_summary">Імпарт, экспарт і кантакты тэлефона</string>
+    <string name="organize_calendar_summary">Дні нараджэння, гадавіны і смерці</string>
+    <string name="organize_merge_summary">Знайсці і аб\'яднаць дублікаты</string>
+    <string name="section_emergency_contacts">Экстранныя кантакты</string>
+    <string name="emergency_contacts_opens_phone">Адкрывае экстранныя кантакты тэлефона</string>
+    <string name="msg_emergency_unavailable">Не ўдалося адкрыць экстранныя кантакты</string>
+    <string name="empty_no_emergency_contacts">Няма экстранных кантактаў</string>
+    <string name="section_bin">Кошык</string>
+    <string name="empty_bin">Няма выдаленых кантактаў</string>
+    <string name="bin_kept_days">Захоўваецца 3 дні.</string>
+    <string name="action_restore">Аднавіць</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">застаўся %d дзень</item>
+        <item quantity="few">засталося %d дні</item>
+        <item quantity="many">засталося %d дзён</item>
+        <item quantity="other">засталося %d дня</item>
+    </plurals>
+    <string name="msg_contact_restored">Кантакт адноўлены</string>
+    <string name="msg_restore_failed">Не ўдалося аднавіць кантакт</string>
+    <string name="section_merge_fix">Аб\'яднаць і выправіць</string>
+    <string name="empty_no_duplicates">Няма дублікатаў</string>
+    <string name="action_merge">Аб\'яднаць</string>
+    <string name="action_swap">Абмен</string>
+    <string name="merge_kept">Застаецца</string>
+    <string name="merge_other">Іншы</string>
+    <string name="dialog_merge_contacts">Аб\'яднаць кантакты?</string>
+    <string name="dialog_merge_contacts_body">Пакідае кантакт злева і выдаляе кантакт справа.</string>
+    <string name="merge_same_phone">Той самы тэлефон</string>
+    <string name="merge_same_email">Тая самая эл. пошта</string>
+    <string name="merge_same_name">Тое самае імя</string>
+    <string name="msg_contacts_merged">Кантакты аб\'яднаны</string>
+    <string name="msg_merge_failed">Не ўдалося аб\'яднаць кантакты</string>
+    <string name="field_photo">Фота</string>
+    <string name="merge_both_kept">Абодва застаюцца</string>
 </resources>

@@ -481,4 +481,40 @@
     <string name="msg_insert_contact_failed">Kontakt nije moguće dodati</string>
     <string name="login_http_failed">Prijava nije uspjela: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Organiziraj</string>
+    <string name="organize_bin_summary">Nedavno izbrisani kontakti</string>
+    <string name="organize_import_summary">Uvoz, izvoz i kontakti telefona</string>
+    <string name="organize_calendar_summary">Rođendani, godišnjice i smrti</string>
+    <string name="organize_merge_summary">Pronađi i spoji duplikate</string>
+    <string name="section_emergency_contacts">Hitni kontakti</string>
+    <string name="emergency_contacts_opens_phone">Otvara hitne kontakte telefona</string>
+    <string name="msg_emergency_unavailable">Hitni kontakti se ne mogu otvoriti</string>
+    <string name="empty_no_emergency_contacts">Nema hitnih kontakata</string>
+    <string name="section_bin">Korpa</string>
+    <string name="empty_bin">Nema izbrisanih kontakata</string>
+    <string name="bin_kept_days">Čuva se 3 dana.</string>
+    <string name="action_restore">Vrati</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">još %d dan</item>
+        <item quantity="few">još %d dana</item>
+        <item quantity="other">još %d dana</item>
+    </plurals>
+    <string name="msg_contact_restored">Kontakt je vraćen</string>
+    <string name="msg_restore_failed">Kontakt se ne može vratiti</string>
+    <string name="section_merge_fix">Spoji i ispravi</string>
+    <string name="empty_no_duplicates">Nema duplikata</string>
+    <string name="action_merge">Spoji</string>
+    <string name="action_swap">Zamjena</string>
+    <string name="merge_kept">Ostaje</string>
+    <string name="merge_other">Drugi</string>
+    <string name="dialog_merge_contacts">Spojiti kontakte?</string>
+    <string name="dialog_merge_contacts_body">Zadržava lijevi kontakt i briše desni.</string>
+    <string name="merge_same_phone">Isti telefon</string>
+    <string name="merge_same_email">Ista e-pošta</string>
+    <string name="merge_same_name">Isto ime</string>
+    <string name="msg_contacts_merged">Kontakti su spojeni</string>
+    <string name="msg_merge_failed">Kontakti se ne mogu spojiti</string>
+    <string name="field_photo">Fotografija</string>
+    <string name="merge_both_kept">Oba ostaju</string>
 </resources>

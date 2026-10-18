@@ -37,6 +37,20 @@
         <package android:name="com.tencent.mm" />
         <package android:name="jp.naver.line.android" />
         <package android:name="us.zoom.videomeetings" />
+        <package android:name="com.google.android.apps.safetyhub" />
+        <package android:name="com.android.emergency" />
+        <intent>
+            <action android:name="com.google.android.apps.safetyhub.EDIT_CONTACTS" />
+        </intent>
+        <intent>
+            <action android:name="com.google.android.apps.safetyhub.CONTACTS_APP_ENTRY" />
+        </intent>
+        <intent>
+            <action android:name="android.settings.EDIT_EMERGENCY_INFO" />
+        </intent>
+        <intent>
+            <action android:name="android.emergency.EDIT_EMERGENCY_INFO" />
+        </intent>
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="content" android:host="com.android.contacts" />

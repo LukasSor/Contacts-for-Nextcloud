@@ -451,4 +451,38 @@
     <string name="msg_insert_contact_failed">Không thêm được liên hệ</string>
     <string name="login_http_failed">Đăng nhập lỗi: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Sắp xếp</string>
+    <string name="organize_bin_summary">Danh bạ vừa xóa</string>
+    <string name="organize_import_summary">Nhập, xuất và danh bạ điện thoại</string>
+    <string name="organize_calendar_summary">Sinh nhật, kỷ niệm và ngày mất</string>
+    <string name="organize_merge_summary">Tìm và gộp bản trùng</string>
+    <string name="section_emergency_contacts">Danh bạ khẩn cấp</string>
+    <string name="emergency_contacts_opens_phone">Mở danh bạ khẩn cấp của điện thoại</string>
+    <string name="msg_emergency_unavailable">Không mở được danh bạ khẩn cấp</string>
+    <string name="empty_no_emergency_contacts">Không có danh bạ khẩn cấp</string>
+    <string name="section_bin">Thùng rác</string>
+    <string name="empty_bin">Không có danh bạ đã xóa</string>
+    <string name="bin_kept_days">Giữ 3 ngày.</string>
+    <string name="action_restore">Khôi phục</string>
+    <plurals name="bin_days_left">
+        <item quantity="other">còn %d ngày</item>
+    </plurals>
+    <string name="msg_contact_restored">Đã khôi phục danh bạ</string>
+    <string name="msg_restore_failed">Không khôi phục được danh bạ</string>
+    <string name="section_merge_fix">Gộp và sửa</string>
+    <string name="empty_no_duplicates">Không có bản trùng</string>
+    <string name="action_merge">Gộp</string>
+    <string name="action_swap">Đổi</string>
+    <string name="merge_kept">Giữ</string>
+    <string name="merge_other">Khác</string>
+    <string name="dialog_merge_contacts">Gộp danh bạ?</string>
+    <string name="dialog_merge_contacts_body">Giữ danh bạ bên trái và xóa danh bạ bên phải.</string>
+    <string name="merge_same_phone">Cùng điện thoại</string>
+    <string name="merge_same_email">Cùng email</string>
+    <string name="merge_same_name">Cùng tên</string>
+    <string name="msg_contacts_merged">Đã gộp danh bạ</string>
+    <string name="msg_merge_failed">Không gộp được danh bạ</string>
+    <string name="field_photo">Ảnh</string>
+    <string name="merge_both_kept">Giữ cả hai</string>
 </resources>

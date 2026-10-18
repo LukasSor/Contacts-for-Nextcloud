@@ -466,4 +466,39 @@
     <string name="msg_insert_contact_failed">Kontakti ei saanud lisada</string>
     <string name="login_http_failed">Sisselogimine ebaõnnestus: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Korralda</string>
+    <string name="organize_bin_summary">Hiljuti kustutatud kontaktid</string>
+    <string name="organize_import_summary">Import, eksport ja telefoni kontaktid</string>
+    <string name="organize_calendar_summary">Sünnipäevad, aastapäevad ja surmad</string>
+    <string name="organize_merge_summary">Leia ja ühenda duplikaadid</string>
+    <string name="section_emergency_contacts">Hädaabikontaktid</string>
+    <string name="emergency_contacts_opens_phone">Avab telefoni hädaabikontaktid</string>
+    <string name="msg_emergency_unavailable">Hädaabikontakte ei saanud avada</string>
+    <string name="empty_no_emergency_contacts">Hädaabikontakte pole</string>
+    <string name="section_bin">Prügikast</string>
+    <string name="empty_bin">Kustutatud kontakte pole</string>
+    <string name="bin_kept_days">Säilitatakse 3 päeva.</string>
+    <string name="action_restore">Taasta</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">%d päev jäänud</item>
+        <item quantity="other">%d päeva jäänud</item>
+    </plurals>
+    <string name="msg_contact_restored">Kontakt taastatud</string>
+    <string name="msg_restore_failed">Kontakti ei saanud taastada</string>
+    <string name="section_merge_fix">Ühenda ja paranda</string>
+    <string name="empty_no_duplicates">Duplikaate pole</string>
+    <string name="action_merge">Ühenda</string>
+    <string name="action_swap">Vahetus</string>
+    <string name="merge_kept">Jääb</string>
+    <string name="merge_other">Teine</string>
+    <string name="dialog_merge_contacts">Ühendada kontaktid?</string>
+    <string name="dialog_merge_contacts_body">Jätab vasakpoolse kontakti ja kustutab parempoolse.</string>
+    <string name="merge_same_phone">Sama telefon</string>
+    <string name="merge_same_email">Sama e-post</string>
+    <string name="merge_same_name">Sama nimi</string>
+    <string name="msg_contacts_merged">Kontaktid ühendatud</string>
+    <string name="msg_merge_failed">Kontakte ei saanud ühendada</string>
+    <string name="field_photo">Foto</string>
+    <string name="merge_both_kept">Mõlemad jäävad</string>
 </resources>

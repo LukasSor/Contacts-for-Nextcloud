@@ -451,4 +451,38 @@
     <string name="msg_insert_contact_failed">連絡先を追加できません</string>
     <string name="login_http_failed">ログイン失敗: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">整理</string>
+    <string name="organize_bin_summary">最近削除した連絡先</string>
+    <string name="organize_import_summary">インポート、エクスポート、電話の連絡先</string>
+    <string name="organize_calendar_summary">誕生日、記念日、命日</string>
+    <string name="organize_merge_summary">重複を見つけて統合</string>
+    <string name="section_emergency_contacts">緊急連絡先</string>
+    <string name="emergency_contacts_opens_phone">電話の緊急連絡先を開きます</string>
+    <string name="msg_emergency_unavailable">緊急連絡先を開けません</string>
+    <string name="empty_no_emergency_contacts">緊急連絡先なし</string>
+    <string name="section_bin">ゴミ箱</string>
+    <string name="empty_bin">削除した連絡先なし</string>
+    <string name="bin_kept_days">3日間保持。</string>
+    <string name="action_restore">復元</string>
+    <plurals name="bin_days_left">
+        <item quantity="other">残り%d日</item>
+    </plurals>
+    <string name="msg_contact_restored">連絡先を復元しました</string>
+    <string name="msg_restore_failed">連絡先を復元できません</string>
+    <string name="section_merge_fix">統合と修正</string>
+    <string name="empty_no_duplicates">重複なし</string>
+    <string name="action_merge">統合</string>
+    <string name="action_swap">入れ替え</string>
+    <string name="merge_kept">残す</string>
+    <string name="merge_other">相手</string>
+    <string name="dialog_merge_contacts">連絡先を統合しますか？</string>
+    <string name="dialog_merge_contacts_body">左の連絡先を残し、右を削除します。</string>
+    <string name="merge_same_phone">同じ電話</string>
+    <string name="merge_same_email">同じメール</string>
+    <string name="merge_same_name">同じ名前</string>
+    <string name="msg_contacts_merged">連絡先を統合しました</string>
+    <string name="msg_merge_failed">連絡先を統合できません</string>
+    <string name="field_photo">写真</string>
+    <string name="merge_both_kept">両方残す</string>
 </resources>

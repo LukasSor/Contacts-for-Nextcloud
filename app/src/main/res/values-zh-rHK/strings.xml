@@ -451,4 +451,38 @@
     <string name="msg_insert_contact_failed">無法添加聯絡人</string>
     <string name="login_http_failed">登入失敗：HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">整理</string>
+    <string name="organize_bin_summary">最近刪除的聯絡人</string>
+    <string name="organize_import_summary">導入、匯出和手機聯絡人</string>
+    <string name="organize_calendar_summary">生日、紀念日和卒日</string>
+    <string name="organize_merge_summary">找出並合併重複項目</string>
+    <string name="section_emergency_contacts">緊急聯絡人</string>
+    <string name="emergency_contacts_opens_phone">開啟手機緊急聯絡人</string>
+    <string name="msg_emergency_unavailable">無法開啟緊急聯絡人</string>
+    <string name="empty_no_emergency_contacts">沒有緊急聯絡人</string>
+    <string name="section_bin">垃圾桶</string>
+    <string name="empty_bin">沒有已刪除的聯絡人</string>
+    <string name="bin_kept_days">保留 3 天。</string>
+    <string name="action_restore">還原</string>
+    <plurals name="bin_days_left">
+        <item quantity="other">剩餘 %d 天</item>
+    </plurals>
+    <string name="msg_contact_restored">已還原聯絡人</string>
+    <string name="msg_restore_failed">無法還原聯絡人</string>
+    <string name="section_merge_fix">合併並修正</string>
+    <string name="empty_no_duplicates">沒有重複項目</string>
+    <string name="action_merge">合併</string>
+    <string name="action_swap">對調</string>
+    <string name="merge_kept">保留</string>
+    <string name="merge_other">對方</string>
+    <string name="dialog_merge_contacts">要合併聯絡人嗎？</string>
+    <string name="dialog_merge_contacts_body">保留左側聯絡人並刪除右側。</string>
+    <string name="merge_same_phone">相同電話</string>
+    <string name="merge_same_email">相同電郵</string>
+    <string name="merge_same_name">相同姓名</string>
+    <string name="msg_contacts_merged">已合併聯絡人</string>
+    <string name="msg_merge_failed">無法合併聯絡人</string>
+    <string name="field_photo">相片</string>
+    <string name="merge_both_kept">兩者都保留</string>
 </resources>

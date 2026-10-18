@@ -20,6 +20,11 @@ import com.nextcloud.contacts.ui.screens.AccountSetupScreen
 import com.nextcloud.contacts.ui.screens.ContactDetailScreen
 import com.nextcloud.contacts.ui.screens.ContactEditScreen
 import com.nextcloud.contacts.ui.screens.ContactListScreen
+import com.nextcloud.contacts.ui.screens.OrganizeBinScreen
+import com.nextcloud.contacts.ui.screens.OrganizeCalendarScreen
+import com.nextcloud.contacts.ui.screens.OrganizeImportScreen
+import com.nextcloud.contacts.ui.screens.OrganizeMergeScreen
+import com.nextcloud.contacts.ui.screens.OrganizeScreen
 import com.nextcloud.contacts.ui.screens.SettingsScreen
 import com.nextcloud.contacts.ui.screens.DateCountdownScreen
 import com.nextcloud.contacts.ui.screens.TimeZoneClockScreen
@@ -123,9 +128,6 @@ fun ContactsNavHost(
         onRequestHandled()
     }
 
-    // A restored contact list must not cover setup. This also replaces a restored
-    // login screen once credentials exist. It does not run again until the route changes,
-    // so an in-progress login stays put until its own completed callback navigates.
     LaunchedEffect(currentBackStackEntry?.destination?.route) {
         val route = currentBackStackEntry?.destination?.route ?: return@LaunchedEffect
         if (route == Routes.POST_LOGIN_SETUP) return@LaunchedEffect
@@ -187,6 +189,11 @@ fun ContactsNavHost(
                 },
                 onAddContact = {
                     navController.navigate(Routes.contactEdit(0))
+                },
+                onOpenOrganize = dropUnlessResumed {
+                    navController.navigate(Routes.ORGANIZE) {
+                        launchSingleTop = true
+                    }
                 },
                 onOpenSettings = dropUnlessResumed {
                     navController.navigate(Routes.SETTINGS) {
@@ -293,6 +300,40 @@ fun ContactsNavHost(
                     }
                 },
             )
+        }
+
+        composable(Routes.ORGANIZE) {
+            OrganizeScreen(
+                onBack = { navController.popBackStack() },
+                onOpenBin = dropUnlessResumed {
+                    navController.navigate(Routes.ORGANIZE_BIN) { launchSingleTop = true }
+                },
+                onOpenImportDevice = dropUnlessResumed {
+                    navController.navigate(Routes.ORGANIZE_IMPORT) { launchSingleTop = true }
+                },
+                onOpenCalendar = dropUnlessResumed {
+                    navController.navigate(Routes.ORGANIZE_CALENDAR) { launchSingleTop = true }
+                },
+                onOpenMerge = dropUnlessResumed {
+                    navController.navigate(Routes.ORGANIZE_MERGE) { launchSingleTop = true }
+                },
+            )
+        }
+
+        composable(Routes.ORGANIZE_BIN) {
+            OrganizeBinScreen(onBack = { navController.popBackStack() })
+        }
+
+        composable(Routes.ORGANIZE_IMPORT) {
+            OrganizeImportScreen(onBack = { navController.popBackStack() })
+        }
+
+        composable(Routes.ORGANIZE_CALENDAR) {
+            OrganizeCalendarScreen(onBack = { navController.popBackStack() })
+        }
+
+        composable(Routes.ORGANIZE_MERGE) {
+            OrganizeMergeScreen(onBack = { navController.popBackStack() })
         }
 
         composable(Routes.SETTINGS) {

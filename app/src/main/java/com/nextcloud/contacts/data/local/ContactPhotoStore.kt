@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import com.nextcloud.contacts.util.AvatarBitmapCache
 import java.io.File
 import java.io.FileOutputStream
+import java.security.MessageDigest
 
 class ContactPhotoStore(context: Context) {
     private val directory = File(context.filesDir, "contact_photos").apply { mkdirs() }
@@ -19,6 +20,22 @@ class ContactPhotoStore(context: Context) {
     fun hasPhoto(contactId: Long): Boolean {
         val file = photoFile(contactId)
         return file.exists() && file.length() > 0L
+    }
+
+    /** Content hash used to tell two contact photos apart. Null when there is no photo. */
+    fun photoDigest(contactId: Long): String? {
+        val file = photoFile(contactId)
+        if (!file.exists() || file.length() == 0L) return null
+        val digest = MessageDigest.getInstance("SHA-256")
+        file.inputStream().use { input ->
+            val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
+            while (true) {
+                val count = input.read(buffer)
+                if (count < 0) break
+                digest.update(buffer, 0, count)
+            }
+        }
+        return digest.digest().joinToString(separator = "") { byte -> "%02x".format(byte) }
     }
 
     fun hasThumb(contactId: Long): Boolean {
@@ -101,7 +118,6 @@ class ContactPhotoStore(context: Context) {
     }
 
     companion object {
-        /** ~2× a 40dp list avatar on xxhdpi. */
         const val LIST_THUMB_PX = 128
     }
 }

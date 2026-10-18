@@ -526,4 +526,43 @@
     <string name="msg_insert_contact_failed">تعذرت إضافة جهة الاتصال</string>
     <string name="login_http_failed">فشل تسجيل الدخول: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">تنظيم</string>
+    <string name="organize_bin_summary">جهات اتصال محذوفة حديثاً</string>
+    <string name="organize_import_summary">استيراد وتصدير وجهات الهاتف</string>
+    <string name="organize_calendar_summary">أعياد ميلاد وذكريات ووفيات</string>
+    <string name="organize_merge_summary">ابحث عن التكرارات وادمجها</string>
+    <string name="section_emergency_contacts">جهات اتصال الطوارئ</string>
+    <string name="emergency_contacts_opens_phone">يفتح جهات اتصال الطوارئ في الهاتف</string>
+    <string name="msg_emergency_unavailable">تعذر فتح جهات اتصال الطوارئ</string>
+    <string name="empty_no_emergency_contacts">لا جهات اتصال للطوارئ</string>
+    <string name="section_bin">سلة المحذوفات</string>
+    <string name="empty_bin">لا جهات اتصال محذوفة</string>
+    <string name="bin_kept_days">يُحفظ 3 أيام.</string>
+    <string name="action_restore">استعادة</string>
+    <plurals name="bin_days_left">
+        <item quantity="zero">متبقٍ %d يوم</item>
+        <item quantity="one">متبقٍ %d يوم</item>
+        <item quantity="two">متبقيان %d يومان</item>
+        <item quantity="few">متبقية %d أيام</item>
+        <item quantity="many">متبقيًا %d يومًا</item>
+        <item quantity="other">متبقٍ %d يوم</item>
+    </plurals>
+    <string name="msg_contact_restored">تمت استعادة جهة الاتصال</string>
+    <string name="msg_restore_failed">تعذرت استعادة جهة الاتصال</string>
+    <string name="section_merge_fix">دمج وإصلاح</string>
+    <string name="empty_no_duplicates">لا تكرارات</string>
+    <string name="action_merge">دمج</string>
+    <string name="action_swap">تبديل</string>
+    <string name="merge_kept">مُبقى</string>
+    <string name="merge_other">الآخر</string>
+    <string name="dialog_merge_contacts">دمج جهات الاتصال؟</string>
+    <string name="dialog_merge_contacts_body">يبقي جهة الاتصال اليسرى ويحذف اليمنى.</string>
+    <string name="merge_same_phone">نفس الهاتف</string>
+    <string name="merge_same_email">نفس البريد</string>
+    <string name="merge_same_name">نفس الاسم</string>
+    <string name="msg_contacts_merged">تم دمج جهات الاتصال</string>
+    <string name="msg_merge_failed">تعذر دمج جهات الاتصال</string>
+    <string name="field_photo">صورة</string>
+    <string name="merge_both_kept">كلاهما مُبقى</string>
 </resources>

@@ -466,4 +466,39 @@
     <string name="msg_insert_contact_failed">No s\'ha pogut afegir el contacte</string>
     <string name="login_http_failed">L\'inici de sessió ha fallat: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Organitza</string>
+    <string name="organize_bin_summary">Contactes suprimits fa poc</string>
+    <string name="organize_import_summary">Importa, exporta i contactes del telèfon</string>
+    <string name="organize_calendar_summary">Aniversaris, commemoracions i defuncions</string>
+    <string name="organize_merge_summary">Troba i fusiona duplicats</string>
+    <string name="section_emergency_contacts">Contactes d\'emergència</string>
+    <string name="emergency_contacts_opens_phone">Obre els contactes d\'emergència del telèfon</string>
+    <string name="msg_emergency_unavailable">No s\'han pogut obrir els contactes d\'emergència</string>
+    <string name="empty_no_emergency_contacts">Cap contacte d\'emergència</string>
+    <string name="section_bin">Paperera</string>
+    <string name="empty_bin">Cap contacte suprimit</string>
+    <string name="bin_kept_days">Es guarda 3 dies.</string>
+    <string name="action_restore">Restaura</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">%d dia restant</item>
+        <item quantity="other">%d dies restants</item>
+    </plurals>
+    <string name="msg_contact_restored">Contacte restaurat</string>
+    <string name="msg_restore_failed">No s\'ha pogut restaurar el contacte</string>
+    <string name="section_merge_fix">Fusiona i corregeix</string>
+    <string name="empty_no_duplicates">Cap duplicat</string>
+    <string name="action_merge">Fusiona</string>
+    <string name="action_swap">Intercanvi</string>
+    <string name="merge_kept">Conservat</string>
+    <string name="merge_other">Altre</string>
+    <string name="dialog_merge_contacts">Fusionar els contactes?</string>
+    <string name="dialog_merge_contacts_body">Conserva el contacte de l\'esquerra i suprimeix el de la dreta.</string>
+    <string name="merge_same_phone">Mateix telèfon</string>
+    <string name="merge_same_email">Mateix correu</string>
+    <string name="merge_same_name">Mateix nom</string>
+    <string name="msg_contacts_merged">Contactes fusionats</string>
+    <string name="msg_merge_failed">No s\'han pogut fusionar els contactes</string>
+    <string name="field_photo">Foto</string>
+    <string name="merge_both_kept">Tots dos conservats</string>
 </resources>

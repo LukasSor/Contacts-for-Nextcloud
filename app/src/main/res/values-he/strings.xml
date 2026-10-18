@@ -496,4 +496,41 @@
     <string name="msg_insert_contact_failed">לא ניתן להוסיף איש קשר</string>
     <string name="login_http_failed">הכניסה נכשלה: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">ארגון</string>
+    <string name="organize_bin_summary">אנשי קשר שנמחקו לאחרונה</string>
+    <string name="organize_import_summary">ייבוא, ייצוא ואנשי קשר בטלפון</string>
+    <string name="organize_calendar_summary">ימי הולדת, ימי שנה ופטירות</string>
+    <string name="organize_merge_summary">מצא ומזג כפילויות</string>
+    <string name="section_emergency_contacts">אנשי קשר לחירום</string>
+    <string name="emergency_contacts_opens_phone">פותח את אנשי הקשר לחירום בטלפון</string>
+    <string name="msg_emergency_unavailable">לא ניתן לפתוח אנשי קשר לחירום</string>
+    <string name="empty_no_emergency_contacts">אין אנשי קשר לחירום</string>
+    <string name="section_bin">סל מחזור</string>
+    <string name="empty_bin">אין אנשי קשר שנמחקו</string>
+    <string name="bin_kept_days">נשמר ל-3 ימים.</string>
+    <string name="action_restore">שחזור</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">נותר %d יום</item>
+        <item quantity="two">נותרו %d ימים</item>
+        <item quantity="many">נותרו %d ימים</item>
+        <item quantity="other">נותרו %d ימים</item>
+    </plurals>
+    <string name="msg_contact_restored">איש הקשר שוחזר</string>
+    <string name="msg_restore_failed">לא ניתן לשחזר את איש הקשר</string>
+    <string name="section_merge_fix">מיזוג ותיקון</string>
+    <string name="empty_no_duplicates">אין כפילויות</string>
+    <string name="action_merge">מזג</string>
+    <string name="action_swap">החלפה</string>
+    <string name="merge_kept">נשמר</string>
+    <string name="merge_other">אחר</string>
+    <string name="dialog_merge_contacts">למזג אנשי קשר?</string>
+    <string name="dialog_merge_contacts_body">משאיר את איש הקשר משמאל ומוחק את הימני.</string>
+    <string name="merge_same_phone">אותו טלפון</string>
+    <string name="merge_same_email">אותו דוא״ל</string>
+    <string name="merge_same_name">אותו שם</string>
+    <string name="msg_contacts_merged">אנשי הקשר מוזגו</string>
+    <string name="msg_merge_failed">לא ניתן למזג אנשי קשר</string>
+    <string name="field_photo">תמונה</string>
+    <string name="merge_both_kept">שניהם נשמרים</string>
 </resources>

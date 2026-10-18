@@ -481,4 +481,40 @@
         <item quantity="other">S-au găsit %d de contacte pe server, dar nu au putut fi importate</item>
     </plurals>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Organizează</string>
+    <string name="organize_bin_summary">Contacte șterse recent</string>
+    <string name="organize_import_summary">Import, export și contacte din telefon</string>
+    <string name="organize_calendar_summary">Zile de naștere, aniversări și decese</string>
+    <string name="organize_merge_summary">Găsește și unește dublurile</string>
+    <string name="section_emergency_contacts">Contacte de urgență</string>
+    <string name="emergency_contacts_opens_phone">Deschide contactele de urgență ale telefonului</string>
+    <string name="msg_emergency_unavailable">Contactele de urgență nu s-au putut deschide</string>
+    <string name="empty_no_emergency_contacts">Niciun contact de urgență</string>
+    <string name="section_bin">Coș</string>
+    <string name="empty_bin">Niciun contact șters</string>
+    <string name="bin_kept_days">Păstrat 3 zile.</string>
+    <string name="action_restore">Restaurare</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">%d zi rămasă</item>
+        <item quantity="few">%d zile rămase</item>
+        <item quantity="other">%d de zile rămase</item>
+    </plurals>
+    <string name="msg_contact_restored">Contact restaurat</string>
+    <string name="msg_restore_failed">Contactul nu a putut fi restaurat</string>
+    <string name="section_merge_fix">Unește și corectează</string>
+    <string name="empty_no_duplicates">Nicio dublură</string>
+    <string name="action_merge">Unește</string>
+    <string name="action_swap">Schimbă</string>
+    <string name="merge_kept">Rămâne</string>
+    <string name="merge_other">Altul</string>
+    <string name="dialog_merge_contacts">Unești contactele?</string>
+    <string name="dialog_merge_contacts_body">Păstrează contactul din stânga și îl șterge pe cel din dreapta.</string>
+    <string name="merge_same_phone">Același telefon</string>
+    <string name="merge_same_email">Același e-mail</string>
+    <string name="merge_same_name">Același nume</string>
+    <string name="msg_contacts_merged">Contacte unite</string>
+    <string name="msg_merge_failed">Contactele nu au putut fi unite</string>
+    <string name="field_photo">Fotografie</string>
+    <string name="merge_both_kept">Ambele rămân</string>
 </resources>

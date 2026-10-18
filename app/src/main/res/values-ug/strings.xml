@@ -466,4 +466,39 @@
     <string name="msg_insert_contact_failed">ئالاقىداش قوشالمىدى</string>
     <string name="login_http_failed">كىرىش مەغلۇپ بولدى: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">تەرتىپلە</string>
+    <string name="organize_bin_summary">يېقىندا ئۆچۈرۈلگەن ئالاقىداشلار</string>
+    <string name="organize_import_summary">ئەكىرىش، چىقىرىش ۋە تېلېفون ئالاقىداشلىرى</string>
+    <string name="organize_calendar_summary">تۇغۇلغان كۈن، يىللىق خاتىرە ۋە ۋاپات</string>
+    <string name="organize_merge_summary">تەكرارنى تېپىپ بىرلەشتۈر</string>
+    <string name="section_emergency_contacts">جىددىي ئالاقىداشلار</string>
+    <string name="emergency_contacts_opens_phone">تېلېفوننىڭ جىددىي ئالاقىداشلىرىنى ئاچىدۇ</string>
+    <string name="msg_emergency_unavailable">جىددىي ئالاقىداشلارنى ئاچالمىدى</string>
+    <string name="empty_no_emergency_contacts">جىددىي ئالاقىداش يوق</string>
+    <string name="section_bin">ئەخلەت ساندۇقى</string>
+    <string name="empty_bin">ئۆچۈرۈلگەن ئالاقىداش يوق</string>
+    <string name="bin_kept_days">3 كۈن ساقلىنىدۇ.</string>
+    <string name="action_restore">ئەسلىگە كەلتۈر</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">%d كۈن قالدى</item>
+        <item quantity="other">%d كۈن قالدى</item>
+    </plurals>
+    <string name="msg_contact_restored">ئالاقىداش ئەسلىگە كەلتۈرۈلدى</string>
+    <string name="msg_restore_failed">ئالاقىداشنى ئەسلىگە كەلتۈرەلمىدى</string>
+    <string name="section_merge_fix">بىرلەشتۈر ۋە تۈزەت</string>
+    <string name="empty_no_duplicates">تەكرار يوق</string>
+    <string name="action_merge">بىرلەشتۈر</string>
+    <string name="action_swap">ئالماشتۇر</string>
+    <string name="merge_kept">قالىدۇ</string>
+    <string name="merge_other">باشقا</string>
+    <string name="dialog_merge_contacts">ئالاقىداشلارنى بىرلەشتۈرەمسىز؟</string>
+    <string name="dialog_merge_contacts_body">سول تەرەپتىكى ئالاقىداشنى قالدۇرىدۇ، ئوڭ تەرەپتىكىنى ئۆچۈرىدۇ.</string>
+    <string name="merge_same_phone">ئوخشاش تېلېفون</string>
+    <string name="merge_same_email">ئوخشاش تورخەت</string>
+    <string name="merge_same_name">ئوخشاش ئىسىم</string>
+    <string name="msg_contacts_merged">ئالاقىداشلار بىرلەشتۈرۈلدى</string>
+    <string name="msg_merge_failed">ئالاقىداشلارنى بىرلەشتۈرەلمىدى</string>
+    <string name="field_photo">رەسىم</string>
+    <string name="merge_both_kept">ھەر ئىككىسى قالىدۇ</string>
 </resources>

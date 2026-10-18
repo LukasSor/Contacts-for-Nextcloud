@@ -466,4 +466,39 @@
     <string name="msg_insert_contact_failed">Kişi eklenemedi</string>
     <string name="login_http_failed">Oturum açılamadı: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Düzenle</string>
+    <string name="organize_bin_summary">Yakın zamanda silinen kişiler</string>
+    <string name="organize_import_summary">İçe aktarma, dışa aktarma ve telefon kişileri</string>
+    <string name="organize_calendar_summary">Doğum günleri, yıl dönümleri ve ölümler</string>
+    <string name="organize_merge_summary">Yinelenenleri bul ve birleştir</string>
+    <string name="section_emergency_contacts">Acil kişiler</string>
+    <string name="emergency_contacts_opens_phone">Telefonun acil kişilerini açar</string>
+    <string name="msg_emergency_unavailable">Acil kişiler açılamadı</string>
+    <string name="empty_no_emergency_contacts">Acil kişi yok</string>
+    <string name="section_bin">Çöp kutusu</string>
+    <string name="empty_bin">Silinmiş kişi yok</string>
+    <string name="bin_kept_days">3 gün saklanır.</string>
+    <string name="action_restore">Geri yükle</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">%d gün kaldı</item>
+        <item quantity="other">%d gün kaldı</item>
+    </plurals>
+    <string name="msg_contact_restored">Kişi geri yüklendi</string>
+    <string name="msg_restore_failed">Kişi geri yüklenemedi</string>
+    <string name="section_merge_fix">Birleştir ve düzelt</string>
+    <string name="empty_no_duplicates">Yinelenen yok</string>
+    <string name="action_merge">Birleştir</string>
+    <string name="action_swap">Değiştir</string>
+    <string name="merge_kept">Kalır</string>
+    <string name="merge_other">Diğeri</string>
+    <string name="dialog_merge_contacts">Kişiler birleştirilsin mi?</string>
+    <string name="dialog_merge_contacts_body">Soldaki kişiyi tutar, sağdakini siler.</string>
+    <string name="merge_same_phone">Aynı telefon</string>
+    <string name="merge_same_email">Aynı e-posta</string>
+    <string name="merge_same_name">Aynı ad</string>
+    <string name="msg_contacts_merged">Kişiler birleştirildi</string>
+    <string name="msg_merge_failed">Kişiler birleştirilemedi</string>
+    <string name="field_photo">Fotoğraf</string>
+    <string name="merge_both_kept">İkisi de kalır</string>
 </resources>

@@ -466,4 +466,39 @@
     <string name="msg_insert_contact_failed">Kontakti nuk u shtua dot</string>
     <string name="login_http_failed">Hyrja dështoi: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Organizo</string>
+    <string name="organize_bin_summary">Kontakte të fshira së fundmi</string>
+    <string name="organize_import_summary">Importo, eksporto dhe kontaktet e telefonit</string>
+    <string name="organize_calendar_summary">Datëlindje, përvjetorë dhe vdekje</string>
+    <string name="organize_merge_summary">Gjej dhe bashko dublikatet</string>
+    <string name="section_emergency_contacts">Kontaktet e urgjencës</string>
+    <string name="emergency_contacts_opens_phone">Hap kontaktet e urgjencës së telefonit</string>
+    <string name="msg_emergency_unavailable">Kontaktet e urgjencës nuk u hapën</string>
+    <string name="empty_no_emergency_contacts">Pa kontakte urgjence</string>
+    <string name="section_bin">Koshi</string>
+    <string name="empty_bin">Pa kontakte të fshira</string>
+    <string name="bin_kept_days">Ruhet 3 ditë.</string>
+    <string name="action_restore">Rikthe</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">%d ditë mbetur</item>
+        <item quantity="other">%d ditë mbetur</item>
+    </plurals>
+    <string name="msg_contact_restored">Kontakti u rikthye</string>
+    <string name="msg_restore_failed">Kontakti nuk u rikthye</string>
+    <string name="section_merge_fix">Bashko dhe rregullo</string>
+    <string name="empty_no_duplicates">Pa dublikate</string>
+    <string name="action_merge">Bashko</string>
+    <string name="action_swap">Ndërro</string>
+    <string name="merge_kept">Mbetet</string>
+    <string name="merge_other">Tjetri</string>
+    <string name="dialog_merge_contacts">Të bashkohen kontaktet?</string>
+    <string name="dialog_merge_contacts_body">Mban kontaktin majtas dhe fshin atë djathtas.</string>
+    <string name="merge_same_phone">I njëjti telefon</string>
+    <string name="merge_same_email">I njëjti email</string>
+    <string name="merge_same_name">I njëjti emër</string>
+    <string name="msg_contacts_merged">Kontaktet u bashkuan</string>
+    <string name="msg_merge_failed">Kontaktet nuk u bashkuan</string>
+    <string name="field_photo">Foto</string>
+    <string name="merge_both_kept">Të dyja mbeten</string>
 </resources>

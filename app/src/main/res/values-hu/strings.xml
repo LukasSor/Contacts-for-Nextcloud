@@ -466,4 +466,39 @@
         <item quantity="other">%d névjegy van a szerveren, de nem sikerült importálni</item>
     </plurals>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Rendezés</string>
+    <string name="organize_bin_summary">Nemrég törölt névjegyek</string>
+    <string name="organize_import_summary">Import, export és telefonnévjegyek</string>
+    <string name="organize_calendar_summary">Születésnapok, évfordulók és halálozások</string>
+    <string name="organize_merge_summary">Ismétlődések keresése és egyesítése</string>
+    <string name="section_emergency_contacts">Vészhelyzeti névjegyek</string>
+    <string name="emergency_contacts_opens_phone">Megnyitja a telefon vészhelyzeti névjegyeit</string>
+    <string name="msg_emergency_unavailable">A vészhelyzeti névjegyek nem nyílnak meg</string>
+    <string name="empty_no_emergency_contacts">Nincs vészhelyzeti névjegy</string>
+    <string name="section_bin">Kuka</string>
+    <string name="empty_bin">Nincs törölt névjegy</string>
+    <string name="bin_kept_days">3 napig megőrizve.</string>
+    <string name="action_restore">Visszaállítás</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">%d nap van hátra</item>
+        <item quantity="other">%d nap van hátra</item>
+    </plurals>
+    <string name="msg_contact_restored">Névjegy visszaállítva</string>
+    <string name="msg_restore_failed">A névjegyet nem sikerült visszaállítani</string>
+    <string name="section_merge_fix">Egyesítés és javítás</string>
+    <string name="empty_no_duplicates">Nincs ismétlődés</string>
+    <string name="action_merge">Egyesítés</string>
+    <string name="action_swap">Csere</string>
+    <string name="merge_kept">Marad</string>
+    <string name="merge_other">Másik</string>
+    <string name="dialog_merge_contacts">Egyesíti a névjegyeket?</string>
+    <string name="dialog_merge_contacts_body">A bal oldali névjegyet tartja meg, a jobb oldalit törli.</string>
+    <string name="merge_same_phone">Ugyanaz a telefon</string>
+    <string name="merge_same_email">Ugyanaz az e-mail</string>
+    <string name="merge_same_name">Ugyanaz a név</string>
+    <string name="msg_contacts_merged">Névjegyek egyesítve</string>
+    <string name="msg_merge_failed">A névjegyeket nem sikerült egyesíteni</string>
+    <string name="field_photo">Fénykép</string>
+    <string name="merge_both_kept">Mindkettő marad</string>
 </resources>

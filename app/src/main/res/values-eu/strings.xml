@@ -466,4 +466,39 @@
     <string name="msg_insert_contact_failed">Ezin izan da kontaktua gehitu</string>
     <string name="login_http_failed">Ezin izan da saioa hasi: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Antolatu</string>
+    <string name="organize_bin_summary">Azkenaldian ezabatutako kontaktuak</string>
+    <string name="organize_import_summary">Inportatu, esportatu eta telefono-kontaktuak</string>
+    <string name="organize_calendar_summary">Jaiotegunak, urteurrenak eta heriotzak</string>
+    <string name="organize_merge_summary">Aurkitu eta batu bikoiztuak</string>
+    <string name="section_emergency_contacts">Larrialdi-kontaktuak</string>
+    <string name="emergency_contacts_opens_phone">Telefonoaren larrialdi-kontaktuak irekitzen ditu</string>
+    <string name="msg_emergency_unavailable">Ezin izan dira larrialdi-kontaktuak ireki</string>
+    <string name="empty_no_emergency_contacts">Larrialdi-kontakturik ez</string>
+    <string name="section_bin">Zakarrontzia</string>
+    <string name="empty_bin">Ezabatutako kontakturik ez</string>
+    <string name="bin_kept_days">3 egunez gordeta.</string>
+    <string name="action_restore">Leheneratu</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">%d egun falta</item>
+        <item quantity="other">%d egun falta</item>
+    </plurals>
+    <string name="msg_contact_restored">Kontaktua leheneratu da</string>
+    <string name="msg_restore_failed">Ezin izan da kontaktua leheneratu</string>
+    <string name="section_merge_fix">Batu eta zuzendu</string>
+    <string name="empty_no_duplicates">Bikoizturik ez</string>
+    <string name="action_merge">Batu</string>
+    <string name="action_swap">Trukea</string>
+    <string name="merge_kept">Geratzen</string>
+    <string name="merge_other">Bestea</string>
+    <string name="dialog_merge_contacts">Kontaktuak batu?</string>
+    <string name="dialog_merge_contacts_body">Ezkerreko kontaktua uzten du eta eskuinekoa ezabatzen du.</string>
+    <string name="merge_same_phone">Telefono bera</string>
+    <string name="merge_same_email">E-posta bera</string>
+    <string name="merge_same_name">Izen bera</string>
+    <string name="msg_contacts_merged">Kontaktuak batu dira</string>
+    <string name="msg_merge_failed">Ezin izan dira kontaktuak batu</string>
+    <string name="field_photo">Argazkia</string>
+    <string name="merge_both_kept">Biak geratzen</string>
 </resources>

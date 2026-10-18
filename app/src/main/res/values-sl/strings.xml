@@ -496,4 +496,41 @@
     <string name="msg_insert_contact_failed">Stika ni mogoče dodati</string>
     <string name="login_http_failed">Prijava ni uspela: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Uredi</string>
+    <string name="organize_bin_summary">Nedavno izbrisani stiki</string>
+    <string name="organize_import_summary">Uvoz, izvoz in stiki telefona</string>
+    <string name="organize_calendar_summary">Rojstni dnevi, obletnice in smrti</string>
+    <string name="organize_merge_summary">Poišči in združi podvojitve</string>
+    <string name="section_emergency_contacts">Stiki v sili</string>
+    <string name="emergency_contacts_opens_phone">Odpre stike v sili na telefonu</string>
+    <string name="msg_emergency_unavailable">Stikov v sili ni bilo mogoče odpreti</string>
+    <string name="empty_no_emergency_contacts">Ni stikov v sili</string>
+    <string name="section_bin">Smetnjak</string>
+    <string name="empty_bin">Ni izbrisanih stikov</string>
+    <string name="bin_kept_days">Shranjeno 3 dni.</string>
+    <string name="action_restore">Obnovi</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">še %d dan</item>
+        <item quantity="two">še %d dneva</item>
+        <item quantity="few">še %d dni</item>
+        <item quantity="other">še %d dni</item>
+    </plurals>
+    <string name="msg_contact_restored">Stik obnovljen</string>
+    <string name="msg_restore_failed">Stika ni bilo mogoče obnoviti</string>
+    <string name="section_merge_fix">Združi in popravi</string>
+    <string name="empty_no_duplicates">Ni podvojitev</string>
+    <string name="action_merge">Združi</string>
+    <string name="action_swap">Zamenjaj</string>
+    <string name="merge_kept">Ostane</string>
+    <string name="merge_other">Drugi</string>
+    <string name="dialog_merge_contacts">Združi stike?</string>
+    <string name="dialog_merge_contacts_body">Ohrani levi stik in izbriše desnega.</string>
+    <string name="merge_same_phone">Isti telefon</string>
+    <string name="merge_same_email">Ista e-pošta</string>
+    <string name="merge_same_name">Isto ime</string>
+    <string name="msg_contacts_merged">Stiki združeni</string>
+    <string name="msg_merge_failed">Stikov ni bilo mogoče združiti</string>
+    <string name="field_photo">Fotografija</string>
+    <string name="merge_both_kept">Oboje ostane</string>
 </resources>

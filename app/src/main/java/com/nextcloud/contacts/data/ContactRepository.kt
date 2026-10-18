@@ -155,11 +155,6 @@ class ContactRepository(
         return contactDao.getById(id)
     }
 
-    /**
-     * A contact saved after prefix and suffix were cleared can still store the old
-     * formatted name. Refresh that name from the current fields once, without
-     * marking the row dirty, so sync does not upload it again.
-     */
     private suspend fun alignStaleDisplayNames() {
         if (displayNamesAligned.get()) return
         displayNameAlignment.withLock {
@@ -471,7 +466,12 @@ class ContactRepository(
         val existing = contactDao.getById(id)?.contact ?: return
         if (existing.remoteUrl != null) {
             contactDao.updateContact(
-                existing.copy(deleted = true, dirty = true, lastModified = System.currentTimeMillis()),
+                existing.copy(
+                    deleted = true,
+                    dirty = true,
+                    // lastModified is the delete time. The bin window starts here, not at sync.
+                    lastModified = System.currentTimeMillis(),
+                ),
             )
             removeDeviceIntegrations(id)
         } else {
@@ -479,6 +479,22 @@ class ContactRepository(
             photoStore.deletePhoto(id)
             removeDeviceIntegrations(id)
         }
+    }
+
+    fun observeDeletedContacts(): Flow<List<ContactEntity>> = contactDao.observeDeleted()
+
+    /** Puts a soft-deleted contact back. Dirty so the next sync uploads it. */
+    suspend fun restoreContact(id: Long) {
+        val existing = contactDao.getById(id)?.contact ?: return
+        if (!existing.deleted) return
+        contactDao.updateContact(
+            existing.copy(
+                deleted = false,
+                dirty = true,
+                lastModified = System.currentTimeMillis(),
+            ),
+        )
+        syncDeviceIntegrations(id)
     }
 
     suspend fun getPendingSync(): List<ContactEntity> = contactDao.getPendingSync()
@@ -494,7 +510,9 @@ class ContactRepository(
      * from that map so equivalent URLs do not scan the address book again.
      */
     suspend fun openRemoteContactIndex(server: String): RemoteContactIndex {
-        val contacts = contactDao.getAllServerLinkedContacts()
+        // Bin rows stay linked so a pull can see them and leave them alone.
+        val contacts = contactDao.getAllServerLinkedContacts() +
+            contactDao.getDeletedServerLinkedContacts()
         val updates = ArrayList<ContactEntity>()
         val normalized = ArrayList<ContactEntity>(contacts.size)
         for (contact in contacts) {
@@ -535,6 +553,12 @@ class ContactRepository(
         val uid = fileName.removeSuffix(".vcf").removeSuffix(".VCF")
         if (uid.isNotBlank()) {
             contactDao.getByRemoteUid(uid)?.let { return it }
+            contactDao.findDeletedByRemoteUid(uid)?.let { return it }
+        }
+        contactDao.findDeletedByRemoteFileName(fileName).forEach { candidate ->
+            if (RemoteUrlNormalizer.same(server, candidate.remoteUrl, key)) {
+                return candidate
+            }
         }
         return null
     }
@@ -722,6 +746,70 @@ class ContactRepository(
         val contactId: Long,
         val duplicateRemoteUrl: String?,
     )
+
+    suspend fun loadDuplicateGroups(): List<ContactDuplicates.ValueGroup> {
+        val contacts = contactDao.listFingerprintContacts()
+        val activeIds = contacts.mapTo(HashSet()) { it.id }
+        val phones = HashMap<Long, MutableList<String>>()
+        for (row in contactDao.listPhoneValues()) {
+            if (row.contactId !in activeIds) continue
+            phones.getOrPut(row.contactId) { mutableListOf() }.add(row.value)
+        }
+        val emails = HashMap<Long, MutableList<String>>()
+        for (row in contactDao.listEmailValues()) {
+            if (row.contactId !in activeIds) continue
+            emails.getOrPut(row.contactId) { mutableListOf() }.add(row.value)
+        }
+        return ContactDuplicates.findValues(
+            names = contacts.associate { it.id to it.displayName },
+            phonesByContact = phones,
+            emailsByContact = emails,
+        )
+    }
+
+    /**
+     * Keeps one contact, copies fields the way a sync merge does, then deletes
+     * the others through [deleteContact] so server cards are removed on sync.
+     * [keeperId] is the contact the merge screen put on the left. Without it,
+     * the server card, then the newer edit, then the lower id is kept.
+     */
+    suspend fun mergeContacts(
+        contactIds: List<Long>,
+        keeperId: Long? = null,
+        fieldsFromDuplicate: Set<MergeSingletonField> = emptySet(),
+    ) {
+        val ids = contactIds.distinct()
+        if (ids.size < 2) return
+        val loaded = ids.mapNotNull { contactDao.getById(it) }.filter { !it.contact.deleted }
+        if (loaded.size < 2) return
+        val chosenKeeper = keeperId?.takeIf { id -> loaded.any { it.contact.id == id } }
+        val keeper = chosenKeeper ?: ContactDuplicates.pickMergeKeeperId(
+            loaded.map { details ->
+                ContactDuplicates.MergeCandidate(
+                    id = details.contact.id,
+                    hasRemote = !details.contact.remoteUrl.isNullOrBlank(),
+                    lastModified = details.contact.lastModified,
+                )
+            },
+        )
+        val losers = loaded.filter { it.contact.id != keeper }
+        val picks = if (losers.size == 1) fieldsFromDuplicate else emptySet()
+        for (loser in losers) {
+            val fresh = contactDao.getById(loser.contact.id) ?: continue
+            if (fresh.contact.deleted) continue
+            if (!applyDuplicateFields(
+                    fresh,
+                    keeper,
+                    markDirty = true,
+                    fieldsFromDuplicate = picks,
+                    keepProfile = true,
+                    keepFormat = true,
+                )
+            ) continue
+            deleteContact(fresh.contact.id)
+        }
+        syncDeviceIntegrations(keeper)
+    }
 
     suspend fun fingerprintIndex(): FingerprintIndex {
         val phones = contactDao.listPhoneValues().groupBy({ it.contactId }, { it.value })
@@ -948,10 +1036,44 @@ class ContactRepository(
     private suspend fun absorbServerDuplicate(loserId: Long, winnerId: Long) {
         if (loserId == winnerId) return
         val loserDetails = contactDao.getById(loserId) ?: return
-        val winnerDetails = contactDao.getById(winnerId) ?: return
+        if (!applyDuplicateFields(loserDetails, winnerId, markDirty = false)) return
+        removeDeviceIntegrations(loserId)
+        photoStore.deletePhoto(loserId)
+        contactDao.deleteContact(loserId)
+        syncDeviceIntegrations(winnerId)
+    }
+
+    /**
+     * Copies list fields onto the keeper and applies singleton choices.
+     * Does not delete the extra contact.
+     * [fieldsFromDuplicate] selects differing singleton values from [loserDetails].
+     * Blanks are filled from the other contact. Unset choices keep the keeper.
+     * The merge screen sets [keepProfile] and [keepFormat] so the left contact's
+     * photo, nickname, phonetic names, and display format stay put. A chosen
+     * display name still brings that contact's name parts.
+     */
+    private suspend fun applyDuplicateFields(
+        loserDetails: ContactWithDetails,
+        winnerId: Long,
+        markDirty: Boolean,
+        fieldsFromDuplicate: Set<MergeSingletonField> = emptySet(),
+        keepProfile: Boolean = false,
+        keepFormat: Boolean = false,
+    ): Boolean {
+        if (loserDetails.contact.id == winnerId) return false
+        val winnerDetails = contactDao.getById(winnerId) ?: return false
         val loser = loserDetails.contact
         val winner = winnerDetails.contact
-        val mergedWinner = winner.copy(
+        val mergedFields = ContactMerge.mergeScalars(
+            keeper = winner,
+            duplicate = loser,
+            fromDuplicate = fieldsFromDuplicate,
+            keeperPhotoDigest = photoStore.photoDigest(winnerId),
+            duplicatePhotoDigest = photoStore.photoDigest(loser.id),
+            keepProfile = keepProfile,
+            keepFormat = keepFormat,
+        )
+        val mergedWinner = mergedFields.contact.copy(
             talkInviteVerifiedUserId = winner.talkInviteVerifiedUserId ?: loser.talkInviteVerifiedUserId,
             talkInviteVerifiedCloudId = winner.talkInviteVerifiedCloudId ?: loser.talkInviteVerifiedCloudId,
             nextcloudProfileLookupCache = NextcloudProfileLookupCache.merge(
@@ -969,45 +1091,21 @@ class ContactRepository(
             isFavorite = winner.isFavorite || loser.isFavorite,
             remoteUid = winner.remoteUid?.takeIf { it.isNotBlank() } ?: loser.remoteUid,
             etag = winner.etag?.takeIf { it.isNotBlank() } ?: loser.etag,
-            displayName = winner.displayName.ifBlank { loser.displayName },
-            prefix = winner.prefix.ifBlank { loser.prefix },
-            givenName = winner.givenName.ifBlank { loser.givenName },
-            middleName = winner.middleName.ifBlank { loser.middleName },
-            familyName = winner.familyName.ifBlank { loser.familyName },
-            suffix = winner.suffix.ifBlank { loser.suffix },
-            nickname = winner.nickname.ifBlank { loser.nickname },
-            phoneticGiven = winner.phoneticGiven.ifBlank { loser.phoneticGiven },
-            phoneticFamily = winner.phoneticFamily.ifBlank { loser.phoneticFamily },
-            organization = winner.organization.ifBlank { loser.organization },
-            title = winner.title.ifBlank { loser.title },
-            role = winner.role.ifBlank { loser.role },
-            gender = winner.gender.ifBlank { loser.gender },
-            birthday = winner.birthday.ifBlank { loser.birthday },
-            birthplace = winner.birthplace.ifBlank { loser.birthplace },
-            anniversary = winner.anniversary.ifBlank { loser.anniversary },
-            deathDate = winner.deathDate.ifBlank { loser.deathDate },
-            deathPlace = winner.deathPlace.ifBlank { loser.deathPlace },
-            categories = winner.categories.ifBlank { loser.categories },
-            notes = winner.notes.ifBlank { loser.notes },
-            notesMarkdown = winner.notesMarkdown || loser.notesMarkdown,
-            editFieldSyntaxEnabled = winner.editFieldSyntaxEnabled || loser.editFieldSyntaxEnabled,
-            geo = winner.geo.ifBlank { loser.geo },
-            timeZone = winner.timeZone.ifBlank { loser.timeZone },
-            managersName = winner.managersName.ifBlank { loser.managersName },
-            managersUid = winner.managersUid.ifBlank { loser.managersUid },
-            relationshipToYou = winner.relationshipToYou.ifBlank { loser.relationshipToYou },
-            vcardScalarExtrasJson = mergeScalarExtras(winner.vcardScalarExtrasJson, loser.vcardScalarExtrasJson),
+            editFieldSyntaxEnabled = if (keepFormat) {
+                winner.editFieldSyntaxEnabled
+            } else {
+                winner.editFieldSyntaxEnabled || loser.editFieldSyntaxEnabled
+            },
             vcardUnknownLinesJson = mergeUnknownLines(winner.vcardUnknownLinesJson, loser.vcardUnknownLinesJson),
+            dirty = if (markDirty) true else winner.dirty,
+            lastModified = if (markDirty) System.currentTimeMillis() else winner.lastModified,
         )
         contactDao.updateContact(mergedWinner)
         mergeDuplicateDetails(loserDetails, winnerId)
-        if (!photoStore.hasPhoto(winnerId) && photoStore.hasPhoto(loserId)) {
-            photoStore.readPhoto(loserId)?.let { photoStore.savePhoto(winnerId, it) }
+        if (mergedFields.copyPhotoFromDuplicate) {
+            photoStore.readPhoto(loser.id)?.let { photoStore.savePhoto(winnerId, it) }
         }
-        removeDeviceIntegrations(loserId)
-        photoStore.deletePhoto(loserId)
-        contactDao.deleteContact(loserId)
-        syncDeviceIntegrations(winnerId)
+        return true
     }
 
     private suspend fun mergeDuplicateDetails(loser: ContactWithDetails, winnerId: Long) {
@@ -1093,14 +1191,41 @@ class ContactRepository(
         )
     }
 
-    suspend fun removeByRemoteUrl(remoteUrl: String) {
+    suspend fun removeByRemoteUrl(remoteUrl: String, now: Long = System.currentTimeMillis()) {
         val existing = contactDao.getByRemoteUrl(remoteUrl)
             ?: contactDao.findByRemoteFileName(RemoteUrlNormalizer.fileName(remoteUrl))
             ?: return
+        if (shouldKeepDeletedContactAfterServerGone(existing, now)) {
+            contactDao.updateContact(contactAfterServerDeleteKept(existing))
+            return
+        }
+        purgeDeletedContact(existing.id)
+    }
+
+    /** The server card is gone and the bin window is still open. Href and etag go; the row stays. */
+    suspend fun keepDeletedContactAfterServerGone(id: Long) {
+        val existing = contactDao.getById(id)?.contact ?: return
+        if (!existing.deleted) return
+        contactDao.updateContact(contactAfterServerDeleteKept(existing))
+    }
+
+    /**
+     * Drops soft-deleted rows whose server card is already gone and whose delete is older than the bin window.
+     * A delete that has not reached the server yet still has a remote URL and is left alone.
+     */
+    suspend fun purgeExpiredBinContacts(now: Long = System.currentTimeMillis()) {
+        val deletedAtOrBefore = now - BIN_RETENTION_MS
+        for (contact in contactDao.getBinContactsReadyToPurge(deletedAtOrBefore)) {
+            if (contact.remoteUrl != null) continue
+            purgeDeletedContact(contact.id)
+        }
+    }
+
+    suspend fun purgeDeletedContact(id: Long) {
         // Export and calendar links are keyed by the local id, so clear them before the row is gone.
-        removeDeviceIntegrations(existing.id)
-        photoStore.deletePhoto(existing.id)
-        contactDao.deleteContact(existing.id)
+        removeDeviceIntegrations(id)
+        photoStore.deletePhoto(id)
+        contactDao.deleteContact(id)
     }
 
     suspend fun clearAll() {
@@ -1403,14 +1528,6 @@ class ContactRepository(
             contactDao.insertEmails(merged.map { it.copy(id = 0, contactId = contactId) })
         }
         return true
-    }
-
-    private fun mergeScalarExtras(winnerRaw: String, loserRaw: String): String {
-        val winner = ContactScalarVcardExtras.decode(winnerRaw)
-        val loser = ContactScalarVcardExtras.decode(loserRaw)
-        if (loser.isEmpty()) return winnerRaw
-        if (winner.isEmpty()) return loserRaw
-        return ContactScalarVcardExtras.encode(winner + loser.filterKeys { it !in winner })
     }
 
     private fun mergeUnknownLines(winnerRaw: String, loserRaw: String): String {

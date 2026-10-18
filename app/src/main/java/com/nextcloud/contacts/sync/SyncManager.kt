@@ -6,6 +6,8 @@ import com.nextcloud.contacts.R
 import com.nextcloud.contacts.auth.CredentialStore
 import com.nextcloud.contacts.data.ContactRepository
 import com.nextcloud.contacts.data.RemoteContactIndex
+import com.nextcloud.contacts.data.serverDeleteIsDue
+import com.nextcloud.contacts.data.shouldKeepDeletedContactAfterServerGone
 import com.nextcloud.contacts.data.local.ContactEntity
 import com.nextcloud.contacts.data.local.ContactWithDetails
 import com.nextcloud.contacts.data.prefs.UserPreferences
@@ -68,6 +70,7 @@ class SyncManager(
         val credentials = credentialStore.getCredentials() ?: return@withContext SyncResult.NotLoggedIn
         try {
             val client = CardDavClient(credentials)
+            contactRepository.purgeExpiredBinContacts()
             val index = contactRepository.openRemoteContactIndex(credentials.server)
             val pull = pullRemoteChanges(client, credentials.server, index)
             contactRepository.deduplicateLocalContacts(credentials.server)
@@ -111,6 +114,8 @@ class SyncManager(
         var pushed = 0
         for (contact in pending) {
             if (contact.deleted) {
+                // The href is already gone. Leave the bin row alone; do not create the card again.
+                if (!serverDeleteIsDue(contact.remoteUrl, contact.deleted)) continue
                 val storageKey = contact.remoteUrl ?: continue
                 try {
                     client.deleteVCard(storageKey, contact.etag)
@@ -121,6 +126,7 @@ class SyncManager(
                         throw e
                     }
                 }
+                // The card is off the server. The local row stays in the bin until the window ends.
                 contactRepository.removeByRemoteUrl(storageKey)
                 pushed++
                 continue
@@ -321,6 +327,15 @@ class SyncManager(
         index: RemoteContactIndex,
     ): ApplyResult {
         val existing = contactRepository.findByRemoteReference(server, storageKey, index)
+        if (existing != null && existing.deleted) {
+            if (shouldKeepDeletedContactAfterServerGone(existing, System.currentTimeMillis())) {
+                contactRepository.keepDeletedContactAfterServerGone(existing.id)
+            } else {
+                contactRepository.purgeDeletedContact(existing.id)
+                index.remove(existing.id)
+            }
+            return ApplyResult.Unchanged
+        }
         if (existing != null && shouldSkipRemoteDelete(existing.dirty, existing.deleted)) {
             return ApplyResult.Unchanged
         }
@@ -338,7 +353,7 @@ class SyncManager(
         for (change in changes) {
             if (change.deleted) continue
             val existing = contactRepository.findByRemoteReference(server, change.href, index) ?: continue
-            if (existing.dirty) continue
+            if (existing.deleted || existing.dirty) continue
             when (change.favorite) {
                 true -> contactRepository.setFavorite(existing.id, true)
                 false -> contactRepository.setFavorite(existing.id, false)
@@ -358,6 +373,11 @@ class SyncManager(
             return forgetMissingServerCard(server, storageKey, index)
         }
         val existing = contactRepository.findByRemoteReference(server, storageKey, index)
+        if (existing?.deleted == true) {
+            // The server card is still there because this delete has not been uploaded.
+            // Leave the bin row in place, and do not bring the contact back to the list.
+            return ApplyResult.Unchanged
+        }
         if (existing?.dirty == true) {
             return ApplyResult.Unchanged
         }
@@ -378,7 +398,6 @@ class SyncManager(
             client.downloadVCard(storageKey)
         } catch (e: Exception) {
             if (e is CancellationException) throw e
-            // The report still listed a card the server has already removed.
             if (httpStatusFromClientError(e) == 404) {
                 return forgetMissingServerCard(server, storageKey, index)
             }
@@ -580,7 +599,6 @@ internal fun shouldClearDirtyAfterFavoriteUpload(
 
 private val HTTP_STATUS = Regex("""HTTP (\d{3})""")
 
-/** Property names and parameter names only, so a rejected PUT can be diagnosed without contact values. */
 internal fun vcardStructure(vcard: String): String = vcard
     .lineSequence()
     .map { it.trim() }

@@ -466,4 +466,39 @@
     <string name="msg_insert_contact_failed">კონტაქტი ვერ დაემატა</string>
     <string name="login_http_failed">შესვლა ვერ მოხერხდა: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">ორგანიზება</string>
+    <string name="organize_bin_summary">ახლახან წაშლილი კონტაქტები</string>
+    <string name="organize_import_summary">იმპორტი, ექსპორტი და ტელეფონის კონტაქტები</string>
+    <string name="organize_calendar_summary">დაბადების დღეები, წლისთავები და გარდაცვალება</string>
+    <string name="organize_merge_summary">იპოვე და გააერთიანე დუბლიკატები</string>
+    <string name="section_emergency_contacts">საგანგებო კონტაქტები</string>
+    <string name="emergency_contacts_opens_phone">ხსნის ტელეფონის საგანგებო კონტაქტებს</string>
+    <string name="msg_emergency_unavailable">საგანგებო კონტაქტები ვერ გაიხსნა</string>
+    <string name="empty_no_emergency_contacts">საგანგებო კონტაქტები არ არის</string>
+    <string name="section_bin">ურნა</string>
+    <string name="empty_bin">წაშლილი კონტაქტები არ არის</string>
+    <string name="bin_kept_days">3 დღე ინახება.</string>
+    <string name="action_restore">აღდგენა</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">დარჩა %d დღე</item>
+        <item quantity="other">დარჩა %d დღე</item>
+    </plurals>
+    <string name="msg_contact_restored">კონტაქტი აღდგა</string>
+    <string name="msg_restore_failed">კონტაქტი ვერ აღდგა</string>
+    <string name="section_merge_fix">შერწყმა და გასწორება</string>
+    <string name="empty_no_duplicates">დუბლიკატები არ არის</string>
+    <string name="action_merge">შერწყმა</string>
+    <string name="action_swap">გაცვლა</string>
+    <string name="merge_kept">რჩება</string>
+    <string name="merge_other">სხვა</string>
+    <string name="dialog_merge_contacts">შევაერთოთ კონტაქტები?</string>
+    <string name="dialog_merge_contacts_body">ტოვებს მარცხენა კონტაქტს და შლის მარჯვენას.</string>
+    <string name="merge_same_phone">იგივე ტელეფონი</string>
+    <string name="merge_same_email">იგივე ელფოსტა</string>
+    <string name="merge_same_name">იგივე სახელი</string>
+    <string name="msg_contacts_merged">კონტაქტები შეერთდა</string>
+    <string name="msg_merge_failed">კონტაქტები ვერ შეერთდა</string>
+    <string name="field_photo">ფოტო</string>
+    <string name="merge_both_kept">ორივე რჩება</string>
 </resources>

@@ -466,4 +466,39 @@
     <string name="msg_insert_contact_failed">Imeshindwa kuongeza mwasiliani</string>
     <string name="login_http_failed">Kuingia kumeshindwa: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Panga</string>
+    <string name="organize_bin_summary">Mawasiliano yaliyofutwa hivi karibuni</string>
+    <string name="organize_import_summary">Uagizaji, uhamishaji na mawasiliano ya simu</string>
+    <string name="organize_calendar_summary">Siku za kuzaliwa, maadhimisho na vifo</string>
+    <string name="organize_merge_summary">Tafuta na unganisha nakala</string>
+    <string name="section_emergency_contacts">Mawasiliano ya dharura</string>
+    <string name="emergency_contacts_opens_phone">Hufungua mawasiliano ya dharura ya simu</string>
+    <string name="msg_emergency_unavailable">Imeshindwa kufungua mawasiliano ya dharura</string>
+    <string name="empty_no_emergency_contacts">Hakuna mawasiliano ya dharura</string>
+    <string name="section_bin">Pipu</string>
+    <string name="empty_bin">Hakuna mawasiliano yaliyofutwa</string>
+    <string name="bin_kept_days">Huwekwa siku 3.</string>
+    <string name="action_restore">Rejesha</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">siku %d imebaki</item>
+        <item quantity="other">siku %d zimebaki</item>
+    </plurals>
+    <string name="msg_contact_restored">Mawasiliano yamerejeshwa</string>
+    <string name="msg_restore_failed">Imeshindwa kurejesha mawasiliano</string>
+    <string name="section_merge_fix">Unganisha na rekebisha</string>
+    <string name="empty_no_duplicates">Hakuna nakala</string>
+    <string name="action_merge">Unganisha</string>
+    <string name="action_swap">Badili</string>
+    <string name="merge_kept">Inabaki</string>
+    <string name="merge_other">Nyingine</string>
+    <string name="dialog_merge_contacts">Unganisha mawasiliano?</string>
+    <string name="dialog_merge_contacts_body">Huacha mawasiliano ya kushoto na kufuta ya kulia.</string>
+    <string name="merge_same_phone">Simu ile ile</string>
+    <string name="merge_same_email">Barua pepe ile ile</string>
+    <string name="merge_same_name">Jina lile lile</string>
+    <string name="msg_contacts_merged">Mawasiliano yameunganishwa</string>
+    <string name="msg_merge_failed">Imeshindwa kuunganisha mawasiliano</string>
+    <string name="field_photo">Picha</string>
+    <string name="merge_both_kept">Vyote vinabaki</string>
 </resources>

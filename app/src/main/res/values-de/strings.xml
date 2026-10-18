@@ -466,4 +466,39 @@
     <string name="msg_insert_contact_failed">Kontakt nicht hinzugefügt</string>
     <string name="login_http_failed">Anmeldung fehlgeschlagen: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Organisieren</string>
+    <string name="organize_bin_summary">Kürzlich gelöschte Kontakte</string>
+    <string name="organize_import_summary">Import, Export und Telefonkontakte</string>
+    <string name="organize_calendar_summary">Geburtstage, Jahrestage und Todesfälle</string>
+    <string name="organize_merge_summary">Duplikate finden und zusammenführen</string>
+    <string name="section_emergency_contacts">Notfallkontakte</string>
+    <string name="emergency_contacts_opens_phone">Öffnet die Notfallkontakte des Telefons</string>
+    <string name="msg_emergency_unavailable">Notfallkontakte konnten nicht geöffnet werden</string>
+    <string name="empty_no_emergency_contacts">Keine Notfallkontakte</string>
+    <string name="section_bin">Papierkorb</string>
+    <string name="empty_bin">Keine gelöschten Kontakte</string>
+    <string name="bin_kept_days">3 Tage aufbewahrt.</string>
+    <string name="action_restore">Wiederherstellen</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">%d Tag übrig</item>
+        <item quantity="other">%d Tage übrig</item>
+    </plurals>
+    <string name="msg_contact_restored">Kontakt wiederhergestellt</string>
+    <string name="msg_restore_failed">Kontakt konnte nicht wiederhergestellt werden</string>
+    <string name="section_merge_fix">Zusammenführen und korrigieren</string>
+    <string name="empty_no_duplicates">Keine Duplikate</string>
+    <string name="action_merge">Zusammenführen</string>
+    <string name="action_swap">Tauschen</string>
+    <string name="merge_kept">Bleibt</string>
+    <string name="merge_other">Andere</string>
+    <string name="dialog_merge_contacts">Kontakte zusammenführen?</string>
+    <string name="dialog_merge_contacts_body">Behält den linken Kontakt und löscht den rechten.</string>
+    <string name="merge_same_phone">Gleiches Telefon</string>
+    <string name="merge_same_email">Gleiche E-Mail</string>
+    <string name="merge_same_name">Gleicher Name</string>
+    <string name="msg_contacts_merged">Kontakte zusammengeführt</string>
+    <string name="msg_merge_failed">Kontakte konnten nicht zusammengeführt werden</string>
+    <string name="field_photo">Foto</string>
+    <string name="merge_both_kept">Beide bleiben</string>
 </resources>

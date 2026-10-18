@@ -496,4 +496,41 @@
     <string name="msg_insert_contact_failed">Kontakt se nepodařilo přidat</string>
     <string name="login_http_failed">Přihlášení selhalo: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Uspořádat</string>
+    <string name="organize_bin_summary">Nedávno smazané kontakty</string>
+    <string name="organize_import_summary">Import, export a kontakty telefonu</string>
+    <string name="organize_calendar_summary">Narozeniny, výročí a úmrtí</string>
+    <string name="organize_merge_summary">Najít a sloučit duplicity</string>
+    <string name="section_emergency_contacts">Nouzové kontakty</string>
+    <string name="emergency_contacts_opens_phone">Otevře nouzové kontakty telefonu</string>
+    <string name="msg_emergency_unavailable">Nouzové kontakty nešlo otevřít</string>
+    <string name="empty_no_emergency_contacts">Žádné nouzové kontakty</string>
+    <string name="section_bin">Koš</string>
+    <string name="empty_bin">Žádné smazané kontakty</string>
+    <string name="bin_kept_days">Uchováno 3 dny.</string>
+    <string name="action_restore">Obnovit</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">zbývá %d den</item>
+        <item quantity="few">zbývají %d dny</item>
+        <item quantity="many">zbývá %d dne</item>
+        <item quantity="other">zbývá %d dní</item>
+    </plurals>
+    <string name="msg_contact_restored">Kontakt obnoven</string>
+    <string name="msg_restore_failed">Kontakt nešlo obnovit</string>
+    <string name="section_merge_fix">Sloučit a opravit</string>
+    <string name="empty_no_duplicates">Žádné duplicity</string>
+    <string name="action_merge">Sloučit</string>
+    <string name="action_swap">Prohodit</string>
+    <string name="merge_kept">Zůstane</string>
+    <string name="merge_other">Druhý</string>
+    <string name="dialog_merge_contacts">Sloučit kontakty?</string>
+    <string name="dialog_merge_contacts_body">Ponechá kontakt vlevo a smaže kontakt vpravo.</string>
+    <string name="merge_same_phone">Stejný telefon</string>
+    <string name="merge_same_email">Stejný e-mail</string>
+    <string name="merge_same_name">Stejné jméno</string>
+    <string name="msg_contacts_merged">Kontakty sloučeny</string>
+    <string name="msg_merge_failed">Kontakty nešlo sloučit</string>
+    <string name="field_photo">Fotka</string>
+    <string name="merge_both_kept">Obě zůstanou</string>
 </resources>

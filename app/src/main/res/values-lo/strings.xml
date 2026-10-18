@@ -451,4 +451,38 @@
     <string name="msg_insert_contact_failed">ເພີ່ມຕິດຕໍ່ບໍ່ໄດ້</string>
     <string name="login_http_failed">ເຂົ້າສູ່ລະບົບບໍ່ສຳເລັດ: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">ຈັດລະບຽບ</string>
+    <string name="organize_bin_summary">ລາຍຊື່ທີ່ລຶບຫຼ້າສຸດ</string>
+    <string name="organize_import_summary">ນຳເຂົ້າ ສົ່ງອອກ ແລະ ລາຍຊື່ໂທລະສັບ</string>
+    <string name="organize_calendar_summary">ວັນເກີດ ວັນຄົບຮອບ ແລະ ວັນເສຍຊີວິດ</string>
+    <string name="organize_merge_summary">ຊອກ ແລະ ຮວມລາຍຊື່ຊ້ຳ</string>
+    <string name="section_emergency_contacts">ລາຍຊື່ສຸກເສີນ</string>
+    <string name="emergency_contacts_opens_phone">ເປີດລາຍຊື່ສຸກເສີນຂອງໂທລະສັບ</string>
+    <string name="msg_emergency_unavailable">ເປີດລາຍຊື່ສຸກເສີນບໍ່ໄດ້</string>
+    <string name="empty_no_emergency_contacts">ບໍ່ມີລາຍຊື່ສຸກເສີນ</string>
+    <string name="section_bin">ຖັງຂີ້ເຫຍື້ອ</string>
+    <string name="empty_bin">ບໍ່ມີລາຍຊື່ທີ່ລຶບ</string>
+    <string name="bin_kept_days">ເກັບໄວ້ 3 ມື້.</string>
+    <string name="action_restore">ກູ້ຄືນ</string>
+    <plurals name="bin_days_left">
+        <item quantity="other">ເຫຼືອ %d ມື້</item>
+    </plurals>
+    <string name="msg_contact_restored">ກູ້ລາຍຊື່ຄືນແລ້ວ</string>
+    <string name="msg_restore_failed">ກູ້ລາຍຊື່ຄືນບໍ່ໄດ້</string>
+    <string name="section_merge_fix">ຮວມແລະແກ້ໄຂ</string>
+    <string name="empty_no_duplicates">ບໍ່ມີຊໍ້າ</string>
+    <string name="action_merge">ຮວມ</string>
+    <string name="action_swap">ສລັບ</string>
+    <string name="merge_kept">ເກັບ</string>
+    <string name="merge_other">ອື່ນ</string>
+    <string name="dialog_merge_contacts">ຮວມລາຍຊື່ບໍ?</string>
+    <string name="dialog_merge_contacts_body">ເກັບລາຍຊື່ຊ້າຍ ແລະລຶບລາຍຊື່ຂວາ.</string>
+    <string name="merge_same_phone">ໂທລະສັບດຽວກັນ</string>
+    <string name="merge_same_email">ອິເມວດຽວກັນ</string>
+    <string name="merge_same_name">ຊື່ດຽວກັນ</string>
+    <string name="msg_contacts_merged">ຮວມລາຍຊື່ແລ້ວ</string>
+    <string name="msg_merge_failed">ຮວມລາຍຊື່ບໍ່ໄດ້</string>
+    <string name="field_photo">ຮູບ</string>
+    <string name="merge_both_kept">ທັງສອງເກັບ</string>
 </resources>

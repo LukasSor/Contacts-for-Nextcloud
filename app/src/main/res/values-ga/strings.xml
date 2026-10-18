@@ -511,4 +511,42 @@
     <string name="msg_insert_contact_failed">Níorbh fhéidir teagmhálaí a chur leis</string>
     <string name="login_http_failed">Theip ar an logáil isteach: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Eagraigh</string>
+    <string name="organize_bin_summary">Teagmhálaithe scriosta le déanaí</string>
+    <string name="organize_import_summary">Iompórtáil, easpórtáil agus teagmhálaithe fóin</string>
+    <string name="organize_calendar_summary">Breithlaethanta, comórthaí agus básanna</string>
+    <string name="organize_merge_summary">Aimsigh agus cumaisc dúblaigh</string>
+    <string name="section_emergency_contacts">Teagmhálaithe éigeandála</string>
+    <string name="emergency_contacts_opens_phone">Osclaíonn teagmhálaithe éigeandála an fhóin</string>
+    <string name="msg_emergency_unavailable">Níorbh fhéidir teagmhálaithe éigeandála a oscailt</string>
+    <string name="empty_no_emergency_contacts">Gan teagmhálaithe éigeandála</string>
+    <string name="section_bin">Bosca bruscair</string>
+    <string name="empty_bin">Gan teagmhálaithe scriosta</string>
+    <string name="bin_kept_days">Coinnithe 3 lá.</string>
+    <string name="action_restore">Athchóirigh</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">%d lá fágtha</item>
+        <item quantity="two">%d lá fágtha</item>
+        <item quantity="few">%d lá fágtha</item>
+        <item quantity="many">%d lá fágtha</item>
+        <item quantity="other">%d lá fágtha</item>
+    </plurals>
+    <string name="msg_contact_restored">Teagmhálaí athchóirithe</string>
+    <string name="msg_restore_failed">Níorbh fhéidir an teagmhálaí a athchóiriú</string>
+    <string name="section_merge_fix">Cumaisc agus deisigh</string>
+    <string name="empty_no_duplicates">Gan dúblaigh</string>
+    <string name="action_merge">Cumaisc</string>
+    <string name="action_swap">Babhtáil</string>
+    <string name="merge_kept">Coinnithe</string>
+    <string name="merge_other">Eile</string>
+    <string name="dialog_merge_contacts">Teagmhálaithe a chumasadh?</string>
+    <string name="dialog_merge_contacts_body">Coimeádann an teagmhálaí ar chlé agus scriosann an ceann ar dheis.</string>
+    <string name="merge_same_phone">Fón céanna</string>
+    <string name="merge_same_email">Ríomhphost céanna</string>
+    <string name="merge_same_name">Ainm céanna</string>
+    <string name="msg_contacts_merged">Teagmhálaithe cumaiscthe</string>
+    <string name="msg_merge_failed">Níorbh fhéidir teagmhálaithe a chumasadh</string>
+    <string name="field_photo">Grianghraf</string>
+    <string name="merge_both_kept">An dá cheann coinnithe</string>
 </resources>

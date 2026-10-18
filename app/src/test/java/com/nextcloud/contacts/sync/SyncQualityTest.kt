@@ -1,10 +1,16 @@
 package com.nextcloud.contacts.sync
 
+import com.nextcloud.contacts.data.BIN_RETENTION_MS
 import com.nextcloud.contacts.data.FingerprintIndex
+import com.nextcloud.contacts.data.binDaysRemaining
 import com.nextcloud.contacts.data.contactAfterFavoriteToggle
 import com.nextcloud.contacts.data.contactAfterServerCardMissing
+import com.nextcloud.contacts.data.contactAfterServerDeleteKept
 import com.nextcloud.contacts.data.contactWithFavorite
 import com.nextcloud.contacts.data.remoteUidForPush
+import com.nextcloud.contacts.data.serverDeleteIsDue
+import com.nextcloud.contacts.data.shouldKeepDeletedContactAfterServerGone
+import com.nextcloud.contacts.data.shouldPurgeBinContact
 import com.nextcloud.contacts.data.RemoteContactIndex
 import com.nextcloud.contacts.data.local.ContactEntity
 import com.nextcloud.contacts.data.local.FingerprintContactRow
@@ -146,6 +152,54 @@ class SyncQualityTest {
         assertTrue(shouldSkipRemoteDelete(dirty = true, locallyDeleted = false))
         assertFalse(shouldSkipRemoteDelete(dirty = false, locallyDeleted = false))
         assertFalse(shouldSkipRemoteDelete(dirty = true, locallyDeleted = true))
+    }
+
+    @Test
+    fun deletedContactStaysInTheBinForThreeDaysAfterTheServerCardIsGone() {
+        val deletedAt = 5_000L
+        val withinBin = deletedAt + BIN_RETENTION_MS - 1
+        val binEnded = deletedAt + BIN_RETENTION_MS
+        val deleted = ContactEntity(
+            id = 9,
+            remoteUrl = "/remote.php/dav/addressbooks/users/a/contacts/ada.vcf",
+            etag = "gone",
+            displayName = "Ada Lovelace",
+            lastModified = deletedAt,
+            dirty = true,
+            deleted = true,
+        )
+        // The server DELETE is due on the next sync, at the moment of the delete and
+        // after the bin window, for as long as the href is still stored.
+        assertTrue(serverDeleteIsDue(deleted.remoteUrl, deleted.deleted))
+        assertTrue(serverDeleteIsDue(deleted.remoteUrl, deleted = true))
+        assertTrue(shouldKeepDeletedContactAfterServerGone(deleted, withinBin))
+        assertFalse(shouldKeepDeletedContactAfterServerGone(deleted, binEnded))
+        // The server delete has not landed yet, so age alone must not drop the row.
+        assertFalse(
+            shouldPurgeBinContact(
+                remoteUrl = deleted.remoteUrl,
+                deletedAtMillis = deletedAt,
+                nowMillis = binEnded,
+            ),
+        )
+        assertFalse(shouldPurgeBinContact(remoteUrl = null, deletedAtMillis = deletedAt, nowMillis = withinBin))
+        assertTrue(shouldPurgeBinContact(remoteUrl = null, deletedAtMillis = deletedAt, nowMillis = binEnded))
+
+        val kept = contactAfterServerDeleteKept(deleted)
+        assertNull(kept.remoteUrl)
+        assertNull(kept.etag)
+        assertFalse(serverDeleteIsDue(kept.remoteUrl, kept.deleted))
+        assertFalse(kept.dirty)
+        assertTrue(kept.deleted)
+        assertEquals(deletedAt, kept.lastModified)
+        assertEquals("Ada Lovelace", kept.displayName)
+
+        val day = 24L * 60L * 60L * 1000L
+        assertEquals(3, binDaysRemaining(deletedAt, deletedAt))
+        assertEquals(3, binDaysRemaining(deletedAt, deletedAt + day - 1))
+        assertEquals(2, binDaysRemaining(deletedAt, deletedAt + day))
+        assertEquals(1, binDaysRemaining(deletedAt, deletedAt + BIN_RETENTION_MS - 1))
+        assertEquals(0, binDaysRemaining(deletedAt, deletedAt + BIN_RETENTION_MS))
     }
 
     @Test

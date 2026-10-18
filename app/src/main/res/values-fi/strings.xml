@@ -466,4 +466,39 @@
         <item quantity="other">Palvelimelta löytyi %d yhteystietoa, mutta niitä ei voitu tuoda</item>
     </plurals>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
+
+    <string name="screen_organize">Järjestä</string>
+    <string name="organize_bin_summary">Äskettäin poistetut yhteystiedot</string>
+    <string name="organize_import_summary">Tuonti, vienti ja puhelimen yhteystiedot</string>
+    <string name="organize_calendar_summary">Syntymäpäivät, vuosipäivät ja kuolemat</string>
+    <string name="organize_merge_summary">Etsi ja yhdistä kaksoiskappaleet</string>
+    <string name="section_emergency_contacts">Hätäyhteystiedot</string>
+    <string name="emergency_contacts_opens_phone">Avaa puhelimen hätäyhteystiedot</string>
+    <string name="msg_emergency_unavailable">Hätäyhteystietoja ei voitu avata</string>
+    <string name="empty_no_emergency_contacts">Ei hätäyhteystietoja</string>
+    <string name="section_bin">Roskakori</string>
+    <string name="empty_bin">Ei poistettuja yhteystietoja</string>
+    <string name="bin_kept_days">Säilyy 3 päivää.</string>
+    <string name="action_restore">Palauta</string>
+    <plurals name="bin_days_left">
+        <item quantity="one">%d päivä jäljellä</item>
+        <item quantity="other">%d päivää jäljellä</item>
+    </plurals>
+    <string name="msg_contact_restored">Yhteystieto palautettu</string>
+    <string name="msg_restore_failed">Yhteystietoa ei voitu palauttaa</string>
+    <string name="section_merge_fix">Yhdistä ja korjaa</string>
+    <string name="empty_no_duplicates">Ei kaksoiskappaleita</string>
+    <string name="action_merge">Yhdistä</string>
+    <string name="action_swap">Vaihto</string>
+    <string name="merge_kept">Jää</string>
+    <string name="merge_other">Toinen</string>
+    <string name="dialog_merge_contacts">Yhdistetäänkö yhteystiedot?</string>
+    <string name="dialog_merge_contacts_body">Säilyttää vasemman ja poistaa oikean.</string>
+    <string name="merge_same_phone">Sama puhelin</string>
+    <string name="merge_same_email">Sama sähköposti</string>
+    <string name="merge_same_name">Sama nimi</string>
+    <string name="msg_contacts_merged">Yhteystiedot yhdistetty</string>
+    <string name="msg_merge_failed">Yhteystietoja ei voitu yhdistää</string>
+    <string name="field_photo">Kuva</string>
+    <string name="merge_both_kept">Molemmat jäävät</string>
 </resources>
