@@ -1,6 +1,7 @@
 package com.nextcloud.contacts.ui.screens
 
 import com.nextcloud.contacts.R
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.material3.AlertDialog
@@ -44,9 +45,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.Notes
+import androidx.compose.material.icons.filled.Cake
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.ContactEmergency
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Event
 import androidx.compose.material.icons.filled.ImportExport
 import androidx.compose.material.icons.filled.Merge
 import androidx.compose.material.icons.filled.SwapHoriz
@@ -64,6 +68,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
@@ -584,10 +589,19 @@ fun OrganizeCalendarScreen(
                 tonalElevation = 0.dp,
                 shadowElevation = 0.dp,
             ) {
-                Column(modifier = Modifier.fillMaxWidth()) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 12.dp),
+                ) {
                     ListItem(
                         colors = rowColors,
-                        headlineContent = { Text(stringResource(R.string.field_birthday)) },
+                        headlineContent = {
+                            CalendarKindLabel(
+                                icon = Icons.Filled.Cake,
+                                label = stringResource(R.string.field_birthday),
+                            )
+                        },
                         supportingContent = {
                             ContactDatesDestinationSegmentedControl(
                                 selected = settings.birthdaysDestination,
@@ -598,7 +612,12 @@ fun OrganizeCalendarScreen(
                     )
                     ListItem(
                         colors = rowColors,
-                        headlineContent = { Text(stringResource(R.string.field_anniversary)) },
+                        headlineContent = {
+                            CalendarKindLabel(
+                                icon = Icons.Filled.Event,
+                                label = stringResource(R.string.field_anniversary),
+                            )
+                        },
                         supportingContent = {
                             ContactDatesDestinationSegmentedControl(
                                 selected = settings.anniversariesDestination,
@@ -609,7 +628,12 @@ fun OrganizeCalendarScreen(
                     )
                     ListItem(
                         colors = rowColors,
-                        headlineContent = { Text(stringResource(R.string.field_date_of_death)) },
+                        headlineContent = {
+                            CalendarKindLabel(
+                                icon = painterResource(R.drawable.ic_gravestone),
+                                label = stringResource(R.string.field_date_of_death),
+                            )
+                        },
                         supportingContent = {
                             ContactDatesDestinationSegmentedControl(
                                 selected = settings.datesOfDeathDestination,
@@ -620,7 +644,12 @@ fun OrganizeCalendarScreen(
                     )
                     ListItem(
                         colors = rowColors,
-                        headlineContent = { Text(stringResource(R.string.label_description)) },
+                        headlineContent = {
+                            CalendarKindLabel(
+                                icon = Icons.AutoMirrored.Filled.Notes,
+                                label = stringResource(R.string.label_description),
+                            )
+                        },
                         supportingContent = {
                             CalendarEventDescriptionSegmentedControl(
                                 selected = settings.calendarEventDescriptionMode,
@@ -1273,6 +1302,53 @@ private fun SupportingLine(text: String) {
         color = MaterialTheme.colorScheme.onSurfaceVariant,
         modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
     )
+}
+
+@Composable
+private fun CalendarKindLabel(
+    icon: ImageVector,
+    label: String,
+) {
+    CalendarKindLabel(label) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            modifier = Modifier.size(24.dp),
+            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+    }
+}
+
+@Composable
+private fun CalendarKindLabel(
+    icon: Painter,
+    label: String,
+) {
+    CalendarKindLabel(label) {
+        Icon(
+            painter = icon,
+            contentDescription = null,
+            modifier = Modifier.size(24.dp),
+            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+    }
+}
+
+@Composable
+private fun CalendarKindLabel(
+    label: String,
+    icon: @Composable () -> Unit,
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        icon()
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodyLarge,
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
