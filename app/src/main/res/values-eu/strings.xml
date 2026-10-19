@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Eremuak editatzean</string>
     <string name="setting_scroll_letters">Letrak korritzean</string>
     <string name="setting_scroll_letters_summary">Korritzean alfabetoa erakusten du zerrendan.</string>
+    <string name="setting_letters_on_the_side">Letren barra</string>
+    <string name="setting_letters_on_the_side_summary">Korritze-barra letraz ordezkatzen du.</string>
     <string name="setting_website_logos">Webguneen logotipoak</string>
     <string name="setting_website_logos_summary">Webgunearen ikonoa hartu eta estekaren ondoan erakusten du.</string>
     <string name="setting_large_favorites">Gogoko handiak</string>

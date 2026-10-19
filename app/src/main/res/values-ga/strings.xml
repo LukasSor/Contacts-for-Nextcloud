@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Réimsí agus á chur in eagar</string>
     <string name="setting_scroll_letters">Litreacha agus á scrollú</string>
     <string name="setting_scroll_letters_summary">Taispeánann an aibítir ar an liosta agus tú ag scrollú.</string>
+    <string name="setting_letters_on_the_side">Barra litreacha</string>
+    <string name="setting_letters_on_the_side_summary">Cuir litreacha in ionad an bharra scrolla.</string>
     <string name="setting_website_logos">Lógónna suíomhanna</string>
     <string name="setting_website_logos_summary">Faigheann an deilbhín ón suíomh agus taispeánann é in aice leis an nasc.</string>
     <string name="setting_large_favorites">Ceanáin mhóra</string>

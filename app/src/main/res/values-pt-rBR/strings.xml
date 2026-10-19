@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Campos ao editar</string>
     <string name="setting_scroll_letters">Letras ao rolar</string>
     <string name="setting_scroll_letters_summary">Mostra o alfabeto na lista ao rolar.</string>
+    <string name="setting_letters_on_the_side">Barra de letras</string>
+    <string name="setting_letters_on_the_side_summary">Substitui a barra de rolagem por letras.</string>
     <string name="setting_website_logos">Logotipos de sites</string>
     <string name="setting_website_logos_summary">Busca o favicon do site e mostra ao lado do link.</string>
     <string name="setting_large_favorites">Favoritos grandes</string>

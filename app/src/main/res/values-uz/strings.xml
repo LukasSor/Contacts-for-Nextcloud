@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Tahrirlashdagi maydonlar</string>
     <string name="setting_scroll_letters">Aylantirishda harflar</string>
     <string name="setting_scroll_letters_summary">Aylantirganda kontaktlar roʻyxatida alifboni koʻrsatadi.</string>
+    <string name="setting_letters_on_the_side">Harf paneli</string>
+    <string name="setting_letters_on_the_side_summary">Aylantirish panelini harflarga almashtiradi.</string>
     <string name="setting_website_logos">Sayt logotiplarini yoqish</string>
     <string name="setting_website_logos_summary">Sayt belgisini olib, havola yonida koʻrsatadi.</string>
     <string name="setting_large_favorites">Katta saralanganlar</string>

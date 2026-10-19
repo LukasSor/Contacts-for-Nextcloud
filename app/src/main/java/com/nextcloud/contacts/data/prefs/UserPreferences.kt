@@ -47,6 +47,7 @@ data class UserPreferencesSnapshot(
     val contactEditFieldMode: ContactEditFieldMode,
     val fieldSyntaxEnabled: Boolean,
     val largeFavorites: Boolean = false,
+    val lettersOnTheSide: Boolean = false,
 )
 
 class UserPreferences(private val context: Context) {
@@ -153,6 +154,7 @@ class UserPreferences(private val context: Context) {
             },
             fieldSyntaxEnabled = prefs[KEY_FIELD_SYNTAX] ?: false,
             largeFavorites = prefs[KEY_LARGE_FAVORITES] ?: false,
+            lettersOnTheSide = prefs[KEY_LETTERS_ON_THE_SIDE] ?: false,
         )
     }
 
@@ -200,6 +202,10 @@ class UserPreferences(private val context: Context) {
 
     val showScrollLetters: Flow<Boolean> = context.dataStore.data.map { prefs ->
         prefs[KEY_SHOW_SCROLL_LETTERS] ?: true
+    }
+
+    val lettersOnTheSide: Flow<Boolean> = context.dataStore.data.map { prefs ->
+        prefs[KEY_LETTERS_ON_THE_SIDE] ?: false
     }
 
     val largeFavorites: Flow<Boolean> = context.dataStore.data.map { prefs ->
@@ -326,6 +332,12 @@ class UserPreferences(private val context: Context) {
     suspend fun setShowScrollLetters(enabled: Boolean) {
         context.dataStore.edit { prefs ->
             prefs[KEY_SHOW_SCROLL_LETTERS] = enabled
+        }
+    }
+
+    suspend fun setLettersOnTheSide(enabled: Boolean) {
+        context.dataStore.edit { prefs ->
+            prefs[KEY_LETTERS_ON_THE_SIDE] = enabled
         }
     }
 
@@ -486,6 +498,7 @@ class UserPreferences(private val context: Context) {
         private val KEY_CALENDAR_EVENT_DESCRIPTION_MODE =
             stringPreferencesKey("calendar_event_description_mode")
         private val KEY_SHOW_SCROLL_LETTERS = booleanPreferencesKey("show_scroll_letters")
+        private val KEY_LETTERS_ON_THE_SIDE = booleanPreferencesKey("letters_on_the_side")
         private val KEY_LARGE_FAVORITES = booleanPreferencesKey("large_favorites")
         private val KEY_AVATAR_FRAME = stringPreferencesKey("avatar_frame")
         private val KEY_AUTO_LINK_MESSENGERS = booleanPreferencesKey("auto_link_messengers")

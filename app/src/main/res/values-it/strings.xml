@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Campi in modifica</string>
     <string name="setting_scroll_letters">Lettere durante lo scorrimento</string>
     <string name="setting_scroll_letters_summary">Mostra l\'alfabeto nell\'elenco durante lo scorrimento.</string>
+    <string name="setting_letters_on_the_side">Barra lettere</string>
+    <string name="setting_letters_on_the_side_summary">Sostituisce la barra di scorrimento con lettere.</string>
     <string name="setting_website_logos">Loghi dei siti</string>
     <string name="setting_website_logos_summary">Scarica la favicon del sito e la mostra accanto al link.</string>
     <string name="setting_large_favorites">Preferiti grandi</string>

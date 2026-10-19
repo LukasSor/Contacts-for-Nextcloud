@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Sehemu wakati wa kuhariri</string>
     <string name="setting_scroll_letters">Onesha herufi unaposogeza</string>
     <string name="setting_scroll_letters_summary">Huonyesha alfabeti kwenye orodha unaposogeza.</string>
+    <string name="setting_letters_on_the_side">Upau wa herufi</string>
+    <string name="setting_letters_on_the_side_summary">Badilisha upau wa kusogeza na herufi.</string>
     <string name="setting_website_logos">Washa nembo za tovuti</string>
     <string name="setting_website_logos_summary">Huchukua ikoni kutoka tovuti na kuionyesha kando ya kiungo.</string>
     <string name="setting_large_favorites">Vipendwa vikubwa</string>

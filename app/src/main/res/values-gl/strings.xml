@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Campos ao editar</string>
     <string name="setting_scroll_letters">Letras ao desprazar</string>
     <string name="setting_scroll_letters_summary">Amosa o alfabeto na lista ao desprazar.</string>
+    <string name="setting_letters_on_the_side">Barra de letras</string>
+    <string name="setting_letters_on_the_side_summary">Substitúe a barra de desprazamento por letras.</string>
     <string name="setting_website_logos">Logotipos de sitios web</string>
     <string name="setting_website_logos_summary">Obtén a icona do sitio e amósaa xunto á ligazón.</string>
     <string name="setting_large_favorites">Favoritos grandes</string>

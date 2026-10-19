@@ -9,9 +9,11 @@ import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.drag
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -37,34 +39,67 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerEventPass
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import com.nextcloud.contacts.ui.list.AlphabetIndexModel
+import com.nextcloud.contacts.ui.list.AlphabetIndexSection
 import com.nextcloud.contacts.ui.list.FAVORITES_INDEX_GLYPH
 import com.nextcloud.contacts.ui.list.mapSectionIndexForScroll
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.math.abs
 import kotlin.math.roundToInt
 
 val ContactListScrollbarEndPadding = 14.dp
 
+val ContactListLetterStripEndPadding = 36.dp
+
 const val ContactListScrollbarHideDelayMillis = 1000L
+
+private val LetterStripWidth = 28.dp
+
+/** End inset plus width stays inside [ContactListLetterStripEndPadding]. */
+private val LetterStripEndInset = 4.dp
+
+/**
+ * Temporary start strip. Width stays inside the list's 16.dp start padding
+ * so the letters sit in the gutter and do not cover the contact cards.
+ */
+private val StartLetterStripWidth = 14.dp
+
+/**
+ * Compact pitch. A little looser than 16dp, still a centered block,
+ * not stretched over the list height.
+ */
+private val LetterSlotHeight = 20.dp
+
+/** Immediate press zone. Stays in the list gutter, clear of the avatar. */
+private val StartLetterGutter = 20.dp
+
+/** Drag zone. Covers the side where the scrolling letters sit. */
+private val StartLetterDragBand = 56.dp
 
 private val ThumbThickness = 8.dp
 private val TrackWidth = 16.dp
-/** Also applied in px where the thumb is drawn. */
 private val ThumbMinHeight = 64.dp
-/** Minimum thumb height as a fraction of the track. */
 private const val ThumbMinSizeFraction = 0.12f
 private val ThumbCorner = RoundedCornerShape(percent = 50)
 private val LetterPreviewStartPadding = 8.dp
@@ -73,21 +108,18 @@ private const val ThumbFadeDurationMillis = 400
 
 private const val LetterFadeDurationMillis = 120
 
-/**
- * Thumb on the end edge. Letter preview stays at the start-center of the viewport.
- * Dragging scrolls by position; this is not an A–Z index.
- */
 @Composable
 fun ContactListScrollbar(
     listState: LazyListState,
     sectionModel: AlphabetIndexModel,
     showScrollLetters: Boolean = true,
+    lettersOnTheSide: Boolean = false,
+    startScrubSection: Int? = null,
     modifier: Modifier = Modifier,
 ) {
     val metrics by remember(listState) {
         derivedStateOf { computeScrollbarMetrics(listState) }
     }
-    if (!metrics.enabled) return
 
     val scope = rememberCoroutineScope()
     val density = LocalDensity.current
@@ -95,13 +127,39 @@ fun ContactListScrollbar(
     var trackHeightPx by remember { mutableIntStateOf(0) }
     var dragThumbTopFraction by remember { mutableFloatStateOf(Float.NaN) }
     var scrollJob by remember { mutableStateOf<Job?>(null) }
+    var endDragSection by remember { mutableIntStateOf(-1) }
 
     val listScrolling by remember(listState) {
         derivedStateOf { listState.isScrollInProgress }
     }
-    // isScrollInProgress stays true for the fling after the finger lifts.
+    // Offset changes cover scrolls that never flip isScrollInProgress, including
+    // a fling that starts while a strip gesture is being released.
+    var recentScroll by remember { mutableStateOf(false) }
+    LaunchedEffect(listState) {
+        var previous: Pair<Int, Int>? = null
+        var hideJob: Job? = null
+        snapshotFlow {
+            listState.firstVisibleItemIndex to listState.firstVisibleItemScrollOffset
+        }.collect { current ->
+            val prev = previous
+            previous = current
+            if (prev == null || prev == current) return@collect
+            recentScroll = true
+            hideJob?.cancel()
+            hideJob = launch {
+                delay(80)
+                recentScroll = false
+            }
+        }
+    }
+    val endStripActive = endDragSection in sectionModel.sections.indices
+    // True only between strip pointer-down and pointer-up.
+    var stripFingerDown by remember { mutableStateOf(false) }
+    val fingerOnLetterStrip = stripFingerDown || startScrubSection != null
     val wantThumbVisible = interacting || listScrolling
-    val wantLettersVisible = showScrollLetters && (interacting || listScrolling)
+    // Ordinary scrolling and a drag on either letter strip show the short stack.
+    val wantLettersVisible = showScrollLetters &&
+        (fingerOnLetterStrip || interacting || listScrolling || (lettersOnTheSide && recentScroll))
 
     val thumbAlphaAnim = remember { Animatable(0f) }
     val thumbAlpha by thumbAlphaAnim.asState()
@@ -152,14 +210,12 @@ fun ContactListScrollbar(
         }
     }
 
-    // No tween. Interpolating toward a moving offset lags for the whole fling.
     val thumbFraction = if (!dragThumbTopFraction.isNaN()) {
         dragThumbTopFraction
     } else {
         metrics.thumbOffsetFraction
     }
 
-    // Visible-item count changes every frame. Freeze thumb height for this gesture.
     var sessionThumbSizeFraction by remember { mutableFloatStateOf(Float.NaN) }
     SideEffect {
         when {
@@ -176,13 +232,11 @@ fun ContactListScrollbar(
 
     val thumbChromeVisible = thumbAlpha > 0.01f
     val lettersChromeVisible = showScrollLetters && letterAlpha > 0.01f
-    // Letter tracks the section at the viewport center. Near the ends, scroll
-    // progress plus hysteresis. This only picks a letter; it does not scroll.
     var stickySectionIndex by remember(sectionModel) { mutableIntStateOf(-1) }
-    val sectionPick by remember(listState, sectionModel, showScrollLetters) {
+    val trackSection = showScrollLetters || lettersOnTheSide
+    val sectionPick by remember(listState, sectionModel, trackSection) {
         derivedStateOf {
-            if (!showScrollLetters || sectionModel.isEmpty) return@derivedStateOf null
-            // Read scroll offset here or the preview stays stale during a fling.
+            if (!trackSection || sectionModel.isEmpty) return@derivedStateOf null
             listState.firstVisibleItemIndex
             listState.firstVisibleItemScrollOffset
             val visible = listState.layoutInfo.visibleItemsInfo
@@ -217,9 +271,18 @@ fun ContactListScrollbar(
     SideEffect {
         stickySectionIndex = adjustedSection ?: -1
     }
-    val previewWindow = adjustedSection?.let { index ->
-        sectionModel.previewWindowAt(index)?.takeIf { it.glyphs.isNotEmpty() }
+    val selectedSection = when {
+        startScrubSection != null && startScrubSection in sectionModel.sections.indices ->
+            startScrubSection
+        endDragSection in sectionModel.sections.indices -> endDragSection
+        else -> adjustedSection ?: -1
     }
+    // Follow the finger while a strip is dragged, and the list letter otherwise.
+    val previewWindow = selectedSection
+        .takeIf { it in sectionModel.sections.indices }
+        ?.let { index ->
+            sectionModel.previewWindowAt(index)?.takeIf { it.glyphs.isNotEmpty() }
+        }
 
     val unselectedColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
     val selectedColor = MaterialTheme.colorScheme.primary
@@ -232,7 +295,24 @@ fun ContactListScrollbar(
         }
     }
 
-    // No graphicsLayer on this Box. A clipped layer hides the letter overlay.
+    fun jumpToSection(index: Int) {
+        val itemIndex = sectionModel.sections.getOrNull(index)?.firstItemIndex ?: return
+        scrollJob?.cancel()
+        scrollJob = scope.launch {
+            listState.scrollToItem(itemIndex)
+        }
+    }
+
+    val showThumb = !lettersOnTheSide && metrics.enabled
+    val showEndStrip = lettersOnTheSide && sectionModel.sections.isNotEmpty()
+    val showStartStrip = startScrubSection != null && sectionModel.sections.isNotEmpty()
+    val centerGlyph = when {
+        showStartStrip -> sectionModel.sections.getOrNull(selectedSection)?.glyph
+        endStripActive -> sectionModel.sections.getOrNull(endDragSection)?.glyph
+        else -> null
+    }
+    if (!showThumb && !showEndStrip && !showStartStrip && !lettersChromeVisible) return
+
     Box(modifier = modifier.fillMaxSize()) {
         val thumbMinPx = with(density) { ThumbMinHeight.toPx() }
         val trackH = trackHeightPx.toFloat().coerceAtLeast(1f)
@@ -242,6 +322,98 @@ fun ContactListScrollbar(
         val travelPx = (trackH - thumbHeightPx).coerceAtLeast(0f)
         val thumbTopPx = thumbFraction * travelPx
 
+        if (showStartStrip) {
+            AlphabetLetterStrip(
+                sections = sectionModel.sections,
+                selectedIndex = selectedSection,
+                stripWidth = StartLetterStripWidth,
+                maxMarkSize = StartLetterStripWidth,
+                modifier = Modifier.align(Alignment.CenterStart),
+            )
+        }
+
+        if (showEndStrip) {
+            AlphabetLetterStrip(
+                sections = sectionModel.sections,
+                selectedIndex = selectedSection,
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .padding(end = LetterStripEndInset),
+                onSelect = { index ->
+                    stripFingerDown = true
+                    endDragSection = index
+                    jumpToSection(index)
+                },
+                onGestureEnd = {
+                    stripFingerDown = false
+                    endDragSection = -1
+                },
+            )
+        } else if (showThumb) {
+            Box(
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .fillMaxHeight()
+                    .width(TrackWidth)
+                    .padding(vertical = 4.dp)
+                    .onSizeChanged { trackHeightPx = it.height }
+                    .then(
+                        if (thumbChromeVisible || wantThumbVisible) {
+                            Modifier.pointerInput(metrics.enabled) {
+                                awaitEachGesture {
+                                    val down = awaitFirstDown()
+                                    val height = size.height.toFloat()
+                                    if (height <= 0f) return@awaitEachGesture
+                                    val thumbH = (height * thumbSizeFraction)
+                                        .coerceAtLeast(thumbMinPx)
+                                        .coerceAtMost(height)
+                                    val travel = (height - thumbH).coerceAtLeast(1f)
+
+                                    interacting = true
+                                    val top = ((down.position.y - thumbH / 2f) / travel)
+                                        .coerceIn(0f, 1f)
+                                    dragThumbTopFraction = top
+                                    scrollToFraction(top)
+                                    drag(down.id) { change ->
+                                        val dragTop = ((change.position.y - thumbH / 2f) / travel)
+                                            .coerceIn(0f, 1f)
+                                        dragThumbTopFraction = dragTop
+                                        scrollToFraction(dragTop)
+                                        change.consume()
+                                    }
+                                    interacting = false
+                                    dragThumbTopFraction = Float.NaN
+                                }
+                            }
+                        } else {
+                            Modifier
+                        },
+                    ),
+            ) {
+                if (trackHeightPx > 0 && thumbChromeVisible) {
+                    Box(
+                        modifier = Modifier
+                            .align(Alignment.TopCenter)
+                            .offset { IntOffset(0, thumbTopPx.roundToInt()) }
+                            .width(ThumbThickness)
+                            .height(with(density) { thumbHeightPx.toDp() })
+                            .alpha(thumbAlpha)
+                            .clip(ThumbCorner)
+                            .background(thumbColor),
+                    )
+                }
+            }
+        }
+
+        centerGlyph?.let { glyph ->
+            CenterLetterBubble(
+                glyph = glyph,
+                modifier = Modifier.align(Alignment.Center),
+            )
+        }
+
+        // Above either strip. Drawn while the list scrolls and while a finger
+        // drags either letter strip, when scroll letters are enabled.
         if (lettersChromeVisible) {
             previewWindow?.let { window ->
                 LetterPreviewStack(
@@ -251,65 +423,290 @@ fun ContactListScrollbar(
                     modifier = Modifier
                         .align(Alignment.CenterStart)
                         .padding(start = LetterPreviewStartPadding)
+                        .zIndex(1f)
                         .alpha(letterAlpha),
                 )
             }
         }
+    }
+}
 
-        Box(
+/**
+ * Start-edge scrubber. A quick tap still opens the row. A press in the gutter,
+ * or a drag on the side where the scrolling letters sit, shows the letter strip
+ * and the center letter. The band is the start edge, so RTL stays on the start side.
+ */
+@Composable
+fun Modifier.contactListStartLetterScrub(
+    enabled: Boolean,
+    listState: LazyListState,
+    sectionModel: AlphabetIndexModel,
+    onActiveSection: (Int?) -> Unit,
+): Modifier {
+    val layoutDirection = LocalLayoutDirection.current
+    val density = LocalDensity.current
+    val gutterPx = with(density) { StartLetterGutter.toPx() }
+    val bandPx = with(density) { StartLetterDragBand.toPx() }
+    val scope = rememberCoroutineScope()
+    val scrollJob = remember { mutableStateOf<Job?>(null) }
+    if (!enabled || sectionModel.isEmpty) return this
+    return pointerInput(sectionModel, layoutDirection, gutterPx, bandPx) {
+        val touchSlop = viewConfiguration.touchSlop
+        try {
+            awaitEachGesture {
+                val down = awaitFirstDown(
+                    requireUnconsumed = false,
+                    pass = PointerEventPass.Initial,
+                )
+                val width = size.width.toFloat()
+                val fromStart = if (layoutDirection == LayoutDirection.Rtl) {
+                    width - down.position.x
+                } else {
+                    down.position.x
+                }
+                if (fromStart > bandPx) return@awaitEachGesture
+
+                val pointerId = down.id
+                val originY = down.position.y
+                var scrubbing = fromStart <= gutterPx
+                var lastIndex = -1
+
+                fun select(y: Float) {
+                    val count = sectionModel.sections.size
+                    val available = size.height.toFloat()
+                    val slotPx = letterSlotPx(available, count, LetterSlotHeight.toPx())
+                    val blockHeight = slotPx * count.toFloat()
+                    val index = sectionIndexAtY(
+                        y = y - letterBlockTopPx(available, blockHeight),
+                        height = blockHeight,
+                        count = count,
+                    )
+                    if (index == lastIndex) return
+                    lastIndex = index
+                    onActiveSection(index)
+                    val itemIndex = sectionModel.sections[index].firstItemIndex
+                    scrollJob.value?.cancel()
+                    scrollJob.value = scope.launch {
+                        listState.scrollToItem(itemIndex)
+                    }
+                }
+
+                try {
+                    if (scrubbing) {
+                        down.consume()
+                        select(originY)
+                    }
+
+                    while (true) {
+                        val event = awaitPointerEvent(PointerEventPass.Initial)
+                        val change = event.changes.firstOrNull { it.id == pointerId } ?: break
+                        if (!change.pressed) {
+                            if (scrubbing) change.consume()
+                            break
+                        }
+                        if (!scrubbing && abs(change.position.y - originY) >= touchSlop) {
+                            scrubbing = true
+                        }
+                        if (scrubbing) {
+                            change.consume()
+                            select(change.position.y)
+                        }
+                    }
+                } finally {
+                    // Also when the pointer disappears without an up event.
+                    if (scrubbing) onActiveSection(null)
+                }
+            }
+        } finally {
+            onActiveSection(null)
+        }
+    }
+}
+
+@Composable
+private fun AlphabetLetterStrip(
+    sections: List<AlphabetIndexSection>,
+    selectedIndex: Int,
+    modifier: Modifier = Modifier,
+    stripWidth: Dp = LetterStripWidth,
+    maxMarkSize: Dp = 18.dp,
+    onSelect: ((Int) -> Unit)? = null,
+    onGestureEnd: (() -> Unit)? = null,
+) {
+    if (sections.isEmpty()) return
+    val density = LocalDensity.current
+    val primary = MaterialTheme.colorScheme.primary
+    val onSurface = MaterialTheme.colorScheme.onSurface
+    BoxWithConstraints(
+        modifier = modifier
+            .width(stripWidth)
+            .fillMaxHeight(),
+        contentAlignment = Alignment.Center,
+    ) {
+        val availablePx = with(density) { maxHeight.toPx() }
+        val slotPx = letterSlotPx(availablePx, sections.size, with(density) { LetterSlotHeight.toPx() })
+        val slot = with(density) { slotPx.toDp() }
+        val fontSize = stripFontSize(slot)
+        val markSize = slot.coerceAtMost(maxMarkSize).coerceAtLeast(10.dp)
+        val blockHeight = slot * sections.size
+        Column(
             modifier = Modifier
-                .align(Alignment.CenterEnd)
-                .fillMaxHeight()
-                .width(TrackWidth)
-                .padding(vertical = 4.dp)
-                .onSizeChanged { trackHeightPx = it.height }
+                .fillMaxWidth()
+                .height(blockHeight)
                 .then(
-                    if (thumbChromeVisible || wantThumbVisible) {
-                        Modifier.pointerInput(metrics.enabled) {
+                    if (onSelect != null) {
+                        Modifier.pointerInput(sections, slotPx) {
                             awaitEachGesture {
                                 val down = awaitFirstDown()
-                                val height = size.height.toFloat()
-                                if (height <= 0f) return@awaitEachGesture
-                                val thumbH = (height * thumbSizeFraction)
-                                    .coerceAtLeast(thumbMinPx)
-                                    .coerceAtMost(height)
-                                val travel = (height - thumbH).coerceAtLeast(1f)
-
-                                interacting = true
-                                val top = ((down.position.y - thumbH / 2f) / travel)
-                                    .coerceIn(0f, 1f)
-                                dragThumbTopFraction = top
-                                scrollToFraction(top)
-                                drag(down.id) { change ->
-                                    val dragTop = ((change.position.y - thumbH / 2f) / travel)
-                                        .coerceIn(0f, 1f)
-                                    dragThumbTopFraction = dragTop
-                                    scrollToFraction(dragTop)
-                                    change.consume()
+                                try {
+                                    fun select(y: Float) {
+                                        onSelect(
+                                            sectionIndexAtY(
+                                                y = y,
+                                                height = size.height.toFloat(),
+                                                count = sections.size,
+                                            ),
+                                        )
+                                    }
+                                    select(down.position.y)
+                                    down.consume()
+                                    drag(down.id) { change ->
+                                        select(change.position.y)
+                                        change.consume()
+                                    }
+                                } finally {
+                                    onGestureEnd?.invoke()
                                 }
-                                interacting = false
-                                dragThumbTopFraction = Float.NaN
                             }
                         }
                     } else {
                         Modifier
                     },
                 ),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            if (trackHeightPx > 0 && thumbChromeVisible) {
+            sections.forEachIndexed { index, section ->
                 Box(
                     modifier = Modifier
-                        .align(Alignment.TopCenter)
-                        .offset { IntOffset(0, thumbTopPx.roundToInt()) }
-                        .width(ThumbThickness)
-                        .height(with(density) { thumbHeightPx.toDp() })
-                        .alpha(thumbAlpha)
-                        .clip(ThumbCorner)
-                        .background(thumbColor),
-                )
+                        .height(slot)
+                        .fillMaxWidth(),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    StripGlyph(
+                        glyph = section.glyph,
+                        selected = index == selectedIndex,
+                        primary = primary,
+                        onSurface = onSurface,
+                        fontSize = fontSize,
+                        markSize = markSize,
+                    )
+                }
             }
         }
     }
+}
+
+@Composable
+private fun StripGlyph(
+    glyph: String,
+    selected: Boolean,
+    primary: Color,
+    onSurface: Color,
+    fontSize: TextUnit,
+    markSize: Dp,
+) {
+    val color = if (selected) primary else onSurface
+    Box(
+        modifier = Modifier
+            .size(markSize)
+            .then(
+                if (selected) {
+                    Modifier
+                        .clip(CircleShape)
+                        .background(primary.copy(alpha = 0.16f))
+                } else {
+                    Modifier
+                },
+            ),
+        contentAlignment = Alignment.Center,
+    ) {
+        if (glyph == FAVORITES_INDEX_GLYPH) {
+            Icon(
+                imageVector = Icons.Default.Star,
+                contentDescription = null,
+                tint = color,
+                modifier = Modifier.size(markSize * 0.62f),
+            )
+        } else {
+            Text(
+                text = glyph,
+                style = MaterialTheme.typography.labelMedium.copy(
+                    fontSize = fontSize,
+                    lineHeight = fontSize,
+                    fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
+                    color = color,
+                ),
+                maxLines = 1,
+            )
+        }
+    }
+}
+
+@Composable
+private fun CenterLetterBubble(
+    glyph: String,
+    modifier: Modifier = Modifier,
+) {
+    val primary = MaterialTheme.colorScheme.primary
+    Box(
+        modifier = modifier
+            .size(96.dp)
+            .clip(RoundedCornerShape(28.dp))
+            .background(MaterialTheme.colorScheme.surfaceContainerHigh),
+        contentAlignment = Alignment.Center,
+    ) {
+        if (glyph == FAVORITES_INDEX_GLYPH) {
+            Icon(
+                imageVector = Icons.Default.Star,
+                contentDescription = null,
+                tint = primary,
+                modifier = Modifier.size(48.dp),
+            )
+        } else {
+            Text(
+                text = glyph.take(1),
+                style = MaterialTheme.typography.displaySmall,
+                color = primary,
+                fontWeight = FontWeight.Bold,
+                maxLines = 1,
+            )
+        }
+    }
+}
+
+private fun stripFontSize(slot: Dp): TextUnit {
+    val raw = (slot.value * 0.68f).sp
+    return when {
+        raw < 9.sp -> 9.sp
+        raw > 11.sp -> 11.sp
+        else -> raw
+    }
+}
+
+/** Preferred pitch, shrunk only when the centered block would not fit. */
+private fun letterSlotPx(availablePx: Float, count: Int, preferredSlotPx: Float): Float {
+    if (count <= 0 || availablePx <= 0f) return preferredSlotPx
+    return preferredSlotPx.coerceAtMost(availablePx / count.toFloat())
+}
+
+private fun letterBlockTopPx(availablePx: Float, blockHeightPx: Float): Float {
+    return ((availablePx - blockHeightPx) / 2f).coerceAtLeast(0f)
+}
+
+private fun sectionIndexAtY(y: Float, height: Float, count: Int): Int {
+    if (count <= 1 || height <= 0f) return 0
+    val fraction = (y / height).coerceIn(0f, 0.999999f)
+    return (fraction * count).toInt().coerceIn(0, count - 1)
 }
 
 @Composable
@@ -379,7 +776,6 @@ private fun PreviewGlyph(
     large: Boolean,
     modifier: Modifier = Modifier,
 ) {
-    // Many UI fonts have no ★ glyph.
     if (glyph == FAVORITES_INDEX_GLYPH) {
         Icon(
             imageVector = Icons.Default.Star,
@@ -417,13 +813,11 @@ private data class ScrollbarMetrics(
     val enabled: Boolean,
 )
 
-/** Item under the viewport midpoint, or the nearest contact row if that point is a gap. */
 private fun LazyListState.itemIndexAtViewportCenter(): Int? {
     val info = layoutInfo
     val visible = info.visibleItemsInfo
     if (visible.isEmpty()) return null
 
-    // Item offsets are from the list top. CenterStart puts the letters at half the height.
     val viewportHeight = info.viewportSize.height.takeIf { it > 0 }
         ?: (info.viewportEndOffset - info.viewportStartOffset +
             info.beforeContentPadding + info.afterContentPadding)
@@ -449,17 +843,12 @@ private fun LazyListState.itemIndexAtViewportCenter(): Int? {
     return pool.minByOrNull(::distanceToCenter)?.index
 }
 
-/**
- * 0 at the top, 1 at the bottom, snapped with canScrollBackward / canScrollForward.
- * First visible index plus offset in that item. Averaging visible row heights makes the thumb jump.
- */
 private fun LazyListState.scrollProgressFraction(): Float {
     if (!canScrollBackward) return 0f
     if (!canScrollForward) return 1f
     return indexBasedScrollFraction()
 }
 
-/** First visible index plus offset in that item. Other on-screen rows are ignored. */
 private fun LazyListState.indexBasedScrollFraction(): Float {
     val info = layoutInfo
     val visible = info.visibleItemsInfo
@@ -503,7 +892,6 @@ private fun computeScrollbarMetrics(listState: LazyListState): ScrollbarMetrics 
         return ScrollbarMetrics(0f, 1f, enabled = false)
     }
 
-    // Not the visible-item count. That changes as rows cross the edge.
     val contentHeight = listState.estimatedMainAxisContentHeight()
     val thumbSize = if (contentHeight <= viewport) {
         1f
@@ -537,7 +925,6 @@ private suspend fun scrollListToNormalized(listState: LazyListState, normalized:
         return
     }
 
-    // Same index-plus-fraction as [indexBasedScrollFraction].
     val position = n * (total - 1).toFloat()
     val index = position.toInt().coerceIn(0, total - 1)
     val frac = (position - index).coerceIn(0f, 1f)

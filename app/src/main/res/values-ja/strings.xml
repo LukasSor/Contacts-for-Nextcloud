@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">編集時の項目</string>
     <string name="setting_scroll_letters">スクロール中に文字</string>
     <string name="setting_scroll_letters_summary">スクロール中、連絡先一覧に文字を表示します。</string>
+    <string name="setting_letters_on_the_side">文字バー</string>
+    <string name="setting_letters_on_the_side_summary">スクロールバーを文字に置き換えます。</string>
     <string name="setting_website_logos">サイトのロゴ</string>
     <string name="setting_website_logos_summary">サイトのファビコンを取得し、リンクの横に表示します。</string>
     <string name="setting_large_favorites">大きなお気に入り</string>

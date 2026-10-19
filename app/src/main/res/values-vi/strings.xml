@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Trường khi sửa</string>
     <string name="setting_scroll_letters">Hiện chữ khi cuộn</string>
     <string name="setting_scroll_letters_summary">Hiện bảng chữ cái trong danh sách khi cuộn.</string>
+    <string name="setting_letters_on_the_side">Thanh chữ</string>
+    <string name="setting_letters_on_the_side_summary">Thay thanh cuộn bằng chữ.</string>
     <string name="setting_website_logos">Logo trang web</string>
     <string name="setting_website_logos_summary">Lấy biểu tượng trang web và hiện cạnh liên kết.</string>
     <string name="setting_large_favorites">Yêu thích lớn</string>

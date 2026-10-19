@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Fält vid redigering</string>
     <string name="setting_scroll_letters">Bokstäver vid rullning</string>
     <string name="setting_scroll_letters_summary">Visar alfabetet i kontaktlistan när du rullar.</string>
+    <string name="setting_letters_on_the_side">Bokstavslist</string>
+    <string name="setting_letters_on_the_side_summary">Ersätter rullningslisten med bokstäver.</string>
     <string name="setting_website_logos">Webbplatslogotyper</string>
     <string name="setting_website_logos_summary">Hämtar favicon från webbplatsen och visar den bredvid länken.</string>
     <string name="setting_large_favorites">Stora favoriter</string>

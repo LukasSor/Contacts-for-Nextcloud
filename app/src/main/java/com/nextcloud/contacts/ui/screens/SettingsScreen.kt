@@ -364,6 +364,18 @@ fun SettingsScreen(
                 },
             )
             ListItem(
+                headlineContent = { Text(stringResource(R.string.setting_letters_on_the_side)) },
+                supportingContent = {
+                    Text(stringResource(R.string.setting_letters_on_the_side_summary))
+                },
+                trailingContent = {
+                    Switch(
+                        checked = state.lettersOnTheSide,
+                        onCheckedChange = viewModel::setLettersOnTheSide,
+                    )
+                },
+            )
+            ListItem(
                 headlineContent = { Text(stringResource(R.string.setting_organic_frame)) },
                 supportingContent = { Text(stringResource(R.string.setting_organic_frame_summary)) },
                 trailingContent = {

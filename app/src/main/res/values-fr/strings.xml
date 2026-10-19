@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Champs à l\'édition</string>
     <string name="setting_scroll_letters">Lettres en faisant défiler</string>
     <string name="setting_scroll_letters_summary">Affiche l\'alphabet dans la liste pendant le défilement.</string>
+    <string name="setting_letters_on_the_side">Barre de lettres</string>
+    <string name="setting_letters_on_the_side_summary">Remplace la barre de défilement par des lettres.</string>
     <string name="setting_website_logos">Logos de sites</string>
     <string name="setting_website_logos_summary">Récupère le favicon du site et l\'affiche à côté du lien.</string>
     <string name="setting_large_favorites">Grands favoris</string>

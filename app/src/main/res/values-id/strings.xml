@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Bidang saat mengedit</string>
     <string name="setting_scroll_letters">Huruf saat menggulir</string>
     <string name="setting_scroll_letters_summary">Menampilkan alfabet di daftar saat menggulir.</string>
+    <string name="setting_letters_on_the_side">Bilah huruf</string>
+    <string name="setting_letters_on_the_side_summary">Mengganti bilah gulir dengan huruf.</string>
     <string name="setting_website_logos">Logo situs</string>
     <string name="setting_website_logos_summary">Mengambil ikon situs dan menampilkannya di samping tautan.</string>
     <string name="setting_large_favorites">Favorit besar</string>

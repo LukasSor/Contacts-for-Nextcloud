@@ -76,8 +76,10 @@ import com.nextcloud.contacts.ui.components.AppSnackbarHost
 import com.nextcloud.contacts.ui.components.ObserveUiNotices
 import com.nextcloud.contacts.ui.components.ContactAvatar
 import com.nextcloud.contacts.ui.components.ContactListFilterSheet
+import com.nextcloud.contacts.ui.components.ContactListLetterStripEndPadding
 import com.nextcloud.contacts.ui.components.ContactListScrollbar
 import com.nextcloud.contacts.ui.components.ContactListScrollbarEndPadding
+import com.nextcloud.contacts.ui.components.contactListStartLetterScrub
 import com.nextcloud.contacts.ui.list.ContactListEntry
 import com.nextcloud.contacts.ui.list.buildAlphabetIndexModel
 import com.nextcloud.contacts.ui.list.contactIdsInVisualOrder
@@ -154,6 +156,9 @@ fun ContactListScreen(
     )
     val container = (context.applicationContext as ContactsApp).container
     val showScrollLetters by container.userPreferences.showScrollLetters.collectAsState(initial = true)
+    val lettersOnTheSide by container.userPreferences.lettersOnTheSide.collectAsState(
+        initial = container.userPreferences.snapshot().lettersOnTheSide,
+    )
     val largeFavorites by container.userPreferences.largeFavorites.collectAsState(
         initial = container.userPreferences.snapshot().largeFavorites,
     )
@@ -340,6 +345,7 @@ fun ContactListScreen(
                     filtersActive = filterState.hasActiveFilters,
                     sortField = filterState.sortField,
                     showScrollLetters = showScrollLetters,
+                    lettersOnTheSide = lettersOnTheSide,
                     largeFavorites = largeFavorites,
                     onContactClick = onContactClick,
                     onImportFromDevice = importFromDevice,
@@ -448,6 +454,7 @@ private fun ContactList(
     filtersActive: Boolean = false,
     sortField: ContactListSortField = ContactListSortField.DISPLAY_NAME,
     showScrollLetters: Boolean = true,
+    lettersOnTheSide: Boolean = false,
     largeFavorites: Boolean = false,
     onContactClick: (Long) -> Unit,
     onImportFromDevice: (() -> Unit)? = null,
@@ -527,15 +534,27 @@ private fun ContactList(
         }
     } else {
         val sectionIndex = remember(shownEntries) { buildAlphabetIndexModel(shownEntries) }
+        var startScrubSection by remember { mutableStateOf<Int?>(null) }
 
-        Box(modifier = listModifier) {
+        Box(
+            modifier = listModifier.contactListStartLetterScrub(
+                enabled = showScrollLetters,
+                listState = listState,
+                sectionModel = sectionIndex,
+                onActiveSection = { startScrubSection = it },
+            ),
+        ) {
             LazyColumn(
                 state = listState,
                 modifier = Modifier.fillMaxSize(),
-                // Room for the thumb. Letters are an overlay, not a column.
+                // Room for the thumb, or for the letter strip when it replaces it.
                 contentPadding = PaddingValues(
                     start = 16.dp,
-                    end = ContactListScrollbarEndPadding,
+                    end = if (lettersOnTheSide) {
+                        ContactListLetterStripEndPadding
+                    } else {
+                        ContactListScrollbarEndPadding
+                    },
                     top = 8.dp,
                     bottom = 8.dp,
                 ),
@@ -595,6 +614,8 @@ private fun ContactList(
                 listState = listState,
                 sectionModel = sectionIndex,
                 showScrollLetters = showScrollLetters,
+                lettersOnTheSide = lettersOnTheSide,
+                startScrubSection = startScrubSection,
                 modifier = Modifier.fillMaxSize(),
             )
         }

@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">שדות בעריכה</string>
     <string name="setting_scroll_letters">אותיות בגלילה</string>
     <string name="setting_scroll_letters_summary">מציג את האלפבית ברשימה בזמן גלילה.</string>
+    <string name="setting_letters_on_the_side">סרגל אותיות</string>
+    <string name="setting_letters_on_the_side_summary">מחליף את פס הגלילה באותיות.</string>
     <string name="setting_website_logos">סמלי אתרים</string>
     <string name="setting_website_logos_summary">טוען סמל מהאתר ומציג אותו ליד הקישור.</string>
     <string name="setting_large_favorites">מועדפים גדולים</string>

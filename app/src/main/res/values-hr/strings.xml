@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Polja pri uređivanju</string>
     <string name="setting_scroll_letters">Slova pri pomicanju</string>
     <string name="setting_scroll_letters_summary">Tijekom pomicanja prikazuje abecedu na popisu kontakata.</string>
+    <string name="setting_letters_on_the_side">Slovna traka</string>
+    <string name="setting_letters_on_the_side_summary">Zamjenjuje traku za pomicanje slovima.</string>
     <string name="setting_website_logos">Logotipi web-mjesta</string>
     <string name="setting_website_logos_summary">Dohvaća ikonu web-mjesta i prikazuje je uz poveznicu.</string>
     <string name="setting_large_favorites">Veliki favoriti</string>

@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Polja pri urejanju</string>
     <string name="setting_scroll_letters">Črke med drsenjem</string>
     <string name="setting_scroll_letters_summary">Med drsenjem pokaže abecedo na seznamu.</string>
+    <string name="setting_letters_on_the_side">Črkovna vrstica</string>
+    <string name="setting_letters_on_the_side_summary">Drsno vrstico zamenja s črkami.</string>
     <string name="setting_website_logos">Logotipi spletnih strani</string>
     <string name="setting_website_logos_summary">Pridobi ikono spletne strani in jo pokaže ob povezavi.</string>
     <string name="setting_large_favorites">Veliki priljubljeni</string>

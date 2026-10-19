@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Pole při úpravě</string>
     <string name="setting_scroll_letters">Písmena při posouvání</string>
     <string name="setting_scroll_letters_summary">Při posouvání ukáže v seznamu abecedu.</string>
+    <string name="setting_letters_on_the_side">Lišta písmen</string>
+    <string name="setting_letters_on_the_side_summary">Nahradí posuvník písmeny.</string>
     <string name="setting_website_logos">Loga webů</string>
     <string name="setting_website_logos_summary">Načte favicon webu a ukáže ho vedle odkazu.</string>
     <string name="setting_large_favorites">Velké oblíbené</string>

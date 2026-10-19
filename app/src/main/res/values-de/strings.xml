@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Felder beim Bearbeiten</string>
     <string name="setting_scroll_letters">Buchstaben beim Scrollen</string>
     <string name="setting_scroll_letters_summary">Zeigt das Alphabet in der Kontaktliste beim Scrollen.</string>
+    <string name="setting_letters_on_the_side">Buchstabenleiste</string>
+    <string name="setting_letters_on_the_side_summary">Ersetzt die Bildlaufleiste durch Buchstaben.</string>
     <string name="setting_website_logos">Webseiten-Logos</string>
     <string name="setting_website_logos_summary">Lädt das Favicon der Webseite und zeigt es neben dem Link.</string>
     <string name="setting_large_favorites">Große Favoriten</string>

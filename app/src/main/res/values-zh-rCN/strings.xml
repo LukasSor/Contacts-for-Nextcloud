@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">编辑时的字段</string>
     <string name="setting_scroll_letters">滚动时显示字母</string>
     <string name="setting_scroll_letters_summary">滚动联系人列表时显示字母。</string>
+    <string name="setting_letters_on_the_side">字母栏</string>
+    <string name="setting_letters_on_the_side_summary">用字母替换滚动条。</string>
     <string name="setting_website_logos">网站图标</string>
     <string name="setting_website_logos_summary">获取网站图标并显示在链接旁。</string>
     <string name="setting_large_favorites">大号收藏</string>

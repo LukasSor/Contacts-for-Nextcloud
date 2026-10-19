@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Pola podczas edycji</string>
     <string name="setting_scroll_letters">Litery podczas przewijania</string>
     <string name="setting_scroll_letters_summary">Pokazuje alfabet na liście kontaktów podczas przewijania.</string>
+    <string name="setting_letters_on_the_side">Pasek liter</string>
+    <string name="setting_letters_on_the_side_summary">Zastępuje pasek przewijania literami.</string>
     <string name="setting_website_logos">Logotypy stron</string>
     <string name="setting_website_logos_summary">Pobiera favicon strony i pokazuje go obok linku.</string>
     <string name="setting_large_favorites">Duże ulubione</string>

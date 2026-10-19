@@ -42,6 +42,13 @@ data class AccountToggleState(
     val enabled: Boolean,
 )
 
+private data class ListAppearancePrefs(
+    val showScrollLetters: Boolean,
+    val avatarFrameStyle: AvatarFrameStyle,
+    val largeFavorites: Boolean,
+    val lettersOnTheSide: Boolean,
+)
+
 private data class ThemeAppearancePrefs(
     val themeMode: ThemeMode,
     val useDynamicColor: Boolean,
@@ -53,6 +60,7 @@ private data class ThemeAppearancePrefs(
     val showScrollLetters: Boolean,
     val avatarFrameStyle: AvatarFrameStyle,
     val largeFavorites: Boolean,
+    val lettersOnTheSide: Boolean,
 )
 
 private data class PreferencesSnapshot(
@@ -66,6 +74,7 @@ private data class PreferencesSnapshot(
     val showScrollLetters: Boolean,
     val avatarFrameStyle: AvatarFrameStyle,
     val largeFavorites: Boolean,
+    val lettersOnTheSide: Boolean,
     val exportToDeviceContacts: Boolean,
     val autoLinkMessengers: Boolean,
     val hideLinkSuggestions: Boolean,
@@ -90,6 +99,7 @@ data class SettingsUiState(
     val showScrollLetters: Boolean = true,
     val avatarFrameStyle: AvatarFrameStyle = AvatarFrameStyle.ORGANIC,
     val largeFavorites: Boolean = false,
+    val lettersOnTheSide: Boolean = false,
     val exportToDeviceContacts: Boolean = false,
     val autoLinkMessengers: Boolean = false,
     val hideLinkSuggestions: Boolean = false,
@@ -176,8 +186,9 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
                 container.userPreferences.showScrollLetters,
                 container.userPreferences.avatarFrameStyle,
                 container.userPreferences.largeFavorites,
-            ) { scrollLetters, avatarFrame, largeFavorites ->
-                Triple(scrollLetters, avatarFrame, largeFavorites)
+                container.userPreferences.lettersOnTheSide,
+            ) { scrollLetters, avatarFrame, largeFavorites, lettersOnTheSide ->
+                ListAppearancePrefs(scrollLetters, avatarFrame, largeFavorites, lettersOnTheSide)
             },
         ) { themePrefs, calendarPrefs, scrollAndAvatar ->
             ThemeAppearancePrefs(
@@ -188,9 +199,10 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
                 storedAnniversariesDestination = calendarPrefs.storedAnniversariesDestination,
                 storedDatesOfDeathDestination = calendarPrefs.storedDatesOfDeathDestination,
                 calendarEventDescriptionMode = calendarPrefs.calendarEventDescriptionMode,
-                showScrollLetters = scrollAndAvatar.first,
-                avatarFrameStyle = scrollAndAvatar.second,
-                largeFavorites = scrollAndAvatar.third,
+                showScrollLetters = scrollAndAvatar.showScrollLetters,
+                avatarFrameStyle = scrollAndAvatar.avatarFrameStyle,
+                largeFavorites = scrollAndAvatar.largeFavorites,
+                lettersOnTheSide = scrollAndAvatar.lettersOnTheSide,
             )
         },
         combine(
@@ -226,6 +238,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
             showScrollLetters = themePrefs.showScrollLetters,
             avatarFrameStyle = themePrefs.avatarFrameStyle,
             largeFavorites = themePrefs.largeFavorites,
+            lettersOnTheSide = themePrefs.lettersOnTheSide,
             exportToDeviceContacts = exportAndMessaging.first,
             autoLinkMessengers = exportAndMessaging.second,
             hideLinkSuggestions = exportAndMessaging.third,
@@ -267,6 +280,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
             showScrollLetters = prefs.showScrollLetters,
             avatarFrameStyle = prefs.avatarFrameStyle,
             largeFavorites = prefs.largeFavorites,
+            lettersOnTheSide = prefs.lettersOnTheSide,
             exportToDeviceContacts = prefs.exportToDeviceContacts,
             autoLinkMessengers = prefs.autoLinkMessengers,
             hideLinkSuggestions = prefs.hideLinkSuggestions,
@@ -317,6 +331,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
             showScrollLetters = seededPreferences.showScrollLetters,
             avatarFrameStyle = seededPreferences.avatarFrameStyle,
             largeFavorites = seededPreferences.largeFavorites,
+            lettersOnTheSide = seededPreferences.lettersOnTheSide,
             exportToDeviceContacts = seededPreferences.exportToDeviceContacts,
             autoLinkMessengers = seededPreferences.autoLinkMessengers,
             hideLinkSuggestions = seededPreferences.hideLinkSuggestions,
@@ -465,6 +480,10 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
 
     fun setShowScrollLetters(enabled: Boolean) {
         viewModelScope.launch { container.userPreferences.setShowScrollLetters(enabled) }
+    }
+
+    fun setLettersOnTheSide(enabled: Boolean) {
+        viewModelScope.launch { container.userPreferences.setLettersOnTheSide(enabled) }
     }
 
     fun setLargeFavorites(enabled: Boolean) {

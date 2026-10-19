@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">فیلدها هنگام ویرایش</string>
     <string name="setting_scroll_letters">حروف هنگام پیمایش</string>
     <string name="setting_scroll_letters_summary">هنگام پیمایش حروف الفبا را در فهرست نشان می‌دهد.</string>
+    <string name="setting_letters_on_the_side">نوار حروف</string>
+    <string name="setting_letters_on_the_side_summary">نوار پیمایش را با حروف جایگزین می‌کند.</string>
     <string name="setting_website_logos">نشان‌های وب‌سایت</string>
     <string name="setting_website_logos_summary">نماد سایت را می‌گیرد و کنار پیوند نشان می‌دهد.</string>
     <string name="setting_large_favorites">علاقه‌مندی‌های بزرگ</string>

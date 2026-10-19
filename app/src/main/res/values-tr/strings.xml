@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Düzenlerken alanlar</string>
     <string name="setting_scroll_letters">Kaydırırken harfler</string>
     <string name="setting_scroll_letters_summary">Kaydırırken kişi listesinde alfabeyi gösterir.</string>
+    <string name="setting_letters_on_the_side">Harf çubuğu</string>
+    <string name="setting_letters_on_the_side_summary">Kaydırma çubuğunu harflerle değiştirir.</string>
     <string name="setting_website_logos">Site logoları</string>
     <string name="setting_website_logos_summary">Siteden favicon alır ve bağlantının yanında gösterir.</string>
     <string name="setting_large_favorites">Büyük sık kullanılanlar</string>

@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Fields when editing</string>
     <string name="setting_scroll_letters">Show letters while scrolling</string>
     <string name="setting_scroll_letters_summary">Shows the alphabet on the contact list while you scroll.</string>
+    <string name="setting_letters_on_the_side">Letter bar</string>
+    <string name="setting_letters_on_the_side_summary">Replace the scrollbar with letters.</string>
     <string name="setting_website_logos">Enable website logos</string>
     <string name="setting_website_logos_summary">Fetches the favicon from the website and shows it next to the link.</string>
     <string name="setting_large_favorites">Large favorites</string>

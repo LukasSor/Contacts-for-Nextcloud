@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Felter ved redigering</string>
     <string name="setting_scroll_letters">Bogstaver ved rulning</string>
     <string name="setting_scroll_letters_summary">Viser alfabetet i kontaktlisten, mens du ruller.</string>
+    <string name="setting_letters_on_the_side">Bogstavbjælke</string>
+    <string name="setting_letters_on_the_side_summary">Erstat rullepanelet med bogstaver.</string>
     <string name="setting_website_logos">Websitelogoer</string>
     <string name="setting_website_logos_summary">Henter favicon fra websitet og viser det ved linket.</string>
     <string name="setting_large_favorites">Store favoritter</string>

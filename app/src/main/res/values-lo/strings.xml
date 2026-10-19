@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">ຊ່ອງເວລາແກ້ໄຂ</string>
     <string name="setting_scroll_letters">ສະແດງຕົວອັກສອນເວລາເລື່ອນ</string>
     <string name="setting_scroll_letters_summary">ສະແດງຕົວອັກສອນໃນລາຍຊື່ເວລາເລື່ອນ.</string>
+    <string name="setting_letters_on_the_side">ແຖບຕົວອັກສອນ</string>
+    <string name="setting_letters_on_the_side_summary">ປ່ຽນແຖບເລື່ອນເປັນຕົວອັກສອນ.</string>
     <string name="setting_website_logos">ເປີດໂລໂກ້ເວັບໄຊ</string>
     <string name="setting_website_logos_summary">ດຶງໄອຄອນຈາກເວັບໄຊແລ້ວສະແດງຂ້າງລິ້ງ.</string>
     <string name="setting_large_favorites">ທີ່ມັກໃຫຍ່</string>

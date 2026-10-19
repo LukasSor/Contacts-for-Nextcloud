@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Camps en editar</string>
     <string name="setting_scroll_letters">Lletres en desplaçar</string>
     <string name="setting_scroll_letters_summary">Mostra l\'alfabet a la llista en desplaçar-se.</string>
+    <string name="setting_letters_on_the_side">Barra de lletres</string>
+    <string name="setting_letters_on_the_side_summary">Substitueix la barra de desplaçament per lletres.</string>
     <string name="setting_website_logos">Logos dels llocs web</string>
     <string name="setting_website_logos_summary">Obtén la icona del lloc i la mostra al costat de l\'enllaç.</string>
     <string name="setting_large_favorites">Preferits grans</string>

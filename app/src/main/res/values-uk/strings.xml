@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Поля під час редагування</string>
     <string name="setting_scroll_letters">Літери під час прокрутки</string>
     <string name="setting_scroll_letters_summary">Показує абетку в списку контактів під час прокрутки.</string>
+    <string name="setting_letters_on_the_side">Літерна панель</string>
+    <string name="setting_letters_on_the_side_summary">Замінює смугу прокрутки літерами.</string>
     <string name="setting_website_logos">Логотипи сайтів</string>
     <string name="setting_website_logos_summary">Завантажує favicon сайту і показує його біля посилання.</string>
     <string name="setting_large_favorites">Велике обране</string>

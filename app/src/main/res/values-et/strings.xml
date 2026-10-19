@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Väljad muutmisel</string>
     <string name="setting_scroll_letters">Tähed kerimisel</string>
     <string name="setting_scroll_letters_summary">Kerimisel näitab tähestikku nimekirjas.</string>
+    <string name="setting_letters_on_the_side">Täheriba</string>
+    <string name="setting_letters_on_the_side_summary">Asendab kerimisriba tähtedega.</string>
     <string name="setting_website_logos">Veebilehtede logod</string>
     <string name="setting_website_logos_summary">Laadib saidi ikooni ja näitab seda lingi kõrval.</string>
     <string name="setting_large_favorites">Suured lemmikud</string>

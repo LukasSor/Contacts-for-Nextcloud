@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Velden bij bewerken</string>
     <string name="setting_scroll_letters">Letters tijdens scrollen</string>
     <string name="setting_scroll_letters_summary">Toont het alfabet in de lijst tijdens het scrollen.</string>
+    <string name="setting_letters_on_the_side">Letterbalk</string>
+    <string name="setting_letters_on_the_side_summary">Vervangt de schuifbalk door letters.</string>
     <string name="setting_website_logos">Websitelogo\'s</string>
     <string name="setting_website_logos_summary">Haalt het favicon van de website op en toont het naast de link.</string>
     <string name="setting_large_favorites">Grote favorieten</string>

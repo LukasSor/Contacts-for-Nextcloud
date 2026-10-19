@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Mezők szerkesztéskor</string>
     <string name="setting_scroll_letters">Betűk görgetéskor</string>
     <string name="setting_scroll_letters_summary">Görgetés közben mutatja az ábécét a névjegylistában.</string>
+    <string name="setting_letters_on_the_side">Betűsáv</string>
+    <string name="setting_letters_on_the_side_summary">A görgetősáv helyett betűk.</string>
     <string name="setting_website_logos">Weboldal-logók</string>
     <string name="setting_website_logos_summary">Lekéri a weboldal ikonját, és a hivatkozás mellett mutatja.</string>
     <string name="setting_large_favorites">Nagy kedvencek</string>

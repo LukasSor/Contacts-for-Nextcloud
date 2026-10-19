@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Поља при уређивању</string>
     <string name="setting_scroll_letters">Слова при клизању</string>
     <string name="setting_scroll_letters_summary">Приказује азбуку на листи при клизању.</string>
+    <string name="setting_letters_on_the_side">Словна трака</string>
+    <string name="setting_letters_on_the_side_summary">Замењује траку за клизање словима.</string>
     <string name="setting_website_logos">Логотипи сајтова</string>
     <string name="setting_website_logos_summary">Преузима икону сајта и приказује је поред везе.</string>
     <string name="setting_large_favorites">Велики омиљени</string>

@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Laukai redaguojant</string>
     <string name="setting_scroll_letters">Raidės slenkant</string>
     <string name="setting_scroll_letters_summary">Slenkant rodo abėcėlę sąraše.</string>
+    <string name="setting_letters_on_the_side">Raidžių juosta</string>
+    <string name="setting_letters_on_the_side_summary">Slinkties juostą pakeičia raidėmis.</string>
     <string name="setting_website_logos">Svetainių logotipai</string>
     <string name="setting_website_logos_summary">Įkelia piktogramą ir rodo ją prie nuorodos.</string>
     <string name="setting_large_favorites">Dideli mėgstami</string>

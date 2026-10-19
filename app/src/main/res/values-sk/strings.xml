@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Polia pri úprave</string>
     <string name="setting_scroll_letters">Písmená pri posúvaní</string>
     <string name="setting_scroll_letters_summary">Pri posúvaní ukáže v zozname abecedu.</string>
+    <string name="setting_letters_on_the_side">Lišta písmen</string>
+    <string name="setting_letters_on_the_side_summary">Nahradí posúvač písmenami.</string>
     <string name="setting_website_logos">Logá webstránok</string>
     <string name="setting_website_logos_summary">Načíta ikonu webstránky a ukáže ju pri odkaze.</string>
     <string name="setting_large_favorites">Veľké obľúbené</string>

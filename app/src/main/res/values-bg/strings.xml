@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Полета при редакция</string>
     <string name="setting_scroll_letters">Букви при превъртане</string>
     <string name="setting_scroll_letters_summary">Показва азбуката в списъка при превъртане.</string>
+    <string name="setting_letters_on_the_side">Буквена лента</string>
+    <string name="setting_letters_on_the_side_summary">Заменя лентата за превъртане с букви.</string>
     <string name="setting_website_logos">Лога на сайтовете</string>
     <string name="setting_website_logos_summary">Взима иконата на сайта и я показва до връзката.</string>
     <string name="setting_large_favorites">Големи любими</string>

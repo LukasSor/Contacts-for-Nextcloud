@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Reitir við breytingu</string>
     <string name="setting_scroll_letters">Sýna stafi við flettingu</string>
     <string name="setting_scroll_letters_summary">Sýnir stafrófið á tengiliðalistanum við flettingu.</string>
+    <string name="setting_letters_on_the_side">Stafastika</string>
+    <string name="setting_letters_on_the_side_summary">Skiptir skrunstikunni út fyrir stafi.</string>
     <string name="setting_website_logos">Virkja vefmerki</string>
     <string name="setting_website_logos_summary">Sækir táknmynd vefsvæðis og sýnir hana við tengilinn.</string>
     <string name="setting_large_favorites">Stór eftirlæti</string>

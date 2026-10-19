@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Medan semasa menyunting</string>
     <string name="setting_scroll_letters">Tunjuk huruf semasa menatal</string>
     <string name="setting_scroll_letters_summary">Menunjukkan abjad pada senarai kenalan semasa anda menatal.</string>
+    <string name="setting_letters_on_the_side">Bar huruf</string>
+    <string name="setting_letters_on_the_side_summary">Gantikan bar tatal dengan huruf.</string>
     <string name="setting_website_logos">Hidupkan logo laman</string>
     <string name="setting_website_logos_summary">Mengambil ikon laman dan menunjukkannya di sebelah pautan.</string>
     <string name="setting_large_favorites">Kegemaran besar</string>

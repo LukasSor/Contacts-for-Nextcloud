@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Campos al editar</string>
     <string name="setting_scroll_letters">Letras al desplazarse</string>
     <string name="setting_scroll_letters_summary">Muestra el alfabeto en la lista al desplazarse.</string>
+    <string name="setting_letters_on_the_side">Barra de letras</string>
+    <string name="setting_letters_on_the_side_summary">Sustituye la barra de desplazamiento por letras.</string>
     <string name="setting_website_logos">Logos de sitios</string>
     <string name="setting_website_logos_summary">Obtiene el favicon del sitio y lo muestra junto al enlace.</string>
     <string name="setting_large_favorites">Favoritos grandes</string>

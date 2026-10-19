@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Πεδία κατά την επεξεργασία</string>
     <string name="setting_scroll_letters">Γράμματα κατά την κύλιση</string>
     <string name="setting_scroll_letters_summary">Δείχνει το αλφάβητο στη λίστα επαφών ενώ κάνετε κύλιση.</string>
+    <string name="setting_letters_on_the_side">Γραμμή γραμμάτων</string>
+    <string name="setting_letters_on_the_side_summary">Αντικαθιστά τη γραμμή κύλισης με γράμματα.</string>
     <string name="setting_website_logos">Λογότυπα ιστοσελίδων</string>
     <string name="setting_website_logos_summary">Λαμβάνει το εικονίδιο της ιστοσελίδας και το δείχνει δίπλα στον σύνδεσμο.</string>
     <string name="setting_large_favorites">Μεγάλα αγαπημένα</string>

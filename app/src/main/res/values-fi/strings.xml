@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Kentät muokatessa</string>
     <string name="setting_scroll_letters">Kirjaimet vieritettäessä</string>
     <string name="setting_scroll_letters_summary">Näyttää aakkoset yhteystietoluettelossa vieritettäessä.</string>
+    <string name="setting_letters_on_the_side">Kirjainpalkki</string>
+    <string name="setting_letters_on_the_side_summary">Korvaa vierityspalkin kirjaimilla.</string>
     <string name="setting_website_logos">Sivustojen logot</string>
     <string name="setting_website_logos_summary">Hakee sivuston kuvakkeen ja näyttää sen linkin vieressä.</string>
     <string name="setting_large_favorites">Suuret suosikit</string>

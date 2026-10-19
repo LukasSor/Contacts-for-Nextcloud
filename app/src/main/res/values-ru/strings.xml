@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Поля при правке</string>
     <string name="setting_scroll_letters">Буквы при прокрутке</string>
     <string name="setting_scroll_letters_summary">Показывает алфавит в списке контактов при прокрутке.</string>
+    <string name="setting_letters_on_the_side">Буквенная панель</string>
+    <string name="setting_letters_on_the_side_summary">Заменяет полосу прокрутки буквами.</string>
     <string name="setting_website_logos">Логотипы сайтов</string>
     <string name="setting_website_logos_summary">Загружает favicon сайта и показывает его рядом со ссылкой.</string>
     <string name="setting_large_favorites">Крупное избранное</string>

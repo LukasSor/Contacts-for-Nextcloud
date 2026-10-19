@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Fushat gjatë redaktimit</string>
     <string name="setting_scroll_letters">Shfaq shkronjat gjatë lëvizjes</string>
     <string name="setting_scroll_letters_summary">Shfaq alfabetin te lista e kontakteve kur lëviz.</string>
+    <string name="setting_letters_on_the_side">Shirit shkronjash</string>
+    <string name="setting_letters_on_the_side_summary">Zëvendëson shiritin e lëvizjes me shkronja.</string>
     <string name="setting_website_logos">Aktivizo logot e faqeve</string>
     <string name="setting_website_logos_summary">Merr ikonën e faqes dhe e shfaq pranë lidhjes.</string>
     <string name="setting_large_favorites">Të preferuarat e mëdha</string>

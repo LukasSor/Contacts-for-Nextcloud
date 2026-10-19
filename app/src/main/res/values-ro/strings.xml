@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Câmpuri la editare</string>
     <string name="setting_scroll_letters">Litere la derulare</string>
     <string name="setting_scroll_letters_summary">Arată alfabetul în lista de contacte în timp ce derulezi.</string>
+    <string name="setting_letters_on_the_side">Bară de litere</string>
+    <string name="setting_letters_on_the_side_summary">Înlocuiește bara de derulare cu litere.</string>
     <string name="setting_website_logos">Sigle de site</string>
     <string name="setting_website_logos_summary">Preia pictograma site-ului și o arată lângă link.</string>
     <string name="setting_large_favorites">Favorite mari</string>

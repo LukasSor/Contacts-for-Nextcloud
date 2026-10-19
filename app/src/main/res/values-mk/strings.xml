@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Полиња при уредување</string>
     <string name="setting_scroll_letters">Букви при лизгање</string>
     <string name="setting_scroll_letters_summary">Ја прикажува азбуката на списокот додека лизгате.</string>
+    <string name="setting_letters_on_the_side">Буквена лента</string>
+    <string name="setting_letters_on_the_side_summary">Ја заменува лентата за лизгање со букви.</string>
     <string name="setting_website_logos">Логоа на веб-сајтови</string>
     <string name="setting_website_logos_summary">Ја зема иконата на веб-сајтот и ја прикажува до врската.</string>
     <string name="setting_large_favorites">Големи омилени</string>

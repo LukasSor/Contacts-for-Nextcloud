@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">ველები რედაქტირებისას</string>
     <string name="setting_scroll_letters">ასოები გადაადგილებისას</string>
     <string name="setting_scroll_letters_summary">გადაადგილებისას ანბანს აჩვენებს კონტაქტების სიაზე.</string>
+    <string name="setting_letters_on_the_side">ასოების ზოლი</string>
+    <string name="setting_letters_on_the_side_summary">გადაადგილების ზოლს ასოებით ცვლის.</string>
     <string name="setting_website_logos">ვებ-საიტის ლოგოები</string>
     <string name="setting_website_logos_summary">იღებს საიტის ხატულას და აჩვენებს ბმულის გვერდით.</string>
     <string name="setting_large_favorites">დიდი რჩეულები</string>

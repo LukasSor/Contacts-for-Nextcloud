@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">تەھرىرلىگەندىكى ساھە</string>
     <string name="setting_scroll_letters">سىيرىغاندا ھەرپلەرنى كۆرسەت</string>
     <string name="setting_scroll_letters_summary">سىيرىغاندا ئالاقىداش تىزىملىكىدە ئېلىپبەنى كۆرسىتىدۇ.</string>
+    <string name="setting_letters_on_the_side">ھەرپ بالدىقى</string>
+    <string name="setting_letters_on_the_side_summary">سىيرىش بالدىقىنى ھەرپلەر بىلەن ئالماشتۇرىدۇ.</string>
     <string name="setting_website_logos">تور بەت بەلگىلىرىنى ئاچ</string>
     <string name="setting_website_logos_summary">تور بەتتىن سىنبەلگە ئېلىپ ئۇلانمىنىڭ يېنىدا كۆرسىتىدۇ.</string>
     <string name="setting_large_favorites">چوڭ ياقتۇرىدىغانلار</string>

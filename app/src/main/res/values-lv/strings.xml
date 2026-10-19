@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Lauki labojot</string>
     <string name="setting_scroll_letters">Burti ritinot</string>
     <string name="setting_scroll_letters_summary">Rāda alfabētu sarakstā, kamēr ritināt.</string>
+    <string name="setting_letters_on_the_side">Burtu josla</string>
+    <string name="setting_letters_on_the_side_summary">Aizstāj ritjoslu ar burtiem.</string>
     <string name="setting_website_logos">Vietņu logotipi</string>
     <string name="setting_website_logos_summary">Iegūst ikonu no vietnes un rāda to blakus saitei.</string>
     <string name="setting_large_favorites">Liela izlase</string>

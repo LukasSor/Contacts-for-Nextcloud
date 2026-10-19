@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">الحقول عند التحرير</string>
     <string name="setting_scroll_letters">إظهار الحروف عند التمرير</string>
     <string name="setting_scroll_letters_summary">يعرض الحروف في قائمة جهات الاتصال أثناء التمرير.</string>
+    <string name="setting_letters_on_the_side">شريط الحروف</string>
+    <string name="setting_letters_on_the_side_summary">استبدل شريط التمرير بالحروف.</string>
     <string name="setting_website_logos">شعارات المواقع</string>
     <string name="setting_website_logos_summary">يجلب أيقونة الموقع ويعرضها بجانب الرابط.</string>
     <string name="setting_large_favorites">المفضلة الكبيرة</string>

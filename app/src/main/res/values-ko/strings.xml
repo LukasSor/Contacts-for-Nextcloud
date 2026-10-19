@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">편집 시 항목</string>
     <string name="setting_scroll_letters">스크롤 시 문자</string>
     <string name="setting_scroll_letters_summary">스크롤하는 동안 연락처 목록에 문자를 표시합니다.</string>
+    <string name="setting_letters_on_the_side">문자 막대</string>
+    <string name="setting_letters_on_the_side_summary">스크롤 막대를 문자로 바꿉니다.</string>
     <string name="setting_website_logos">웹사이트 로고</string>
     <string name="setting_website_logos_summary">웹사이트 파비콘을 가져와 링크 옆에 표시합니다.</string>
     <string name="setting_large_favorites">큰 즐겨찾기</string>

@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">Палі пры рэдагаванні</string>
     <string name="setting_scroll_letters">Літары пры пракрутцы</string>
     <string name="setting_scroll_letters_summary">Пры пракрутцы паказвае алфавіт у спісе.</string>
+    <string name="setting_letters_on_the_side">Літарная панэль</string>
+    <string name="setting_letters_on_the_side_summary">Замяняе паласу пракруткі на літары.</string>
     <string name="setting_website_logos">Лагатыпы сайтаў</string>
     <string name="setting_website_logos_summary">Бярэ значок сайта і паказвае яго побач са спасылкай.</string>
     <string name="setting_large_favorites">Вялікае абранае</string>

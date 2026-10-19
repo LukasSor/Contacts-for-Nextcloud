@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">ช่องตอนแก้ไข</string>
     <string name="setting_scroll_letters">แสดงตัวอักษรตอนเลื่อน</string>
     <string name="setting_scroll_letters_summary">แสดงตัวอักษรในรายชื่อขณะเลื่อน</string>
+    <string name="setting_letters_on_the_side">แถบตัวอักษร</string>
+    <string name="setting_letters_on_the_side_summary">แทนที่แถบเลื่อนด้วยตัวอักษร</string>
     <string name="setting_website_logos">โลโก้เว็บไซต์</string>
     <string name="setting_website_logos_summary">ดึงไอคอนจากเว็บไซต์และแสดงข้างลิงก์</string>
     <string name="setting_large_favorites">รายการโปรดขนาดใหญ่</string>

@@ -301,6 +301,8 @@
     <string name="setting_fields_when_editing">編輯時的欄位</string>
     <string name="setting_scroll_letters">捲動時顯示字母</string>
     <string name="setting_scroll_letters_summary">捲動聯絡人列表時顯示字母。</string>
+    <string name="setting_letters_on_the_side">字母欄</string>
+    <string name="setting_letters_on_the_side_summary">以字母取代捲軸。</string>
     <string name="setting_website_logos">網站圖示</string>
     <string name="setting_website_logos_summary">取得網站圖示並顯示在連結旁。</string>
     <string name="setting_large_favorites">大型收藏</string>
