@@ -497,7 +497,7 @@
     <string name="login_http_failed">Вход не удался: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Организовать</string>
+    <string name="screen_organize">Коллекция</string>
     <string name="organize_bin_summary">Недавно удалённые контакты</string>
     <string name="organize_import_summary">Импорт, экспорт и контакты телефона</string>
     <string name="organize_calendar_summary">Дни рождения, годовщины и смерти</string>
@@ -507,8 +507,8 @@
     <string name="msg_emergency_unavailable">Не удалось открыть экстренные контакты</string>
     <string name="empty_no_emergency_contacts">Нет экстренных контактов</string>
     <string name="section_bin">Корзина</string>
-    <string name="empty_bin">Нет удалённых контактов</string>
-    <string name="bin_kept_days">Хранится 3 дня.</string>
+    <string name="empty_bin">Нет удалённых контактов.</string>
+    <string name="bin_kept_days">Удалённые контакты остаются здесь 3 дня.</string>
     <string name="action_restore">Восстановить</string>
     <plurals name="bin_days_left">
         <item quantity="one">остался %d день</item>

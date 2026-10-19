@@ -467,7 +467,7 @@
     <string name="login_http_failed">Kuingia kumeshindwa: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Panga</string>
+    <string name="screen_organize">Mkusanyiko</string>
     <string name="organize_bin_summary">Mawasiliano yaliyofutwa hivi karibuni</string>
     <string name="organize_import_summary">Uagizaji, uhamishaji na mawasiliano ya simu</string>
     <string name="organize_calendar_summary">Siku za kuzaliwa, maadhimisho na vifo</string>
@@ -477,8 +477,8 @@
     <string name="msg_emergency_unavailable">Imeshindwa kufungua mawasiliano ya dharura</string>
     <string name="empty_no_emergency_contacts">Hakuna mawasiliano ya dharura</string>
     <string name="section_bin">Pipu</string>
-    <string name="empty_bin">Hakuna mawasiliano yaliyofutwa</string>
-    <string name="bin_kept_days">Huwekwa siku 3.</string>
+    <string name="empty_bin">Hakuna mawasiliano yaliyofutwa.</string>
+    <string name="bin_kept_days">Mawasiliano yaliyofutwa yanabaki hapa siku 3.</string>
     <string name="action_restore">Rejesha</string>
     <plurals name="bin_days_left">
         <item quantity="one">siku %d imebaki</item>

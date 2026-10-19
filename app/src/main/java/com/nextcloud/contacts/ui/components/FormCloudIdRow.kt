@@ -159,7 +159,7 @@ fun FormCloudIdRow(
                     inner()
                 },
             )
-            if (!freeFormInputs && value.isBlank()) {
+            if (!freeFormInputs && value.isBlank() && searchState.canSearch) {
                 Row(
                     modifier = Modifier
                         .padding(top = 8.dp)
@@ -210,7 +210,7 @@ fun FormCloudIdRow(
         )
     }
 
-    if (showUserPicker && !freeFormInputs) {
+    if (showUserPicker && !freeFormInputs && searchState.canSearch) {
         NextcloudUserPickerDialog(
             state = searchState,
             onQueryChange = onSearchQueryChange,

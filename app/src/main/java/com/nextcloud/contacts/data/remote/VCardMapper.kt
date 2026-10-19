@@ -1373,14 +1373,6 @@ object VCardMapper {
         else -> Gender(raw)
     }
 
-    /**
-     * List and detail use [storedDisplayName]. That value is the formatted name (FN).
-     * Clearing prefix or suffix updates the name fields, and the upload writes a new
-     * N and FN, but a saved FN was still preferred locally. When the stored N line
-     * still has a prefix or suffix the fields no longer have, rebuild the visible
-     * name from the fields so the old prefix and suffix do not stay on screen.
-     * A formatted name that still matches the structured name is left as-is.
-     */
     internal fun alignContactDisplayName(
         prefix: String,
         givenName: String,
@@ -1391,6 +1383,8 @@ object VCardMapper {
         organization: String,
         storedDisplayName: String,
         scalarExtras: Map<String, VCardSyntaxExtras>,
+        previousNickname: String? = null,
+        previousOrganization: String? = null,
     ): AlignedContactName {
         val partsName = listOf(prefix, givenName, middleName, familyName, suffix)
             .filter { it.isNotBlank() }
@@ -1402,15 +1396,18 @@ object VCardMapper {
         val structuredChanged = nRaw.isNotEmpty() &&
             structuredNameComponents(nRaw) != structuredNameComponents(columnRaw)
         if (!structuredChanged) {
-            val fnRaw = fnEntry?.value?.rawValue?.trim().orEmpty()
-            val display = fnRaw.ifBlank { storedDisplayName.trim() }
-                .ifBlank { partsName }
-                .ifBlank { nickname.trim().ifBlank { organization.trim().ifBlank { "Unnamed" } } }
-            return AlignedContactName(display, scalarExtras)
+            return alignedNameWhenStructuredUnchanged(
+                partsName = partsName,
+                nickname = nickname,
+                organization = organization,
+                storedDisplayName = storedDisplayName,
+                scalarExtras = scalarExtras,
+                fnEntry = fnEntry,
+                previousNickname = previousNickname,
+                previousOrganization = previousOrganization,
+            )
         }
-        val rebuilt = partsName.ifBlank {
-            nickname.trim().ifBlank { organization.trim().ifBlank { "Unnamed" } }
-        }
+        val rebuilt = partsName.ifBlank { fallbackDisplayName(nickname, organization) }
         val next = scalarExtras.toMutableMap()
         if (nEntry != null) {
             next[nEntry.key] = nEntry.value.copy(rawValue = columnRaw)
@@ -1419,6 +1416,66 @@ object VCardMapper {
             next[fnEntry.key] = fnEntry.value.copy(rawValue = rebuilt)
         }
         return AlignedContactName(rebuilt, next)
+    }
+
+    /**
+     * Empty N uses nickname, then organization, then "Unnamed". A custom FN stays
+     * when that fallback did not change. List repair has no previous nickname: a
+     * different non-blank nickname replaces a stale FN. Phonetic names are not shown.
+     */
+    private fun alignedNameWhenStructuredUnchanged(
+        partsName: String,
+        nickname: String,
+        organization: String,
+        storedDisplayName: String,
+        scalarExtras: Map<String, VCardSyntaxExtras>,
+        fnEntry: Map.Entry<String, VCardSyntaxExtras>?,
+        previousNickname: String?,
+        previousOrganization: String?,
+    ): AlignedContactName {
+        val fnRaw = fnEntry?.value?.rawValue?.trim().orEmpty()
+        if (partsName.isNotBlank()) {
+            val display = fnRaw.ifBlank { storedDisplayName.trim() }.ifBlank { partsName }
+            return AlignedContactName(display, scalarExtras)
+        }
+        val nick = nickname.trim()
+        val org = organization.trim()
+        val shown = fnRaw.ifBlank { storedDisplayName.trim() }
+        val nicknameChanged = if (previousNickname != null) {
+            nick != previousNickname.trim()
+        } else {
+            nick.isNotBlank() && nick != shown
+        }
+        val organizationChanged = previousOrganization != null &&
+            org != previousOrganization.trim()
+        val fallbackChanged = if (nick.isNotBlank()) {
+            nicknameChanged
+        } else {
+            nicknameChanged || organizationChanged
+        }
+        if (!fallbackChanged) {
+            val display = shown.ifBlank { fallbackDisplayName(nick, org) }
+            return AlignedContactName(display, scalarExtras)
+        }
+        val rebuilt = fallbackDisplayName(nick, org)
+        return AlignedContactName(rebuilt, withFormattedName(scalarExtras, fnEntry, rebuilt))
+    }
+
+    private fun fallbackDisplayName(nickname: String, organization: String): String =
+        nickname.trim().ifBlank { organization.trim().ifBlank { "Unnamed" } }
+
+    private fun withFormattedName(
+        scalarExtras: Map<String, VCardSyntaxExtras>,
+        fnEntry: Map.Entry<String, VCardSyntaxExtras>?,
+        value: String,
+    ): Map<String, VCardSyntaxExtras> {
+        if (fnEntry == null) {
+            return scalarExtras + ("FN" to VCardSyntaxExtras(rawValue = value))
+        }
+        if (fnEntry.value.rawValue.trim() == value) return scalarExtras
+        return scalarExtras.toMutableMap().also { next ->
+            next[fnEntry.key] = fnEntry.value.copy(rawValue = value)
+        }
     }
 
     private fun structuredNameRaw(

@@ -482,7 +482,7 @@
     <string name="login_http_failed">Pieteikšanās neizdevās: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Kārtot</string>
+    <string name="screen_organize">Krājums</string>
     <string name="organize_bin_summary">Nesen dzēstie kontakti</string>
     <string name="organize_import_summary">Imports, eksports un tālruņa kontakti</string>
     <string name="organize_calendar_summary">Dzimšanas dienas, gadadienas un nāves</string>
@@ -492,8 +492,8 @@
     <string name="msg_emergency_unavailable">Neizdevās atvērt ārkārtas kontaktus</string>
     <string name="empty_no_emergency_contacts">Nav ārkārtas kontaktu</string>
     <string name="section_bin">Atkritne</string>
-    <string name="empty_bin">Nav dzēstu kontaktu</string>
-    <string name="bin_kept_days">Glabā 3 dienas.</string>
+    <string name="empty_bin">Nav dzēstu kontaktu.</string>
+    <string name="bin_kept_days">Dzēstie kontakti paliek šeit 3 dienas.</string>
     <string name="action_restore">Atjaunot</string>
     <plurals name="bin_days_left">
         <item quantity="zero">atlikušas %d dienu</item>

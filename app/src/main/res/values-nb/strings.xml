@@ -467,7 +467,7 @@
     </plurals>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Organiser</string>
+    <string name="screen_organize">Samling</string>
     <string name="organize_bin_summary">Nylig slettede kontakter</string>
     <string name="organize_import_summary">Import, eksport og telefonkontakter</string>
     <string name="organize_calendar_summary">Bursdager, jubileer og dødsfall</string>
@@ -477,8 +477,8 @@
     <string name="msg_emergency_unavailable">Kunne ikke åpne nødkontakter</string>
     <string name="empty_no_emergency_contacts">Ingen nødkontakter</string>
     <string name="section_bin">Papirkurv</string>
-    <string name="empty_bin">Ingen slettede kontakter</string>
-    <string name="bin_kept_days">Beholdes i 3 dager.</string>
+    <string name="empty_bin">Ingen slettede kontakter.</string>
+    <string name="bin_kept_days">Slettede kontakter blir her i 3 dager.</string>
     <string name="action_restore">Gjenopprett</string>
     <plurals name="bin_days_left">
         <item quantity="one">%d dag igjen</item>

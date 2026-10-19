@@ -452,7 +452,7 @@
     <string name="login_http_failed">로그인 실패: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">정리</string>
+    <string name="screen_organize">모음</string>
     <string name="organize_bin_summary">최근 삭제한 연락처</string>
     <string name="organize_import_summary">가져오기, 내보내기, 휴대전화 연락처</string>
     <string name="organize_calendar_summary">생일, 기념일, 기일</string>
@@ -462,8 +462,8 @@
     <string name="msg_emergency_unavailable">긴급 연락처를 열 수 없음</string>
     <string name="empty_no_emergency_contacts">긴급 연락처 없음</string>
     <string name="section_bin">휴지통</string>
-    <string name="empty_bin">삭제한 연락처 없음</string>
-    <string name="bin_kept_days">3일간 보관.</string>
+    <string name="empty_bin">삭제한 연락처 없음.</string>
+    <string name="bin_kept_days">삭제한 연락처는 3일간 여기에 남습니다.</string>
     <string name="action_restore">복원</string>
     <plurals name="bin_days_left">
         <item quantity="other">%d일 남음</item>

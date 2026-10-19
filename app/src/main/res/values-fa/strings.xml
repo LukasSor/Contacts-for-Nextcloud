@@ -467,7 +467,7 @@
     <string name="login_http_failed">ورود ناموفق: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">سازماندهی</string>
+    <string name="screen_organize">مجموعه</string>
     <string name="organize_bin_summary">مخاطبین تازه حذف‌شده</string>
     <string name="organize_import_summary">وارد کردن، خروجی و مخاطبین تلفن</string>
     <string name="organize_calendar_summary">تولد، سالگرد و فوت</string>
@@ -477,8 +477,8 @@
     <string name="msg_emergency_unavailable">مخاطبین اضطراری باز نشد</string>
     <string name="empty_no_emergency_contacts">مخاطب اضطراری نیست</string>
     <string name="section_bin">سطل زباله</string>
-    <string name="empty_bin">مخاطب حذف‌شده نیست</string>
-    <string name="bin_kept_days">۳ روز نگه داشته می‌شود.</string>
+    <string name="empty_bin">مخاطب حذف‌شده نیست.</string>
+    <string name="bin_kept_days">مخاطبان حذف‌شده ۳ روز اینجا می‌مانند.</string>
     <string name="action_restore">بازیابی</string>
     <plurals name="bin_days_left">
         <item quantity="one">%d روز مانده</item>

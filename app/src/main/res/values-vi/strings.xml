@@ -452,7 +452,7 @@
     <string name="login_http_failed">Đăng nhập lỗi: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Sắp xếp</string>
+    <string name="screen_organize">Bộ sưu tập</string>
     <string name="organize_bin_summary">Danh bạ vừa xóa</string>
     <string name="organize_import_summary">Nhập, xuất và danh bạ điện thoại</string>
     <string name="organize_calendar_summary">Sinh nhật, kỷ niệm và ngày mất</string>
@@ -462,8 +462,8 @@
     <string name="msg_emergency_unavailable">Không mở được danh bạ khẩn cấp</string>
     <string name="empty_no_emergency_contacts">Không có danh bạ khẩn cấp</string>
     <string name="section_bin">Thùng rác</string>
-    <string name="empty_bin">Không có danh bạ đã xóa</string>
-    <string name="bin_kept_days">Giữ 3 ngày.</string>
+    <string name="empty_bin">Không có danh bạ đã xóa.</string>
+    <string name="bin_kept_days">Danh bạ đã xóa ở lại đây 3 ngày.</string>
     <string name="action_restore">Khôi phục</string>
     <plurals name="bin_days_left">
         <item quantity="other">còn %d ngày</item>

@@ -467,7 +467,7 @@
     </plurals>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Rendezés</string>
+    <string name="screen_organize">Gyűjtemény</string>
     <string name="organize_bin_summary">Nemrég törölt névjegyek</string>
     <string name="organize_import_summary">Import, export és telefonnévjegyek</string>
     <string name="organize_calendar_summary">Születésnapok, évfordulók és halálozások</string>
@@ -477,8 +477,8 @@
     <string name="msg_emergency_unavailable">A vészhelyzeti névjegyek nem nyílnak meg</string>
     <string name="empty_no_emergency_contacts">Nincs vészhelyzeti névjegy</string>
     <string name="section_bin">Kuka</string>
-    <string name="empty_bin">Nincs törölt névjegy</string>
-    <string name="bin_kept_days">3 napig megőrizve.</string>
+    <string name="empty_bin">Nincs törölt névjegy.</string>
+    <string name="bin_kept_days">A törölt névjegyek 3 napig maradnak itt.</string>
     <string name="action_restore">Visszaállítás</string>
     <plurals name="bin_days_left">
         <item quantity="one">%d nap van hátra</item>

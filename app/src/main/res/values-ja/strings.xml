@@ -452,7 +452,7 @@
     <string name="login_http_failed">ログイン失敗: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">整理</string>
+    <string name="screen_organize">コレクション</string>
     <string name="organize_bin_summary">最近削除した連絡先</string>
     <string name="organize_import_summary">インポート、エクスポート、電話の連絡先</string>
     <string name="organize_calendar_summary">誕生日、記念日、命日</string>
@@ -462,8 +462,8 @@
     <string name="msg_emergency_unavailable">緊急連絡先を開けません</string>
     <string name="empty_no_emergency_contacts">緊急連絡先なし</string>
     <string name="section_bin">ゴミ箱</string>
-    <string name="empty_bin">削除した連絡先なし</string>
-    <string name="bin_kept_days">3日間保持。</string>
+    <string name="empty_bin">削除した連絡先なし。</string>
+    <string name="bin_kept_days">削除した連絡先は3日間ここに残ります。</string>
     <string name="action_restore">復元</string>
     <plurals name="bin_days_left">
         <item quantity="other">残り%d日</item>

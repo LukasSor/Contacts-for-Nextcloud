@@ -452,7 +452,7 @@
     <string name="login_http_failed">Masuk gagal: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Atur</string>
+    <string name="screen_organize">Koleksi</string>
     <string name="organize_bin_summary">Kontak yang baru dihapus</string>
     <string name="organize_import_summary">Impor, ekspor, dan kontak ponsel</string>
     <string name="organize_calendar_summary">Ulang tahun, hari jadi, dan wafat</string>
@@ -462,8 +462,8 @@
     <string name="msg_emergency_unavailable">Kontak darurat tidak dapat dibuka</string>
     <string name="empty_no_emergency_contacts">Tidak ada kontak darurat</string>
     <string name="section_bin">Tempat sampah</string>
-    <string name="empty_bin">Tidak ada kontak terhapus</string>
-    <string name="bin_kept_days">Disimpan 3 hari.</string>
+    <string name="empty_bin">Tidak ada kontak terhapus.</string>
+    <string name="bin_kept_days">Kontak terhapus tetap di sini 3 hari.</string>
     <string name="action_restore">Pulihkan</string>
     <plurals name="bin_days_left">
         <item quantity="other">%d hari lagi</item>

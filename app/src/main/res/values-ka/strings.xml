@@ -467,7 +467,7 @@
     <string name="login_http_failed">შესვლა ვერ მოხერხდა: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">ორგანიზება</string>
+    <string name="screen_organize">კოლექცია</string>
     <string name="organize_bin_summary">ახლახან წაშლილი კონტაქტები</string>
     <string name="organize_import_summary">იმპორტი, ექსპორტი და ტელეფონის კონტაქტები</string>
     <string name="organize_calendar_summary">დაბადების დღეები, წლისთავები და გარდაცვალება</string>
@@ -477,8 +477,8 @@
     <string name="msg_emergency_unavailable">საგანგებო კონტაქტები ვერ გაიხსნა</string>
     <string name="empty_no_emergency_contacts">საგანგებო კონტაქტები არ არის</string>
     <string name="section_bin">ურნა</string>
-    <string name="empty_bin">წაშლილი კონტაქტები არ არის</string>
-    <string name="bin_kept_days">3 დღე ინახება.</string>
+    <string name="empty_bin">წაშლილი კონტაქტები არ არის.</string>
+    <string name="bin_kept_days">წაშლილი კონტაქტები 3 დღე აქ რჩებიან.</string>
     <string name="action_restore">აღდგენა</string>
     <plurals name="bin_days_left">
         <item quantity="one">დარჩა %d დღე</item>

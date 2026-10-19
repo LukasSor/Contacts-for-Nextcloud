@@ -467,7 +467,7 @@
     <string name="login_http_failed">كىرىش مەغلۇپ بولدى: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">تەرتىپلە</string>
+    <string name="screen_organize">توپلام</string>
     <string name="organize_bin_summary">يېقىندا ئۆچۈرۈلگەن ئالاقىداشلار</string>
     <string name="organize_import_summary">ئەكىرىش، چىقىرىش ۋە تېلېفون ئالاقىداشلىرى</string>
     <string name="organize_calendar_summary">تۇغۇلغان كۈن، يىللىق خاتىرە ۋە ۋاپات</string>
@@ -477,8 +477,8 @@
     <string name="msg_emergency_unavailable">جىددىي ئالاقىداشلارنى ئاچالمىدى</string>
     <string name="empty_no_emergency_contacts">جىددىي ئالاقىداش يوق</string>
     <string name="section_bin">ئەخلەت ساندۇقى</string>
-    <string name="empty_bin">ئۆچۈرۈلگەن ئالاقىداش يوق</string>
-    <string name="bin_kept_days">3 كۈن ساقلىنىدۇ.</string>
+    <string name="empty_bin">ئۆچۈرۈلگەن ئالاقىداش يوق.</string>
+    <string name="bin_kept_days">ئۆچۈرۈلگەن ئالاقىداشلار 3 كۈن بۇ يەردە تۇرىدۇ.</string>
     <string name="action_restore">ئەسلىگە كەلتۈر</string>
     <plurals name="bin_days_left">
         <item quantity="one">%d كۈن قالدى</item>

@@ -497,7 +497,7 @@
     <string name="login_http_failed">Prijava ni uspela: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Uredi</string>
+    <string name="screen_organize">Zbirka</string>
     <string name="organize_bin_summary">Nedavno izbrisani stiki</string>
     <string name="organize_import_summary">Uvoz, izvoz in stiki telefona</string>
     <string name="organize_calendar_summary">Rojstni dnevi, obletnice in smrti</string>
@@ -507,8 +507,8 @@
     <string name="msg_emergency_unavailable">Stikov v sili ni bilo mogoče odpreti</string>
     <string name="empty_no_emergency_contacts">Ni stikov v sili</string>
     <string name="section_bin">Smetnjak</string>
-    <string name="empty_bin">Ni izbrisanih stikov</string>
-    <string name="bin_kept_days">Shranjeno 3 dni.</string>
+    <string name="empty_bin">Ni izbrisanih stikov.</string>
+    <string name="bin_kept_days">Izbrisani stiki ostanejo tukaj 3 dni.</string>
     <string name="action_restore">Obnovi</string>
     <plurals name="bin_days_left">
         <item quantity="one">še %d dan</item>

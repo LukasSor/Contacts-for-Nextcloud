@@ -467,7 +467,7 @@
     <string name="login_http_failed">Hyrja dështoi: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Organizo</string>
+    <string name="screen_organize">Koleksion</string>
     <string name="organize_bin_summary">Kontakte të fshira së fundmi</string>
     <string name="organize_import_summary">Importo, eksporto dhe kontaktet e telefonit</string>
     <string name="organize_calendar_summary">Datëlindje, përvjetorë dhe vdekje</string>
@@ -477,8 +477,8 @@
     <string name="msg_emergency_unavailable">Kontaktet e urgjencës nuk u hapën</string>
     <string name="empty_no_emergency_contacts">Pa kontakte urgjence</string>
     <string name="section_bin">Koshi</string>
-    <string name="empty_bin">Pa kontakte të fshira</string>
-    <string name="bin_kept_days">Ruhet 3 ditë.</string>
+    <string name="empty_bin">Pa kontakte të fshira.</string>
+    <string name="bin_kept_days">Kontaktet e fshira qëndrojnë këtu 3 ditë.</string>
     <string name="action_restore">Rikthe</string>
     <plurals name="bin_days_left">
         <item quantity="one">%d ditë mbetur</item>

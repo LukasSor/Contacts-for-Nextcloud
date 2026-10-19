@@ -175,7 +175,7 @@ fun ContactEditScreen(
         )
     }
 
-    if (showNextcloudAccountPicker) {
+    if (showNextcloudAccountPicker && cloudUserSearch.canSearch) {
         NextcloudUserPickerDialog(
             state = cloudUserSearch,
             onQueryChange = viewModel::searchCloudUsers,
@@ -1276,7 +1276,7 @@ fun ContactEditScreen(
                     GroupedFormSpacer()
                 }
 
-                if (!fieldSyntaxEnabled) {
+                if (!fieldSyntaxEnabled && cloudUserSearch.canSearch) {
                     GroupedFormSection(
                         rows = listOf {
                             FormAddRow(
@@ -1291,7 +1291,9 @@ fun ContactEditScreen(
                 }
 
                 if (state.isHiddenFieldVisible(ContactEditHiddenField.WEBSITE, fieldMode)) {
-                    GroupedFormSpacer()
+                    if (fieldSyntaxEnabled || cloudUserSearch.canSearch) {
+                        GroupedFormSpacer()
+                    }
                     GroupedFormSection(
                         rows = buildList {
                             state.urls.forEachIndexed { index, field ->

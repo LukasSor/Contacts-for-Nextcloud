@@ -467,7 +467,7 @@
     </plurals>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Οργάνωση</string>
+    <string name="screen_organize">Συλλογή</string>
     <string name="organize_bin_summary">Πρόσφατα διαγραμμένες επαφές</string>
     <string name="organize_import_summary">Εισαγωγή, εξαγωγή και επαφές τηλεφώνου</string>
     <string name="organize_calendar_summary">Γενέθλια, επέτειοι και θάνατοι</string>
@@ -477,8 +477,8 @@
     <string name="msg_emergency_unavailable">Δεν άνοιξαν οι επαφές έκτακτης ανάγκης</string>
     <string name="empty_no_emergency_contacts">Καμία επαφή έκτακτης ανάγκης</string>
     <string name="section_bin">Κάδος</string>
-    <string name="empty_bin">Καμία διαγραμμένη επαφή</string>
-    <string name="bin_kept_days">Διατηρείται 3 ημέρες.</string>
+    <string name="empty_bin">Καμία διαγραμμένη επαφή.</string>
+    <string name="bin_kept_days">Οι διαγραμμένες επαφές μένουν εδώ 3 ημέρες.</string>
     <string name="action_restore">Επαναφορά</string>
     <plurals name="bin_days_left">
         <item quantity="one">ακόμα %d ημέρα</item>

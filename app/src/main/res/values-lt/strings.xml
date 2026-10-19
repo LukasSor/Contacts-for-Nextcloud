@@ -482,7 +482,7 @@
     <string name="login_http_failed">Prisijungti nepavyko: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Tvarkyti</string>
+    <string name="screen_organize">Rinkinys</string>
     <string name="organize_bin_summary">Neseniai ištrinti adresatai</string>
     <string name="organize_import_summary">Importas, eksportas ir telefono adresatai</string>
     <string name="organize_calendar_summary">Gimtadieniai, sukaktys ir mirtys</string>
@@ -492,8 +492,8 @@
     <string name="msg_emergency_unavailable">Nepavyko atidaryti pagalbos adresatų</string>
     <string name="empty_no_emergency_contacts">Nėra pagalbos adresatų</string>
     <string name="section_bin">Šiukšlinė</string>
-    <string name="empty_bin">Nėra ištrintų adresatų</string>
-    <string name="bin_kept_days">Saugoma 3 dienas.</string>
+    <string name="empty_bin">Nėra ištrintų adresatų.</string>
+    <string name="bin_kept_days">Ištrinti adresatai lieka čia 3 dienas.</string>
     <string name="action_restore">Atkurti</string>
     <plurals name="bin_days_left">
         <item quantity="one">liko %d diena</item>

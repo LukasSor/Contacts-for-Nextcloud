@@ -467,7 +467,7 @@
     <string name="login_http_failed">Входът не успя: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Организиране</string>
+    <string name="screen_organize">Колекция</string>
     <string name="organize_bin_summary">Наскоро изтрити контакти</string>
     <string name="organize_import_summary">Внос, износ и телефонни контакти</string>
     <string name="organize_calendar_summary">Рождени дни, годишнини и смърт</string>
@@ -477,8 +477,8 @@
     <string name="msg_emergency_unavailable">Спешните контакти не се отвориха</string>
     <string name="empty_no_emergency_contacts">Няма спешни контакти</string>
     <string name="section_bin">Кошче</string>
-    <string name="empty_bin">Няма изтрити контакти</string>
-    <string name="bin_kept_days">Пази се 3 дни.</string>
+    <string name="empty_bin">Няма изтрити контакти.</string>
+    <string name="bin_kept_days">Изтритите контакти остават тук 3 дни.</string>
     <string name="action_restore">Възстанови</string>
     <plurals name="bin_days_left">
         <item quantity="one">още %d ден</item>

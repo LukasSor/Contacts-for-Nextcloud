@@ -141,7 +141,7 @@ fun FormSocialProfileRow(
                     inner()
                 },
             )
-            if (isNextcloud && value.isBlank()) {
+            if (isNextcloud && value.isBlank() && searchState.canSearch) {
                 Row(
                     modifier = Modifier
                         .padding(top = 8.dp)
@@ -192,7 +192,7 @@ fun FormSocialProfileRow(
         )
     }
 
-    if (showUserPicker && !freeFormInputs) {
+    if (showUserPicker && !freeFormInputs && searchState.canSearch) {
         NextcloudUserPickerDialog(
             state = searchState,
             onQueryChange = onSearchQueryChange,

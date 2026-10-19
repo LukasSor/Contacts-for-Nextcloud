@@ -467,7 +467,7 @@
     <string name="login_http_failed">Најавата не успеа: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Организирај</string>
+    <string name="screen_organize">Збирка</string>
     <string name="organize_bin_summary">Неодамна избришани контакти</string>
     <string name="organize_import_summary">Увоз, извоз и контакти на телефонот</string>
     <string name="organize_calendar_summary">Родендени, годишнини и смрт</string>
@@ -477,8 +477,8 @@
     <string name="msg_emergency_unavailable">Итните контакти не се отворија</string>
     <string name="empty_no_emergency_contacts">Нема итни контакти</string>
     <string name="section_bin">Корпа</string>
-    <string name="empty_bin">Нема избришани контакти</string>
-    <string name="bin_kept_days">Се чува 3 дена.</string>
+    <string name="empty_bin">Нема избришани контакти.</string>
+    <string name="bin_kept_days">Избришаните контакти остануваат тука 3 дена.</string>
     <string name="action_restore">Врати</string>
     <plurals name="bin_days_left">
         <item quantity="one">уште %d ден</item>

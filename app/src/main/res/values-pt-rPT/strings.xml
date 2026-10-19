@@ -482,7 +482,7 @@
     <string name="login_http_failed">Falha ao iniciar sessão: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Organizar</string>
+    <string name="screen_organize">Coleção</string>
     <string name="organize_bin_summary">Contactos apagados recentemente</string>
     <string name="organize_import_summary">Importar, exportar e contactos do telefone</string>
     <string name="organize_calendar_summary">Datas de nascimento, aniversários e falecimentos</string>
@@ -492,8 +492,8 @@
     <string name="msg_emergency_unavailable">Não foi possível abrir os contactos de emergência</string>
     <string name="empty_no_emergency_contacts">Nenhum contacto de emergência</string>
     <string name="section_bin">Reciclagem</string>
-    <string name="empty_bin">Nenhum contacto apagado</string>
-    <string name="bin_kept_days">Mantido 3 dias.</string>
+    <string name="empty_bin">Nenhum contacto apagado.</string>
+    <string name="bin_kept_days">Os contactos apagados ficam aqui 3 dias.</string>
     <string name="action_restore">Restaurar</string>
     <plurals name="bin_days_left">
         <item quantity="one">%d dia restante</item>

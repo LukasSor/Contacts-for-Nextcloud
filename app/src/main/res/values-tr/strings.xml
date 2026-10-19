@@ -467,7 +467,7 @@
     <string name="login_http_failed">Oturum açılamadı: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Düzenle</string>
+    <string name="screen_organize">Koleksiyon</string>
     <string name="organize_bin_summary">Yakın zamanda silinen kişiler</string>
     <string name="organize_import_summary">İçe aktarma, dışa aktarma ve telefon kişileri</string>
     <string name="organize_calendar_summary">Doğum günleri, yıl dönümleri ve ölümler</string>
@@ -477,8 +477,8 @@
     <string name="msg_emergency_unavailable">Acil kişiler açılamadı</string>
     <string name="empty_no_emergency_contacts">Acil kişi yok</string>
     <string name="section_bin">Çöp kutusu</string>
-    <string name="empty_bin">Silinmiş kişi yok</string>
-    <string name="bin_kept_days">3 gün saklanır.</string>
+    <string name="empty_bin">Silinmiş kişi yok.</string>
+    <string name="bin_kept_days">Silinen kişiler 3 gün burada kalır.</string>
     <string name="action_restore">Geri yükle</string>
     <plurals name="bin_days_left">
         <item quantity="one">%d gün kaldı</item>

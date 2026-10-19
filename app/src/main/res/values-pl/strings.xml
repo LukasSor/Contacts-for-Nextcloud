@@ -497,7 +497,7 @@
     <string name="login_http_failed">Logowanie nieudane: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Porządkuj</string>
+    <string name="screen_organize">Zbiór</string>
     <string name="organize_bin_summary">Ostatnio usunięte kontakty</string>
     <string name="organize_import_summary">Import, eksport i kontakty telefonu</string>
     <string name="organize_calendar_summary">Urodziny, rocznice i zgony</string>
@@ -507,8 +507,8 @@
     <string name="msg_emergency_unavailable">Nie można otworzyć kontaktów alarmowych</string>
     <string name="empty_no_emergency_contacts">Brak kontaktów alarmowych</string>
     <string name="section_bin">Kosz</string>
-    <string name="empty_bin">Brak usuniętych kontaktów</string>
-    <string name="bin_kept_days">Trzymane 3 dni.</string>
+    <string name="empty_bin">Brak usuniętych kontaktów.</string>
+    <string name="bin_kept_days">Usunięte kontakty zostają tu 3 dni.</string>
     <string name="action_restore">Przywróć</string>
     <plurals name="bin_days_left">
         <item quantity="one">został %d dzień</item>

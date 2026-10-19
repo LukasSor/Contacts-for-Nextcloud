@@ -467,7 +467,7 @@
     <string name="login_http_failed">Sisselogimine ebaõnnestus: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Korralda</string>
+    <string name="screen_organize">Kogumik</string>
     <string name="organize_bin_summary">Hiljuti kustutatud kontaktid</string>
     <string name="organize_import_summary">Import, eksport ja telefoni kontaktid</string>
     <string name="organize_calendar_summary">Sünnipäevad, aastapäevad ja surmad</string>
@@ -477,8 +477,8 @@
     <string name="msg_emergency_unavailable">Hädaabikontakte ei saanud avada</string>
     <string name="empty_no_emergency_contacts">Hädaabikontakte pole</string>
     <string name="section_bin">Prügikast</string>
-    <string name="empty_bin">Kustutatud kontakte pole</string>
-    <string name="bin_kept_days">Säilitatakse 3 päeva.</string>
+    <string name="empty_bin">Kustutatud kontakte pole.</string>
+    <string name="bin_kept_days">Kustutatud kontaktid jäävad siia 3 päevaks.</string>
     <string name="action_restore">Taasta</string>
     <plurals name="bin_days_left">
         <item quantity="one">%d päev jäänud</item>

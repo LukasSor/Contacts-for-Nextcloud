@@ -467,7 +467,7 @@
     <string name="login_http_failed">Login failed: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Organize</string>
+    <string name="screen_organize">Collection</string>
     <string name="organize_bin_summary">Recently deleted contacts</string>
     <string name="organize_import_summary">Import, export, and phone contacts</string>
     <string name="organize_calendar_summary">Birthdays, anniversaries, and deaths</string>
@@ -477,8 +477,8 @@
     <string name="msg_emergency_unavailable">Could not open emergency contacts</string>
     <string name="empty_no_emergency_contacts">No emergency contacts</string>
     <string name="section_bin">Bin</string>
-    <string name="empty_bin">No deleted contacts</string>
-    <string name="bin_kept_days">Kept for 3 days.</string>
+    <string name="empty_bin">No deleted contacts.</string>
+    <string name="bin_kept_days">Deleted contacts stay here for 3 days.</string>
     <string name="action_restore">Restore</string>
     <plurals name="bin_days_left">
         <item quantity="one">%d day left</item>

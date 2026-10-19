@@ -497,7 +497,7 @@
     <string name="login_http_failed">Уваход не ўдаўся: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Упарадкаваць</string>
+    <string name="screen_organize">Калекцыя</string>
     <string name="organize_bin_summary">Нядаўна выдаленыя кантакты</string>
     <string name="organize_import_summary">Імпарт, экспарт і кантакты тэлефона</string>
     <string name="organize_calendar_summary">Дні нараджэння, гадавіны і смерці</string>
@@ -507,8 +507,8 @@
     <string name="msg_emergency_unavailable">Не ўдалося адкрыць экстранныя кантакты</string>
     <string name="empty_no_emergency_contacts">Няма экстранных кантактаў</string>
     <string name="section_bin">Кошык</string>
-    <string name="empty_bin">Няма выдаленых кантактаў</string>
-    <string name="bin_kept_days">Захоўваецца 3 дні.</string>
+    <string name="empty_bin">Няма выдаленых кантактаў.</string>
+    <string name="bin_kept_days">Выдаленыя кантакты застаюцца тут 3 дні.</string>
     <string name="action_restore">Аднавіць</string>
     <plurals name="bin_days_left">
         <item quantity="one">застаўся %d дзень</item>

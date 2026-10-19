@@ -497,7 +497,7 @@
     <string name="login_http_failed">הכניסה נכשלה: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">ארגון</string>
+    <string name="screen_organize">אוסף</string>
     <string name="organize_bin_summary">אנשי קשר שנמחקו לאחרונה</string>
     <string name="organize_import_summary">ייבוא, ייצוא ואנשי קשר בטלפון</string>
     <string name="organize_calendar_summary">ימי הולדת, ימי שנה ופטירות</string>
@@ -507,8 +507,8 @@
     <string name="msg_emergency_unavailable">לא ניתן לפתוח אנשי קשר לחירום</string>
     <string name="empty_no_emergency_contacts">אין אנשי קשר לחירום</string>
     <string name="section_bin">סל מחזור</string>
-    <string name="empty_bin">אין אנשי קשר שנמחקו</string>
-    <string name="bin_kept_days">נשמר ל-3 ימים.</string>
+    <string name="empty_bin">אין אנשי קשר שנמחקו.</string>
+    <string name="bin_kept_days">אנשי קשר שנמחקו נשארים כאן 3 ימים.</string>
     <string name="action_restore">שחזור</string>
     <plurals name="bin_days_left">
         <item quantity="one">נותר %d יום</item>

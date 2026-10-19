@@ -452,7 +452,7 @@
     <string name="login_http_failed">登录失败：HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">整理</string>
+    <string name="screen_organize">合集</string>
     <string name="organize_bin_summary">最近删除的联系人</string>
     <string name="organize_import_summary">导入、导出和手机联系人</string>
     <string name="organize_calendar_summary">生日、纪念日和去世</string>
@@ -462,8 +462,8 @@
     <string name="msg_emergency_unavailable">无法打开紧急联系人</string>
     <string name="empty_no_emergency_contacts">没有紧急联系人</string>
     <string name="section_bin">回收站</string>
-    <string name="empty_bin">没有已删除的联系人</string>
-    <string name="bin_kept_days">保留 3 天。</string>
+    <string name="empty_bin">没有已删除的联系人。</string>
+    <string name="bin_kept_days">已删除的联系人会留在这里 3 天。</string>
     <string name="action_restore">恢复</string>
     <plurals name="bin_days_left">
         <item quantity="other">剩余 %d 天</item>

@@ -497,7 +497,7 @@
     <string name="login_http_failed">Přihlášení selhalo: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Uspořádat</string>
+    <string name="screen_organize">Sbírka</string>
     <string name="organize_bin_summary">Nedávno smazané kontakty</string>
     <string name="organize_import_summary">Import, export a kontakty telefonu</string>
     <string name="organize_calendar_summary">Narozeniny, výročí a úmrtí</string>
@@ -507,8 +507,8 @@
     <string name="msg_emergency_unavailable">Nouzové kontakty nešlo otevřít</string>
     <string name="empty_no_emergency_contacts">Žádné nouzové kontakty</string>
     <string name="section_bin">Koš</string>
-    <string name="empty_bin">Žádné smazané kontakty</string>
-    <string name="bin_kept_days">Uchováno 3 dny.</string>
+    <string name="empty_bin">Žádné smazané kontakty.</string>
+    <string name="bin_kept_days">Smazané kontakty tu zůstanou 3 dny.</string>
     <string name="action_restore">Obnovit</string>
     <plurals name="bin_days_left">
         <item quantity="one">zbývá %d den</item>

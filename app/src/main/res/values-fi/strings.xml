@@ -467,7 +467,7 @@
     </plurals>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Järjestä</string>
+    <string name="screen_organize">Kokoelma</string>
     <string name="organize_bin_summary">Äskettäin poistetut yhteystiedot</string>
     <string name="organize_import_summary">Tuonti, vienti ja puhelimen yhteystiedot</string>
     <string name="organize_calendar_summary">Syntymäpäivät, vuosipäivät ja kuolemat</string>
@@ -477,8 +477,8 @@
     <string name="msg_emergency_unavailable">Hätäyhteystietoja ei voitu avata</string>
     <string name="empty_no_emergency_contacts">Ei hätäyhteystietoja</string>
     <string name="section_bin">Roskakori</string>
-    <string name="empty_bin">Ei poistettuja yhteystietoja</string>
-    <string name="bin_kept_days">Säilyy 3 päivää.</string>
+    <string name="empty_bin">Ei poistettuja yhteystietoja.</string>
+    <string name="bin_kept_days">Poistetut yhteystiedot pysyvät täällä 3 päivää.</string>
     <string name="action_restore">Palauta</string>
     <plurals name="bin_days_left">
         <item quantity="one">%d päivä jäljellä</item>

@@ -497,7 +497,7 @@
     <string name="login_http_failed">Вхід не вдався: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Упорядкувати</string>
+    <string name="screen_organize">Колекція</string>
     <string name="organize_bin_summary">Нещодавно вилучені контакти</string>
     <string name="organize_import_summary">Імпорт, експорт і контакти телефону</string>
     <string name="organize_calendar_summary">Дні народження, річниці та смерті</string>
@@ -507,8 +507,8 @@
     <string name="msg_emergency_unavailable">Не вдалося відкрити екстрені контакти</string>
     <string name="empty_no_emergency_contacts">Немає екстрених контактів</string>
     <string name="section_bin">Кошик</string>
-    <string name="empty_bin">Немає вилучених контактів</string>
-    <string name="bin_kept_days">Зберігається 3 дні.</string>
+    <string name="empty_bin">Немає вилучених контактів.</string>
+    <string name="bin_kept_days">Вилучені контакти залишаються тут 3 дні.</string>
     <string name="action_restore">Відновити</string>
     <plurals name="bin_days_left">
         <item quantity="one">залишився %d день</item>

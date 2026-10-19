@@ -467,7 +467,7 @@
     <string name="login_http_failed">Error de acceso: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Organizar</string>
+    <string name="screen_organize">Colección</string>
     <string name="organize_bin_summary">Contactos eliminados hace poco</string>
     <string name="organize_import_summary">Importar, exportar y contactos del teléfono</string>
     <string name="organize_calendar_summary">Cumpleaños, aniversarios y fallecimientos</string>
@@ -477,8 +477,8 @@
     <string name="msg_emergency_unavailable">No se pudieron abrir los contactos de emergencia</string>
     <string name="empty_no_emergency_contacts">Ningún contacto de emergencia</string>
     <string name="section_bin">Papelera</string>
-    <string name="empty_bin">Ningún contacto eliminado</string>
-    <string name="bin_kept_days">Se guarda 3 días.</string>
+    <string name="empty_bin">Ningún contacto eliminado.</string>
+    <string name="bin_kept_days">Los contactos eliminados se quedan aquí 3 días.</string>
     <string name="action_restore">Restaurar</string>
     <plurals name="bin_days_left">
         <item quantity="one">%d día restante</item>

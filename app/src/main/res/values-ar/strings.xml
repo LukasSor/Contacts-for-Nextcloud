@@ -527,7 +527,7 @@
     <string name="login_http_failed">فشل تسجيل الدخول: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">تنظيم</string>
+    <string name="screen_organize">مجموعة</string>
     <string name="organize_bin_summary">جهات اتصال محذوفة حديثاً</string>
     <string name="organize_import_summary">استيراد وتصدير وجهات الهاتف</string>
     <string name="organize_calendar_summary">أعياد ميلاد وذكريات ووفيات</string>
@@ -537,8 +537,8 @@
     <string name="msg_emergency_unavailable">تعذر فتح جهات اتصال الطوارئ</string>
     <string name="empty_no_emergency_contacts">لا جهات اتصال للطوارئ</string>
     <string name="section_bin">سلة المحذوفات</string>
-    <string name="empty_bin">لا جهات اتصال محذوفة</string>
-    <string name="bin_kept_days">يُحفظ 3 أيام.</string>
+    <string name="empty_bin">لا جهات اتصال محذوفة.</string>
+    <string name="bin_kept_days">جهات الاتصال المحذوفة تبقى هنا 3 أيام.</string>
     <string name="action_restore">استعادة</string>
     <plurals name="bin_days_left">
         <item quantity="zero">متبقٍ %d يوم</item>

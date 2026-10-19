@@ -50,6 +50,8 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.ImportExport
 import androidx.compose.material.icons.filled.Merge
 import androidx.compose.material.icons.filled.SwapHoriz
+import androidx.compose.material.icons.outlined.DeleteOutline
+import androidx.compose.material.icons.outlined.People
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -86,6 +88,7 @@ import com.nextcloud.contacts.platform.ContactCalendarEventKind
 import com.nextcloud.contacts.platform.EmergencyContacts
 import com.nextcloud.contacts.ui.components.AppSnackbarHost
 import com.nextcloud.contacts.ui.components.ContactAvatar
+import com.nextcloud.contacts.ui.components.IllustratedEmptyState
 import com.nextcloud.contacts.ui.components.ObserveUiNotices
 import com.nextcloud.contacts.ui.util.rememberCalendarPermissionAction
 import com.nextcloud.contacts.ui.util.rememberDeviceContactsImportAction
@@ -272,19 +275,29 @@ fun OrganizeBinScreen(
         onBack = onBack,
         snackbarHostState = snackbarHostState,
     ) { padding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-                .verticalScroll(rememberScrollState()),
-        ) {
-            val deleted = state.deleted
-            if (deleted == null) {
-                Spacer(modifier = Modifier.height(8.dp))
-            } else if (deleted.isEmpty()) {
-                SupportingLine(stringResource(R.string.bin_kept_days))
-                SupportingLine(stringResource(R.string.empty_bin))
-            } else {
+        val deleted = state.deleted
+        if (deleted == null) {
+            Spacer(
+                modifier = Modifier
+                    .padding(padding)
+                    .height(8.dp),
+            )
+        } else if (deleted.isEmpty()) {
+            IllustratedEmptyState(
+                icon = Icons.Outlined.DeleteOutline,
+                message = stringResource(R.string.empty_bin),
+                supporting = stringResource(R.string.bin_kept_days),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding),
+            )
+        } else {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding)
+                    .verticalScroll(rememberScrollState()),
+            ) {
                 SupportingLine(stringResource(R.string.bin_kept_days))
                 Column(
                     modifier = Modifier
@@ -680,24 +693,29 @@ fun OrganizeMergeScreen(
         onBack = onBack,
         snackbarHostState = snackbarHostState,
     ) { padding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 16.dp, vertical = 8.dp),
-        ) {
-            val groups = state.duplicateMatches
-            if (groups == null) {
-                Spacer(modifier = Modifier.height(8.dp))
-            } else if (groups.isEmpty()) {
-                Text(
-                    text = stringResource(R.string.empty_no_duplicates),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(start = 4.dp, top = 8.dp),
-                )
-            } else {
+        val groups = state.duplicateMatches
+        if (groups == null) {
+            Spacer(
+                modifier = Modifier
+                    .padding(padding)
+                    .height(8.dp),
+            )
+        } else if (groups.isEmpty()) {
+            IllustratedEmptyState(
+                icon = Icons.Outlined.People,
+                message = stringResource(R.string.empty_no_duplicates),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding),
+            )
+        } else {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding)
+                    .verticalScroll(rememberScrollState())
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
+            ) {
                 var shownSection = false
                 listOf(
                     ContactDuplicates.Match.PHONE to R.string.merge_same_phone,
@@ -770,8 +788,8 @@ fun OrganizeMergeScreen(
                         }
                     }
                 }
+                Spacer(modifier = Modifier.height(12.dp))
             }
-            Spacer(modifier = Modifier.height(12.dp))
         }
     }
 }

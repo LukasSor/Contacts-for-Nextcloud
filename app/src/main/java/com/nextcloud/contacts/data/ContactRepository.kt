@@ -1624,6 +1624,8 @@ class ContactRepository(
             organization = input.organization,
             storedDisplayName = input.displayName,
             scalarExtras = input.scalarVcardExtras,
+            previousNickname = existing?.nickname,
+            previousOrganization = existing?.organization,
         )
         return base.copy(
             displayName = aligned.displayName,

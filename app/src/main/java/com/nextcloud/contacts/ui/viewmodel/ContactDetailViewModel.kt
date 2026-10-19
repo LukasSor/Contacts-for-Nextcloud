@@ -124,8 +124,9 @@ class ContactDetailViewModel(
     }
 }
 
+/** A failed upload of a server-linked star is undone. No account keeps the local star. */
 internal fun shouldRevertFavorite(result: SyncManager.SyncResult): Boolean =
-    result !is SyncManager.SyncResult.Success
+    result is SyncManager.SyncResult.Error
 
 /** Notes and messenger links are already stored. The worker posts the upload-failure notice when this is true. */
 internal fun detailFieldSaveNotifiesOnUploadFailure(): Boolean = true

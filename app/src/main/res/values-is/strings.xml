@@ -467,7 +467,7 @@
     <string name="login_http_failed">Innskráning mistókst: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Skipuleggja</string>
+    <string name="screen_organize">Safn</string>
     <string name="organize_bin_summary">Nýlega eyddir tengiliðir</string>
     <string name="organize_import_summary">Innflutningur, útflutningur og símatengiliðir</string>
     <string name="organize_calendar_summary">Afmælisdagar, afmæli og andlát</string>
@@ -477,8 +477,8 @@
     <string name="msg_emergency_unavailable">Ekki tókst að opna neyðartengiliði</string>
     <string name="empty_no_emergency_contacts">Engir neyðartengiliðir</string>
     <string name="section_bin">Rusl</string>
-    <string name="empty_bin">Engir eyddir tengiliðir</string>
-    <string name="bin_kept_days">Geymt í 3 daga.</string>
+    <string name="empty_bin">Engir eyddir tengiliðir.</string>
+    <string name="bin_kept_days">Eyddir tengiliðir eru hér í 3 daga.</string>
     <string name="action_restore">Endurheimta</string>
     <plurals name="bin_days_left">
         <item quantity="one">%d dagur eftir</item>

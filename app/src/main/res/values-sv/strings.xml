@@ -467,7 +467,7 @@
     <string name="login_http_failed">Inloggningen misslyckades: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Ordna</string>
+    <string name="screen_organize">Samling</string>
     <string name="organize_bin_summary">Nyligen borttagna kontakter</string>
     <string name="organize_import_summary">Import, export och telefonkontakter</string>
     <string name="organize_calendar_summary">Födelsedagar, jubileer och dödsfall</string>
@@ -477,8 +477,8 @@
     <string name="msg_emergency_unavailable">Kunde inte öppna nödkontakter</string>
     <string name="empty_no_emergency_contacts">Inga nödkontakter</string>
     <string name="section_bin">Papperskorg</string>
-    <string name="empty_bin">Inga borttagna kontakter</string>
-    <string name="bin_kept_days">Behålls i 3 dagar.</string>
+    <string name="empty_bin">Inga borttagna kontakter.</string>
+    <string name="bin_kept_days">Borttagna kontakter stannar här i 3 dagar.</string>
     <string name="action_restore">Återställ</string>
     <plurals name="bin_days_left">
         <item quantity="one">%d dag kvar</item>

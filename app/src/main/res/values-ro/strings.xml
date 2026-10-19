@@ -482,7 +482,7 @@
     </plurals>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Organizează</string>
+    <string name="screen_organize">Colecție</string>
     <string name="organize_bin_summary">Contacte șterse recent</string>
     <string name="organize_import_summary">Import, export și contacte din telefon</string>
     <string name="organize_calendar_summary">Zile de naștere, aniversări și decese</string>
@@ -492,8 +492,8 @@
     <string name="msg_emergency_unavailable">Contactele de urgență nu s-au putut deschide</string>
     <string name="empty_no_emergency_contacts">Niciun contact de urgență</string>
     <string name="section_bin">Coș</string>
-    <string name="empty_bin">Niciun contact șters</string>
-    <string name="bin_kept_days">Păstrat 3 zile.</string>
+    <string name="empty_bin">Niciun contact șters.</string>
+    <string name="bin_kept_days">Contactele șterse rămân aici 3 zile.</string>
     <string name="action_restore">Restaurare</string>
     <plurals name="bin_days_left">
         <item quantity="one">%d zi rămasă</item>

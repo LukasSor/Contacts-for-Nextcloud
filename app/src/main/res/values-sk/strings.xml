@@ -497,7 +497,7 @@
     </plurals>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Usporiadať</string>
+    <string name="screen_organize">Zbierka</string>
     <string name="organize_bin_summary">Nedávno odstránené kontakty</string>
     <string name="organize_import_summary">Import, export a kontakty telefónu</string>
     <string name="organize_calendar_summary">Narodeniny, výročia a úmrtia</string>
@@ -507,8 +507,8 @@
     <string name="msg_emergency_unavailable">Núdzové kontakty sa nepodarilo otvoriť</string>
     <string name="empty_no_emergency_contacts">Žiadne núdzové kontakty</string>
     <string name="section_bin">Kôš</string>
-    <string name="empty_bin">Žiadne odstránené kontakty</string>
-    <string name="bin_kept_days">Uchované 3 dni.</string>
+    <string name="empty_bin">Žiadne odstránené kontakty.</string>
+    <string name="bin_kept_days">Odstránené kontakty tu zostanú 3 dni.</string>
     <string name="action_restore">Obnoviť</string>
     <plurals name="bin_days_left">
         <item quantity="one">zostáva %d deň</item>

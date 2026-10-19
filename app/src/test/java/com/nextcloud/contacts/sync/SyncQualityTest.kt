@@ -298,7 +298,7 @@ class SyncQualityTest {
     @Test
     fun favoriteSyncErrorRevertsTheStar() {
         assertTrue(shouldRevertFavorite(SyncManager.SyncResult.Error("Could not sync favorite")))
-        assertTrue(shouldRevertFavorite(SyncManager.SyncResult.NotLoggedIn))
+        assertFalse(shouldRevertFavorite(SyncManager.SyncResult.NotLoggedIn))
         assertFalse(shouldRevertFavorite(SyncManager.SyncResult.Success()))
     }
 

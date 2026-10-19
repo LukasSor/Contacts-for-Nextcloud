@@ -467,7 +467,7 @@
     <string name="login_http_failed">Connexion échouée : HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Organiser</string>
+    <string name="screen_organize">Collection</string>
     <string name="organize_bin_summary">Contacts supprimés récemment</string>
     <string name="organize_import_summary">Importer, exporter et contacts du téléphone</string>
     <string name="organize_calendar_summary">Anniversaires, unions et décès</string>
@@ -477,8 +477,8 @@
     <string name="msg_emergency_unavailable">Impossible d\'ouvrir les contacts d\'urgence</string>
     <string name="empty_no_emergency_contacts">Aucun contact d\'urgence</string>
     <string name="section_bin">Corbeille</string>
-    <string name="empty_bin">Aucun contact supprimé</string>
-    <string name="bin_kept_days">Conservé 3 jours.</string>
+    <string name="empty_bin">Aucun contact supprimé.</string>
+    <string name="bin_kept_days">Les contacts supprimés restent ici 3 jours.</string>
     <string name="action_restore">Restaurer</string>
     <plurals name="bin_days_left">
         <item quantity="one">%d jour restant</item>

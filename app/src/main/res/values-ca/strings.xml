@@ -467,7 +467,7 @@
     <string name="login_http_failed">L\'inici de sessió ha fallat: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Organitza</string>
+    <string name="screen_organize">Col·lecció</string>
     <string name="organize_bin_summary">Contactes suprimits fa poc</string>
     <string name="organize_import_summary">Importa, exporta i contactes del telèfon</string>
     <string name="organize_calendar_summary">Aniversaris, commemoracions i defuncions</string>
@@ -477,8 +477,8 @@
     <string name="msg_emergency_unavailable">No s\'han pogut obrir els contactes d\'emergència</string>
     <string name="empty_no_emergency_contacts">Cap contacte d\'emergència</string>
     <string name="section_bin">Paperera</string>
-    <string name="empty_bin">Cap contacte suprimit</string>
-    <string name="bin_kept_days">Es guarda 3 dies.</string>
+    <string name="empty_bin">Cap contacte suprimit.</string>
+    <string name="bin_kept_days">Els contactes suprimits es queden aquí 3 dies.</string>
     <string name="action_restore">Restaura</string>
     <plurals name="bin_days_left">
         <item quantity="one">%d dia restant</item>

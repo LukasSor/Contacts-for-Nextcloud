@@ -452,7 +452,7 @@
     <string name="login_http_failed">เข้าสู่ระบบไม่สำเร็จ: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">จัดระเบียบ</string>
+    <string name="screen_organize">คอลเลกชัน</string>
     <string name="organize_bin_summary">รายชื่อที่ลบล่าสุด</string>
     <string name="organize_import_summary">นำเข้า ส่งออก และรายชื่อในโทรศัพท์</string>
     <string name="organize_calendar_summary">วันเกิด วันครบรอบ และวันเสียชีวิต</string>
@@ -462,8 +462,8 @@
     <string name="msg_emergency_unavailable">เปิดรายชื่อฉุกเฉินไม่ได้</string>
     <string name="empty_no_emergency_contacts">ไม่มีรายชื่อฉุกเฉิน</string>
     <string name="section_bin">ถังขยะ</string>
-    <string name="empty_bin">ไม่มีรายชื่อที่ลบ</string>
-    <string name="bin_kept_days">เก็บไว้ 3 วัน</string>
+    <string name="empty_bin">ไม่มีรายชื่อที่ลบ.</string>
+    <string name="bin_kept_days">รายชื่อที่ลบจะอยู่ที่นี่ 3 วัน.</string>
     <string name="action_restore">คืนค่า</string>
     <plurals name="bin_days_left">
         <item quantity="other">เหลือ %d วัน</item>

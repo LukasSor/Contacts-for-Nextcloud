@@ -264,6 +264,238 @@ class VCardDataSafetyTest {
     }
 
     @Test
+    fun nicknameChangeReplacesStaleFormattedNameWhenStructuredNameIsEmpty() {
+        val scalar = mapOf(
+            "FN" to VCardSyntaxExtras(rawValue = "OldNick"),
+            "N" to VCardSyntaxExtras(rawValue = ";;;;"),
+        )
+        val aligned = VCardMapper.alignContactDisplayName(
+            prefix = "",
+            givenName = "",
+            middleName = "",
+            familyName = "",
+            suffix = "",
+            nickname = "NewNick",
+            organization = "",
+            storedDisplayName = "NewNick",
+            scalarExtras = scalar,
+            previousNickname = "OldNick",
+        )
+        assertEquals("NewNick", aligned.displayName)
+        assertEquals("NewNick", aligned.scalarExtras.getValue("FN").rawValue)
+        assertEquals(";;;;", aligned.scalarExtras.getValue("N").rawValue)
+    }
+
+    @Test
+    fun staleNicknameDisplayNameIsRepairedWithoutAnotherNicknameEdit() {
+        val scalar = mapOf(
+            "FN" to VCardSyntaxExtras(rawValue = "OldNick", propertyGroup = "item1"),
+            "N" to VCardSyntaxExtras(rawValue = ";;;;"),
+        )
+        val aligned = VCardMapper.alignContactDisplayName(
+            prefix = "",
+            givenName = "",
+            middleName = "",
+            familyName = "",
+            suffix = "",
+            nickname = "NewNick",
+            organization = "Somewhere",
+            storedDisplayName = "OldNick",
+            scalarExtras = scalar,
+        )
+        assertEquals("NewNick", aligned.displayName)
+        assertEquals("NewNick", aligned.scalarExtras.getValue("FN").rawValue)
+        assertEquals("item1", aligned.scalarExtras.getValue("FN").propertyGroup)
+    }
+
+    @Test
+    fun customFormattedNameStaysWhenNicknameIsUnchangedAndBlank() {
+        val scalar = mapOf(
+            "FN" to VCardSyntaxExtras(rawValue = "Stage Name"),
+            "N" to VCardSyntaxExtras(rawValue = ";;;;"),
+        )
+        val aligned = VCardMapper.alignContactDisplayName(
+            prefix = "",
+            givenName = "",
+            middleName = "",
+            familyName = "",
+            suffix = "",
+            nickname = "",
+            organization = "",
+            storedDisplayName = "Unnamed",
+            scalarExtras = scalar,
+            previousNickname = "",
+            previousOrganization = "",
+        )
+        assertEquals("Stage Name", aligned.displayName)
+        assertEquals("Stage Name", aligned.scalarExtras.getValue("FN").rawValue)
+    }
+
+    @Test
+    fun customFormattedNameStaysWhenNicknameIsUnchanged() {
+        val scalar = mapOf(
+            "FN" to VCardSyntaxExtras(rawValue = "Stage Name"),
+            "N" to VCardSyntaxExtras(rawValue = ";;;;"),
+        )
+        val aligned = VCardMapper.alignContactDisplayName(
+            prefix = "",
+            givenName = "",
+            middleName = "",
+            familyName = "",
+            suffix = "",
+            nickname = "Art",
+            organization = "",
+            storedDisplayName = "Art",
+            scalarExtras = scalar,
+            previousNickname = "Art",
+        )
+        assertEquals("Stage Name", aligned.displayName)
+        assertEquals("Stage Name", aligned.scalarExtras.getValue("FN").rawValue)
+    }
+
+    @Test
+    fun nicknameChangeDoesNotReplaceStructuredOrCustomFormattedName() {
+        val custom = mapOf(
+            "FN" to VCardSyntaxExtras(rawValue = "Countess Ada"),
+            "N" to VCardSyntaxExtras(rawValue = "Lovelace;Ada;;;"),
+        )
+        val customAligned = VCardMapper.alignContactDisplayName(
+            prefix = "",
+            givenName = "Ada",
+            middleName = "",
+            familyName = "Lovelace",
+            suffix = "",
+            nickname = "Addy",
+            organization = "",
+            storedDisplayName = "Countess Ada",
+            scalarExtras = custom,
+            previousNickname = "Ada",
+        )
+        assertEquals("Countess Ada", customAligned.displayName)
+        assertEquals("Countess Ada", customAligned.scalarExtras.getValue("FN").rawValue)
+
+        val structured = mapOf(
+            "FN" to VCardSyntaxExtras(rawValue = "Ada Lovelace"),
+            "N" to VCardSyntaxExtras(rawValue = "Lovelace;Ada;;;"),
+        )
+        val structuredAligned = VCardMapper.alignContactDisplayName(
+            prefix = "",
+            givenName = "Ada",
+            middleName = "",
+            familyName = "Lovelace",
+            suffix = "",
+            nickname = "Addy",
+            organization = "",
+            storedDisplayName = "Ada Lovelace",
+            scalarExtras = structured,
+            previousNickname = "",
+        )
+        assertEquals("Ada Lovelace", structuredAligned.displayName)
+        assertEquals("Ada Lovelace", structuredAligned.scalarExtras.getValue("FN").rawValue)
+    }
+
+    @Test
+    fun organizationChangeReplacesStaleFormattedNameWhenNameAndNicknameAreEmpty() {
+        val scalar = mapOf(
+            "FN" to VCardSyntaxExtras(rawValue = "OldOrg"),
+            "N" to VCardSyntaxExtras(rawValue = ";;;;"),
+        )
+        val aligned = VCardMapper.alignContactDisplayName(
+            prefix = "",
+            givenName = "",
+            middleName = "",
+            familyName = "",
+            suffix = "",
+            nickname = "",
+            organization = "NewOrg",
+            storedDisplayName = "NewOrg",
+            scalarExtras = scalar,
+            previousNickname = "",
+            previousOrganization = "OldOrg",
+        )
+        assertEquals("NewOrg", aligned.displayName)
+        assertEquals("NewOrg", aligned.scalarExtras.getValue("FN").rawValue)
+    }
+
+    @Test
+    fun customFormattedNameStaysWhenOrganizationIsUnchanged() {
+        val scalar = mapOf(
+            "FN" to VCardSyntaxExtras(rawValue = "Stage Name"),
+            "N" to VCardSyntaxExtras(rawValue = ";;;;"),
+        )
+        val aligned = VCardMapper.alignContactDisplayName(
+            prefix = "",
+            givenName = "",
+            middleName = "",
+            familyName = "",
+            suffix = "",
+            nickname = "",
+            organization = "Acme",
+            storedDisplayName = "Acme",
+            scalarExtras = scalar,
+            previousNickname = "",
+            previousOrganization = "Acme",
+        )
+        assertEquals("Stage Name", aligned.displayName)
+        assertEquals("Stage Name", aligned.scalarExtras.getValue("FN").rawValue)
+
+        val repaired = VCardMapper.alignContactDisplayName(
+            prefix = "",
+            givenName = "",
+            middleName = "",
+            familyName = "",
+            suffix = "",
+            nickname = "",
+            organization = "Acme",
+            storedDisplayName = "Stage Name",
+            scalarExtras = scalar,
+        )
+        assertEquals("Stage Name", repaired.displayName)
+        assertEquals("Stage Name", repaired.scalarExtras.getValue("FN").rawValue)
+    }
+
+    @Test
+    fun clearedNicknameFallsThroughToOrganizationThenUnnamed() {
+        val toOrg = VCardMapper.alignContactDisplayName(
+            prefix = "",
+            givenName = "",
+            middleName = "",
+            familyName = "",
+            suffix = "",
+            nickname = "",
+            organization = "Acme",
+            storedDisplayName = "Acme",
+            scalarExtras = mapOf(
+                "FN" to VCardSyntaxExtras(rawValue = "OldNick"),
+                "N" to VCardSyntaxExtras(rawValue = ";;;;"),
+            ),
+            previousNickname = "OldNick",
+            previousOrganization = "Acme",
+        )
+        assertEquals("Acme", toOrg.displayName)
+        assertEquals("Acme", toOrg.scalarExtras.getValue("FN").rawValue)
+
+        val toUnnamed = VCardMapper.alignContactDisplayName(
+            prefix = "",
+            givenName = "",
+            middleName = "",
+            familyName = "",
+            suffix = "",
+            nickname = "",
+            organization = "",
+            storedDisplayName = "Unnamed",
+            scalarExtras = mapOf(
+                "FN" to VCardSyntaxExtras(rawValue = "OldNick"),
+                "N" to VCardSyntaxExtras(rawValue = ";;;;"),
+            ),
+            previousNickname = "OldNick",
+            previousOrganization = "",
+        )
+        assertEquals("Unnamed", toUnnamed.displayName)
+        assertEquals("Unnamed", toUnnamed.scalarExtras.getValue("FN").rawValue)
+    }
+
+    @Test
     fun v3PhotoEncodingIsNotCopiedOntoV4Upload() {
         val vcardText = """
             BEGIN:VCARD

@@ -467,7 +467,7 @@
     <string name="login_http_failed">Inloggen mislukt: HTTP %1$s</string>
     <string name="msg_saved_locally_upload_failed">Saved on this phone. Upload failed.</string>
 
-    <string name="screen_organize">Ordenen</string>
+    <string name="screen_organize">Collectie</string>
     <string name="organize_bin_summary">Onlangs verwijderde contacten</string>
     <string name="organize_import_summary">Importeren, exporteren en telefooncontacten</string>
     <string name="organize_calendar_summary">Verjaardagen, jubilea en overlijdens</string>
@@ -477,8 +477,8 @@
     <string name="msg_emergency_unavailable">Kan noodcontacten niet openen</string>
     <string name="empty_no_emergency_contacts">Geen noodcontacten</string>
     <string name="section_bin">Prullenbak</string>
-    <string name="empty_bin">Geen verwijderde contacten</string>
-    <string name="bin_kept_days">3 dagen bewaard.</string>
+    <string name="empty_bin">Geen verwijderde contacten.</string>
+    <string name="bin_kept_days">Verwijderde contacten blijven hier 3 dagen.</string>
     <string name="action_restore">Herstellen</string>
     <plurals name="bin_days_left">
         <item quantity="one">nog %d dag</item>
