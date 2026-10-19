@@ -386,6 +386,7 @@
     <string name="msg_synced_counts">同期しました（サーバーから%1$d、サーバーへ%2$d）</string>
     <string name="msg_sync_failed">同期失敗</string>
     <string name="msg_contact_not_found">連絡先が見つかりません</string>
+    <string name="msg_pick_no_detail">該当する情報はありません</string>
     <string name="msg_favorite_sync_failed">お気に入りを同期できません</string>
     <string name="msg_nextcloud_calendar_failed">Nextcloud calendar sync failed</string>
     <string name="msg_no_contacts_in_file">ファイルに連絡先がありません</string>

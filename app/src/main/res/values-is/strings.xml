@@ -386,6 +386,7 @@
     <string name="msg_synced_counts">Samstillt (%1$d frá þjóni, %2$d á þjón)</string>
     <string name="msg_sync_failed">Samstilling mistókst</string>
     <string name="msg_contact_not_found">Tengiliður fannst ekki</string>
+    <string name="msg_pick_no_detail">Engin samsvarandi upplýsing</string>
     <string name="msg_favorite_sync_failed">Tókst ekki að samstilla eftirlæti</string>
     <string name="msg_nextcloud_calendar_failed">Nextcloud calendar sync failed</string>
     <string name="msg_no_contacts_in_file">Engir tengiliðir fundust í skrá</string>

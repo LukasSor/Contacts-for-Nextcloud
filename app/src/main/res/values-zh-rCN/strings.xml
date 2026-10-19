@@ -386,6 +386,7 @@
     <string name="msg_synced_counts">已同步（从服务器 %1$d，到服务器 %2$d）</string>
     <string name="msg_sync_failed">同步失败</string>
     <string name="msg_contact_not_found">未找到联系人</string>
+    <string name="msg_pick_no_detail">没有相符的信息</string>
     <string name="msg_favorite_sync_failed">无法同步收藏</string>
     <string name="msg_nextcloud_calendar_failed">Nextcloud calendar sync failed</string>
     <string name="msg_no_contacts_in_file">文件中没有联系人</string>

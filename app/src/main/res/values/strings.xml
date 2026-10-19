@@ -386,6 +386,7 @@
     <string name="msg_synced_counts">Synced (%1$d from server, %2$d to server)</string>
     <string name="msg_sync_failed">Sync failed</string>
     <string name="msg_contact_not_found">Contact not found</string>
+    <string name="msg_pick_no_detail">No matching detail</string>
     <string name="msg_favorite_sync_failed">Could not sync favorite</string>
     <string name="msg_nextcloud_calendar_failed">Nextcloud calendar sync failed</string>
     <string name="msg_no_contacts_in_file">No contacts found in file</string>

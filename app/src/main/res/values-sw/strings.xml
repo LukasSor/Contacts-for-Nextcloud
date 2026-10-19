@@ -386,6 +386,7 @@
     <string name="msg_synced_counts">Imesawazishwa (%1$d kutoka seva, %2$d kwenda seva)</string>
     <string name="msg_sync_failed">Usawazishaji umeshindwa</string>
     <string name="msg_contact_not_found">Mawasiliano hayapatikani</string>
+    <string name="msg_pick_no_detail">Hakuna maelezo yanayolingana</string>
     <string name="msg_favorite_sync_failed">Imeshindwa kusawazisha kipendwa</string>
     <string name="msg_nextcloud_calendar_failed">Nextcloud calendar sync failed</string>
     <string name="msg_no_contacts_in_file">Hakuna mawasiliano kwenye faili</string>

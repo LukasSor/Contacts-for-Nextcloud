@@ -386,6 +386,7 @@
     <string name="msg_synced_counts">Sinkronizuar (%1$d nga serveri, %2$d te serveri)</string>
     <string name="msg_sync_failed">Sinkronizimi dështoi</string>
     <string name="msg_contact_not_found">Kontakti nuk u gjet</string>
+    <string name="msg_pick_no_detail">Nuk ka të dhënë përputhëse</string>
     <string name="msg_favorite_sync_failed">I preferuari nuk u sinkronizua dot</string>
     <string name="msg_nextcloud_calendar_failed">Nextcloud calendar sync failed</string>
     <string name="msg_no_contacts_in_file">Nuk u gjetën kontakte në skedar</string>

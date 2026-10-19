@@ -386,6 +386,7 @@
     <string name="msg_synced_counts">Tersinkron (%1$d dari server, %2$d ke server)</string>
     <string name="msg_sync_failed">Sinkron gagal</string>
     <string name="msg_contact_not_found">Kontak tidak ditemukan</string>
+    <string name="msg_pick_no_detail">Tidak ada detail yang cocok</string>
     <string name="msg_favorite_sync_failed">Tidak dapat menyinkronkan favorit</string>
     <string name="msg_nextcloud_calendar_failed">Nextcloud calendar sync failed</string>
     <string name="msg_no_contacts_in_file">Tidak ada kontak dalam berkas</string>

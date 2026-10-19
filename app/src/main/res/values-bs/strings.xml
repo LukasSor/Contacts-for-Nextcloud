@@ -386,6 +386,7 @@
     <string name="msg_synced_counts">Sinhronizovano (%1$d sa servera, %2$d na server)</string>
     <string name="msg_sync_failed">Sinhronizacija nije uspjela</string>
     <string name="msg_contact_not_found">Kontakt nije pronađen</string>
+    <string name="msg_pick_no_detail">Nema odgovarajućeg podatka</string>
     <string name="msg_favorite_sync_failed">Omiljeni nije moguće sinhronizovati</string>
     <string name="msg_nextcloud_calendar_failed">Nextcloud calendar sync failed</string>
     <string name="msg_no_contacts_in_file">U datoteci nema kontakata</string>

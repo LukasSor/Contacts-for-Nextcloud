@@ -386,6 +386,7 @@
     <string name="msg_synced_counts">Szinkronizálva (%1$d a szerverről, %2$d a szerverre)</string>
     <string name="msg_sync_failed">A szinkronizálás nem sikerült</string>
     <string name="msg_contact_not_found">A névjegy nem található</string>
+    <string name="msg_pick_no_detail">Nincs egyező adat</string>
     <string name="msg_favorite_sync_failed">A kedvenc szinkronizálása nem sikerült</string>
     <string name="msg_nextcloud_calendar_failed">Nextcloud calendar sync failed</string>
     <string name="msg_no_contacts_in_file">A fájlban nincs névjegy</string>

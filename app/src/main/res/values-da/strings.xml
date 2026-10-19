@@ -386,6 +386,7 @@
     <string name="msg_synced_counts">Synkroniseret (%1$d fra serveren, %2$d til serveren)</string>
     <string name="msg_sync_failed">Synk mislykkedes</string>
     <string name="msg_contact_not_found">Kontakten blev ikke fundet</string>
+    <string name="msg_pick_no_detail">Ingen matchende oplysning</string>
     <string name="msg_favorite_sync_failed">Kunne ikke synkronisere favorit</string>
     <string name="msg_nextcloud_calendar_failed">Nextcloud calendar sync failed</string>
     <string name="msg_no_contacts_in_file">Ingen kontakter i filen</string>

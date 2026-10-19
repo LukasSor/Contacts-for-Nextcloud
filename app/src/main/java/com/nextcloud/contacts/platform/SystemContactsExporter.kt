@@ -11,6 +11,7 @@ import android.provider.ContactsContract.CommonDataKinds.Email
 import android.provider.ContactsContract.CommonDataKinds.Phone
 import android.provider.ContactsContract.CommonDataKinds.Photo
 import android.provider.ContactsContract.CommonDataKinds.StructuredName
+import android.provider.ContactsContract.CommonDataKinds.StructuredPostal
 import android.provider.ContactsContract.Data
 import android.provider.ContactsContract.RawContacts
 import com.nextcloud.contacts.R
@@ -66,8 +67,7 @@ class SystemContactsExporter(
     suspend fun deleteContact(appContactId: Long) {
         val rawId = links.getRawContactId(appContactId) ?: return
         if (hasWritePermission()) {
-            // Soft-delete leaves the row in the provider. Hard-delete so other apps
-            // that list every raw contact do not keep showing it.
+          
             resolver.delete(syncAdapterRawContactUri(rawId), null, null)
         }
         links.removeAppContact(appContactId)
@@ -92,6 +92,26 @@ class SystemContactsExporter(
         val contactId = contactUri.lastPathSegment?.toLongOrNull() ?: return null
         val rawContactId = queryPrimaryRawContactId(contactId) ?: return null
         return links.getAppContactId(rawContactId)
+    }
+
+    /**
+     * Data row on our own raw contact, after export. CoMaps and other pickers
+     * read column data1 (formatted address, phone number, or email).
+     * Returns null when device export is off or this contact is not in that account.
+     */
+    suspend fun externalPickUri(appContactId: Long, kind: ContactPickKind): Uri? {
+        if (!isEnabled() || !hasWritePermission()) return null
+        exportContact(appContactId)
+        if (kind == ContactPickKind.CONTACT) return lookupUriForAppContact(appContactId)
+        val rawId = links.getRawContactId(appContactId) ?: return null
+        val mime = when (kind) {
+            ContactPickKind.POSTAL_ADDRESS -> StructuredPostal.CONTENT_ITEM_TYPE
+            ContactPickKind.PHONE -> Phone.CONTENT_ITEM_TYPE
+            ContactPickKind.EMAIL -> Email.CONTENT_ITEM_TYPE
+            ContactPickKind.CONTACT -> return lookupUriForAppContact(appContactId)
+        }
+        val dataId = firstFilledDataId(rawId, mime) ?: return null
+        return ContentUris.withAppendedId(Data.CONTENT_URI, dataId)
     }
 
     suspend fun lookupUriForAppContact(appContactId: Long): Uri? {
@@ -146,10 +166,6 @@ class SystemContactsExporter(
 
     private fun account(): Account = Account(ACCOUNT_NAME, ACCOUNT_TYPE)
 
-    /**
-     * One raw contact per person. A missing link is recovered from [RawContacts.SOURCE_ID]
-     * so a later export does not insert another copy.
-     */
     private suspend fun activeRawContactId(appContactId: Long, contact: ContactWithDetails): Long? {
         val linked = links.getRawContactId(appContactId)
         if (linked != null && rawContactIsActive(linked)) return linked
@@ -211,7 +227,6 @@ class SystemContactsExporter(
         }
     }
 
-    /** Rewrite phones, emails, and the name on the existing raw contact. */
     private fun replaceDataRows(rawContactId: Long, contact: ContactWithDetails) {
         requireWritePermission()
         val ops = ArrayList<ContentProviderOperation>()
@@ -235,11 +250,6 @@ class SystemContactsExporter(
         }
     }
 
-    /**
-     * Previous exports marked the old raw contact deleted and inserted a new one.
-     * Those deleted rows stay in the provider. Drop them, and drop live rows that
-     * are no longer linked to an app contact.
-     */
     private suspend fun purgeStaleRawContacts() {
         if (!hasWritePermission()) return
         val keep = links.linkedRawContactIds()
@@ -339,6 +349,24 @@ class SystemContactsExporter(
             )
         }
 
+        contact.addresses.forEach { address ->
+            val formatted = shareableAddress(address)
+            if (formatted.isBlank()) return@forEach
+            ops.add(
+                insertData()
+                    .withValue(Data.MIMETYPE, StructuredPostal.CONTENT_ITEM_TYPE)
+                    .withValue(StructuredPostal.FORMATTED_ADDRESS, formatted)
+                    .withValue(StructuredPostal.STREET, address.street)
+                    .withValue(StructuredPostal.POBOX, address.poBox)
+                    .withValue(StructuredPostal.CITY, address.city)
+                    .withValue(StructuredPostal.REGION, address.region)
+                    .withValue(StructuredPostal.POSTCODE, address.postalCode)
+                    .withValue(StructuredPostal.COUNTRY, address.country)
+                    .withValue(StructuredPostal.TYPE, mapAddressType(address.type))
+                    .build(),
+            )
+        }
+
         photoStore.readPhoto(contact.contact.id)?.let { bytes ->
             ops.add(
                 insertData()
@@ -347,6 +375,35 @@ class SystemContactsExporter(
                     .build(),
             )
         }
+    }
+
+    private fun firstFilledDataId(rawContactId: Long, mimeType: String): Long? {
+        resolver.query(
+            Data.CONTENT_URI,
+            arrayOf(Data._ID, Data.DATA1),
+            "${Data.RAW_CONTACT_ID} = ? AND ${Data.MIMETYPE} = ?",
+            arrayOf(rawContactId.toString(), mimeType),
+            "${Data._ID} ASC",
+        )?.use { cursor ->
+            val idColumn = cursor.getColumnIndex(Data._ID)
+            val valueColumn = cursor.getColumnIndex(Data.DATA1)
+            if (idColumn < 0) return null
+            var fallback: Long? = null
+            while (cursor.moveToNext()) {
+                val id = cursor.getLong(idColumn)
+                val value = if (valueColumn < 0) "" else cursor.getString(valueColumn).orEmpty()
+                if (value.isNotBlank()) return id
+                if (fallback == null) fallback = id
+            }
+            return fallback
+        }
+        return null
+    }
+
+    private fun mapAddressType(type: String): Int = when (type.lowercase()) {
+        "work" -> StructuredPostal.TYPE_WORK
+        "other" -> StructuredPostal.TYPE_OTHER
+        else -> StructuredPostal.TYPE_HOME
     }
 
     private fun mapPhoneType(type: String): Int = when (type.lowercase()) {

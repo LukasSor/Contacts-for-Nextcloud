@@ -386,6 +386,7 @@
     <string name="msg_synced_counts">Sinchronizuota (%1$d iš serverio, %2$d į serverį)</string>
     <string name="msg_sync_failed">Sinchronizavimas nepavyko</string>
     <string name="msg_contact_not_found">Adresatas nerastas</string>
+    <string name="msg_pick_no_detail">Nėra atitinkančios informacijos</string>
     <string name="msg_favorite_sync_failed">Nepavyko sinchronizuoti mėgstamo</string>
     <string name="msg_nextcloud_calendar_failed">Nextcloud calendar sync failed</string>
     <string name="msg_no_contacts_in_file">Faile adresatų nerasta</string>

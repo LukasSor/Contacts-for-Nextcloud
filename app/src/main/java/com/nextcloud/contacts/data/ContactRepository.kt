@@ -48,6 +48,7 @@ import com.nextcloud.contacts.data.local.UrlEntity
 import com.nextcloud.contacts.data.remote.RemoteUrlNormalizer
 import com.nextcloud.contacts.data.remote.VCardMapper
 import com.nextcloud.contacts.platform.ContactsProviderIntegrations
+import com.nextcloud.contacts.platform.MessagingContactsIntents
 import com.nextcloud.contacts.platform.MessengerImMapping
 import com.nextcloud.contacts.platform.ContactDatesCalendarCoordinator
 import com.nextcloud.contacts.platform.SystemContactsExporter
@@ -1242,6 +1243,7 @@ class ContactRepository(
         val imported: Int,
         val updated: Int,
         val failed: Int,
+        val contactIds: List<Long> = emptyList(),
     )
 
     suspend fun exportAllToVcf(): VcfExportResult {
@@ -1266,6 +1268,7 @@ class ContactRepository(
         var imported = 0
         var updated = 0
         var failed = 0
+        val contactIds = ArrayList<Long>()
         val index = fingerprintIndex()
         for (vcard in vcards) {
             try {
@@ -1291,17 +1294,40 @@ class ContactRepository(
                         }
                     }
                     index.put(existingId, input.displayName, phones, emails)
+                    contactIds.add(existingId)
                     updated++
                 } else {
                     val id = createContactWithRemoteUid(input, remoteUid ?: UUID.randomUUID().toString())
                     index.put(id, input.displayName, phones, emails)
+                    contactIds.add(id)
                     imported++
                 }
             } catch (_: Exception) {
                 failed++
             }
         }
-        return VcfImportResult(imported = imported, updated = updated, failed = failed)
+        return VcfImportResult(
+            imported = imported,
+            updated = updated,
+            failed = failed,
+            contactIds = contactIds,
+        )
+    }
+
+    suspend fun findContactIdByPhone(raw: String): Long? {
+        val digits = MessagingContactsIntents.digitsOnly(raw)
+        if (digits.isEmpty()) return null
+        return contactDao.listPhoneValues().firstOrNull { row ->
+            MessagingContactsIntents.phonesMatch(digits, MessagingContactsIntents.digitsOnly(row.value))
+        }?.contactId
+    }
+
+    suspend fun findContactIdByEmail(raw: String): Long? {
+        val email = raw.trim()
+        if (email.isEmpty()) return null
+        return contactDao.listEmailValues().firstOrNull { row ->
+            row.value.trim().equals(email, ignoreCase = true)
+        }?.contactId
     }
 
     data class BulkImportResult(

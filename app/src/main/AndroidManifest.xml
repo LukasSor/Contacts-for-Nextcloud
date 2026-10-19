@@ -210,6 +210,165 @@
 
             </intent-filter>
 
+            <!-- CoMaps search contacts button: ACTION_PICK vnd.android.cursor.dir/postal-address_v2 -->
+            <intent-filter>
+                <action android:name="android.intent.action.PICK" />
+                <action android:name="android.intent.action.GET_CONTENT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.dir/postal-address_v2" />
+                <data android:mimeType="vnd.android.cursor.item/postal-address_v2" />
+                <data android:mimeType="vnd.android.cursor.dir/postal-address" />
+                <data android:mimeType="vnd.android.cursor.item/postal-address" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.PICK" />
+                <action android:name="android.intent.action.GET_CONTENT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.dir/person" />
+                <data android:mimeType="vnd.android.cursor.dir/phone_v2" />
+                <data android:mimeType="vnd.android.cursor.dir/phone" />
+                <data android:mimeType="vnd.android.cursor.item/phone_v2" />
+                <data android:mimeType="vnd.android.cursor.item/phone" />
+                <data android:mimeType="vnd.android.cursor.dir/email_v2" />
+                <data android:mimeType="vnd.android.cursor.item/email_v2" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.dir/person" />
+                <data android:mimeType="vnd.android.cursor.item/raw_contact" />
+                <data android:mimeType="vnd.android.cursor.item/group" />
+                <data android:mimeType="vnd.android.cursor.dir/group" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" android:host="com.android.contacts" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.EDIT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.item/raw_contact" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.INSERT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.dir/person" />
+                <data android:mimeType="vnd.android.cursor.dir/raw_contact" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="com.android.contacts.action.QUICK_CONTACT" />
+                <action android:name="android.provider.action.QUICK_CONTACT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.item/contact" />
+                <data android:mimeType="vnd.android.cursor.item/person" />
+                <data android:mimeType="vnd.android.cursor.item/raw_contact" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="com.android.contacts.action.LIST_STARRED" />
+                <action android:name="com.android.contacts.action.LIST_FREQUENT" />
+                <action android:name="com.android.contacts.action.LIST_STREQUENT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="com.android.contacts.action.SHOW_OR_CREATE_CONTACT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="tel" />
+                <data android:scheme="mailto" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/x-vcard" />
+                <data android:mimeType="text/vcard" />
+                <data android:mimeType="text/directory" />
+                <data android:mimeType="application/vcard" />
+                <data android:mimeType="text/vcf" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/x-vcard" />
+                <data android:mimeType="text/vcard" />
+                <data android:mimeType="text/directory" />
+                <data android:mimeType="application/vcard" />
+                <data android:mimeType="text/vcf" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" />
+                <data android:scheme="file" />
+                <data android:host="*" />
+                <data android:mimeType="*/*" />
+                <data android:pathPattern=".*\\.vcf" />
+                <data android:pathPattern=".*\\.VCF" />
+                <data android:pathPattern=".*\\.vcard" />
+                <data android:pathPattern=".*\\.VCARD" />
+                <data android:pathPattern=".*/.*\\.vcf" />
+                <data android:pathPattern=".*/.*\\.VCF" />
+                <data android:pathPattern=".*/.*\\.vcard" />
+                <data android:pathPattern=".*/.*\\.VCARD" />
+                <data android:pathPattern=".*/.*/.*\\.vcf" />
+                <data android:pathPattern=".*/.*/.*\\.VCF" />
+                <data android:pathPattern=".*/.*/.*\\.vcard" />
+                <data android:pathPattern=".*/.*/.*\\.VCARD" />
+                <data android:pathPattern=".*/.*/.*/.*\\.vcf" />
+                <data android:pathPattern=".*/.*/.*/.*\\.VCF" />
+                <data android:pathPattern=".*/.*/.*/.*\\.vcard" />
+                <data android:pathPattern=".*/.*/.*/.*\\.VCARD" />
+                <data android:pathPattern=".*/.*/.*/.*/.*\\.vcf" />
+                <data android:pathPattern=".*/.*/.*/.*/.*\\.VCF" />
+                <data android:pathPattern=".*/.*/.*/.*/.*\\.vcard" />
+                <data android:pathPattern=".*/.*/.*/.*/.*\\.VCARD" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" />
+                <data android:scheme="file" />
+                <data android:host="*" />
+                <data android:pathPattern=".*\\.vcf" />
+                <data android:pathPattern=".*\\.VCF" />
+                <data android:pathPattern=".*\\.vcard" />
+                <data android:pathPattern=".*\\.VCARD" />
+                <data android:pathPattern=".*/.*\\.vcf" />
+                <data android:pathPattern=".*/.*\\.VCF" />
+                <data android:pathPattern=".*/.*\\.vcard" />
+                <data android:pathPattern=".*/.*\\.VCARD" />
+                <data android:pathPattern=".*/.*/.*\\.vcf" />
+                <data android:pathPattern=".*/.*/.*\\.VCF" />
+                <data android:pathPattern=".*/.*/.*\\.vcard" />
+                <data android:pathPattern=".*/.*/.*\\.VCARD" />
+                <data android:pathPattern=".*/.*/.*/.*\\.vcf" />
+                <data android:pathPattern=".*/.*/.*/.*\\.VCF" />
+                <data android:pathPattern=".*/.*/.*/.*\\.vcard" />
+                <data android:pathPattern=".*/.*/.*/.*\\.VCARD" />
+                <data android:pathPattern=".*/.*/.*/.*/.*\\.vcf" />
+                <data android:pathPattern=".*/.*/.*/.*/.*\\.VCF" />
+                <data android:pathPattern=".*/.*/.*/.*/.*\\.vcard" />
+                <data android:pathPattern=".*/.*/.*/.*/.*\\.VCARD" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.APPLICATION_PREFERENCES" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
         </activity>
 
 
@@ -233,6 +392,12 @@
                 android:resource="@xml/contacts_authenticator" />
 
         </service>
+
+        <provider
+            android:name=".platform.PickedContactFieldProvider"
+            android:authorities="${applicationId}.pickedfield"
+            android:exported="true"
+            android:grantUriPermissions="true" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

@@ -5,6 +5,9 @@ import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.dropUnlessResumed
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -15,6 +18,10 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.nextcloud.contacts.ContactsApp
+import com.nextcloud.contacts.R
+import com.nextcloud.contacts.data.local.ContactInput
+import com.nextcloud.contacts.data.local.VCardTypedFieldInput
+import com.nextcloud.contacts.data.vcf.formatVcfImportMessage
 import com.nextcloud.contacts.platform.ContactsLaunch
 import com.nextcloud.contacts.ui.screens.AccountSetupScreen
 import com.nextcloud.contacts.ui.screens.ContactDetailScreen
@@ -46,6 +53,7 @@ fun ContactsNavHost(
     isPickerMode: Boolean = false,
     onRequestHandled: () -> Unit = {},
     onContactPicked: (Long) -> Unit = {},
+    onPickerCancel: () -> Unit = {},
     onHomeContentReady: () -> Unit = {},
 ) {
     val context = LocalContext.current
@@ -60,6 +68,7 @@ fun ContactsNavHost(
         setupCompleted = setupCompleted,
     )
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    var openedFromOutside by remember { mutableStateOf(false) }
     // A deep link can open detail before the list is ready. Sync still waits for a screen.
     LaunchedEffect(currentBackStackEntry?.destination?.route) {
         val route = currentBackStackEntry?.destination?.route ?: return@LaunchedEffect
@@ -70,58 +79,103 @@ fun ContactsNavHost(
 
     LaunchedEffect(incomingRequest) {
         val request = incomingRequest ?: return@LaunchedEffect
-        if (!container.credentialStore.isLoggedIn()) {
-            onRequestHandled()
-            return@LaunchedEffect
+        openedFromOutside = true
+        fun navigateFromOutside(route: String) {
+            val current = navController.currentDestination?.route
+            if (current == route) return
+            val leavingSetup = current == Routes.SETUP || current == Routes.POST_LOGIN_SETUP
+            navController.navigate(route) {
+                if (leavingSetup) {
+                    popUpTo(current!!) { inclusive = true }
+                }
+                launchSingleTop = true
+                restoreState = !leavingSetup
+            }
         }
-        val showSetup = PostLoginSetup.startDestination(
-            loggedIn = true,
-            loginSkipped = container.userPreferences.isSetupSkipped(),
-            setupCompleted = container.userPreferences.isPostLoginSetupComplete(),
-        ) == Routes.POST_LOGIN_SETUP
+        fun openContactList() {
+            navigateFromOutside(Routes.CONTACTS)
+        }
         when (val launch = request.launch) {
             ContactsLaunch.Home,
-            ContactsLaunch.List,
-            -> {
-                if (showSetup) {
-                    if (navController.currentDestination?.route != Routes.POST_LOGIN_SETUP) {
-                        navController.navigate(Routes.POST_LOGIN_SETUP) {
-                            popUpTo(0) { inclusive = true }
-                            launchSingleTop = true
-                            restoreState = false
-                        }
-                    }
-                } else if (navController.currentDestination?.route != Routes.CONTACTS) {
-                    // Open the list without clearing a restored screen above it.
-                    navController.navigate(Routes.CONTACTS) {
-                        launchSingleTop = true
-                        restoreState = true
-                    }
-                }
+            ContactsLaunch.ContactList,
+            is ContactsLaunch.PickContact,
+            -> openContactList()
+            is ContactsLaunch.SearchContacts -> {
+                ContactListPendingSearch.set(launch.query)
+                openContactList()
             }
-            ContactsLaunch.PickContact -> navController.navigate(Routes.CONTACTS) {
-                launchSingleTop = true
-                restoreState = true
-            }
+            ContactsLaunch.OpenSettings -> navigateFromOutside(Routes.SETTINGS)
             is ContactsLaunch.InsertContact -> {
                 ContactEditPrefill.input = launch.prefilled
-                navController.navigate(Routes.contactEdit(0))
+                navigateFromOutside(Routes.contactEdit(0))
             }
             is ContactsLaunch.ViewContact -> {
                 val appId = resolveAppContactId(container, request.systemUri)
                 if (appId != null) {
-                    navController.navigate(Routes.contactDetail(appId))
+                    navigateFromOutside(Routes.contactDetail(appId))
                 } else {
-                    navController.navigate(Routes.CONTACTS)
+                    openContactList()
                 }
             }
             is ContactsLaunch.EditContact -> {
                 val appId = resolveAppContactId(container, request.systemUri)
                 if (appId != null) {
-                    navController.navigate(Routes.contactEdit(appId))
+                    navigateFromOutside(Routes.contactEdit(appId))
                 } else {
-                    ContactEditPrefill.input = null
-                    navController.navigate(Routes.contactEdit(0))
+                    openContactList()
+                }
+            }
+            is ContactsLaunch.ShowOrCreateContact -> {
+                val appId = withContext(Dispatchers.IO) {
+                    when {
+                        !launch.phone.isNullOrBlank() -> container.contactRepository.findContactIdByPhone(launch.phone)
+                        !launch.email.isNullOrBlank() -> container.contactRepository.findContactIdByEmail(launch.email)
+                        else -> null
+                    }
+                }
+                if (appId != null) {
+                    navigateFromOutside(Routes.contactDetail(appId))
+                } else if (!launch.phone.isNullOrBlank() || !launch.email.isNullOrBlank()) {
+                    ContactEditPrefill.input = ContactInput(
+                        phones = if (!launch.phone.isNullOrBlank()) {
+                            listOf(VCardTypedFieldInput.phone(value = launch.phone))
+                        } else {
+                            listOf(VCardTypedFieldInput.phone())
+                        },
+                        emails = if (!launch.email.isNullOrBlank()) {
+                            listOf(VCardTypedFieldInput.email(value = launch.email))
+                        } else {
+                            listOf(VCardTypedFieldInput.email())
+                        },
+                    )
+                    navigateFromOutside(Routes.contactEdit(0))
+                } else {
+                    openContactList()
+                }
+            }
+            is ContactsLaunch.ImportVCards -> {
+                val text = withContext(Dispatchers.IO) {
+                    readIncomingVCardText(context, launch.uris, launch.fallbackText)
+                }
+                if (text.isNullOrBlank()) {
+                    container.uiNotices.post(context.getString(R.string.msg_could_not_read_file))
+                    openContactList()
+                } else {
+                    val result = withContext(Dispatchers.IO) {
+                        runCatching { container.contactRepository.importFromVcf(text) }.getOrNull()
+                    }
+                    if (result == null) {
+                        container.uiNotices.post(context.getString(R.string.msg_could_not_read_file))
+                        openContactList()
+                    } else {
+                        container.uiNotices.post(formatVcfImportMessage(context, result))
+                        val onlyId = result.contactIds.singleOrNull()
+                        if (onlyId != null) {
+                            navigateFromOutside(Routes.contactDetail(onlyId))
+                        } else {
+                            openContactList()
+                        }
+                    }
                 }
             }
         }
@@ -130,7 +184,7 @@ fun ContactsNavHost(
 
     LaunchedEffect(currentBackStackEntry?.destination?.route) {
         val route = currentBackStackEntry?.destination?.route ?: return@LaunchedEffect
-        if (route == Routes.POST_LOGIN_SETUP) return@LaunchedEffect
+        if (route == Routes.POST_LOGIN_SETUP || openedFromOutside) return@LaunchedEffect
         val forced = PostLoginSetup.startDestination(
             loggedIn = container.credentialStore.isLoggedIn(),
             loginSkipped = container.userPreferences.isSetupSkipped(),
@@ -201,6 +255,7 @@ fun ContactsNavHost(
                     }
                 },
                 isPickerMode = isPickerMode,
+                onPickerCancel = onPickerCancel,
                 onContactsReady = onHomeContentReady,
             )
         }
@@ -368,6 +423,22 @@ private suspend fun resolveAppContactId(
 ): Long? {
     if (systemUri == null) return null
     return withContext(Dispatchers.IO) {
-        container.systemContactsExporter.lookupAppContactId(systemUri)
+        runCatching { container.systemContactsExporter.lookupAppContactId(systemUri) }.getOrNull()
     }
+}
+
+private fun readIncomingVCardText(
+    context: android.content.Context,
+    uris: List<android.net.Uri>,
+    fallbackText: String?,
+): String? {
+    val parts = uris.mapNotNull { uri ->
+        runCatching {
+            context.contentResolver.openInputStream(uri)?.use { stream ->
+                stream.bufferedReader().readText()
+            }
+        }.getOrNull()?.takeIf { it.isNotBlank() }
+    }
+    if (parts.isNotEmpty()) return parts.joinToString("\n")
+    return fallbackText?.trim()?.takeIf { it.contains("BEGIN:VCARD", ignoreCase = true) }
 }

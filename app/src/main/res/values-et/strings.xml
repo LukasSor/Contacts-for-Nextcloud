@@ -386,6 +386,7 @@
     <string name="msg_synced_counts">Sünkroonitud (%1$d serverist, %2$d serverisse)</string>
     <string name="msg_sync_failed">Sünkroonimine ebaõnnestus</string>
     <string name="msg_contact_not_found">Kontakti ei leitud</string>
+    <string name="msg_pick_no_detail">Sobivat kirjet pole</string>
     <string name="msg_favorite_sync_failed">Lemmikuid ei saanud sünkroonida</string>
     <string name="msg_nextcloud_calendar_failed">Nextcloud calendar sync failed</string>
     <string name="msg_no_contacts_in_file">Failist ei leitud kontakte</string>

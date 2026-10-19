@@ -386,6 +386,7 @@
     <string name="msg_synced_counts">Συγχρονίστηκε (%1$d από τον διακομιστή, %2$d προς τον διακομιστή)</string>
     <string name="msg_sync_failed">Ο συγχρονισμός απέτυχε</string>
     <string name="msg_contact_not_found">Η επαφή δεν βρέθηκε</string>
+    <string name="msg_pick_no_detail">Δεν υπάρχει αντίστοιχο στοιχείο</string>
     <string name="msg_favorite_sync_failed">Το αγαπημένο δεν συγχρονίστηκε</string>
     <string name="msg_nextcloud_calendar_failed">Nextcloud calendar sync failed</string>
     <string name="msg_no_contacts_in_file">Δεν υπάρχουν επαφές στο αρχείο</string>

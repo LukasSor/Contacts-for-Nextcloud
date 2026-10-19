@@ -86,6 +86,7 @@ import com.nextcloud.contacts.ui.list.withLargeFavoriteCards
 import com.nextcloud.contacts.ui.util.rememberDeviceContactsImportAction
 import com.nextcloud.contacts.ui.viewmodel.ContactListSortField
 import com.nextcloud.contacts.ui.navigation.ContactListPendingGroupFilter
+import com.nextcloud.contacts.ui.navigation.ContactListPendingSearch
 import com.nextcloud.contacts.ui.viewmodel.ContactListViewModel
 import com.nextcloud.contacts.ui.viewmodel.contactBirthdayRowLabel
 import com.nextcloud.contacts.ui.viewmodel.sortChipLabel
@@ -129,6 +130,7 @@ fun ContactListScreen(
     onOpenOrganize: () -> Unit,
     onOpenSettings: () -> Unit,
     isPickerMode: Boolean = false,
+    onPickerCancel: () -> Unit = {},
     onContactsReady: () -> Unit = {},
     viewModel: ContactListViewModel = viewModel(),
 ) {
@@ -166,6 +168,15 @@ fun ContactListScreen(
         }
     }
 
+    val pendingSearchToken = ContactListPendingSearch.token
+    LaunchedEffect(pendingSearchToken) {
+        val query = ContactListPendingSearch.consume(pendingSearchToken) ?: return@LaunchedEffect
+        if (query.isNotEmpty()) {
+            viewModel.updateSearch(query)
+            searchExpanded = true
+        }
+    }
+
     LaunchedEffect(message) {
         message?.let {
             snackbarHostState.showSnackbar(it)
@@ -193,6 +204,13 @@ fun ContactListScreen(
         topBar = {
             TopAppBar(
                 title = { Text(if (isPickerMode) stringResource(R.string.screen_choose_contact) else stringResource(R.string.screen_contacts)) },
+                navigationIcon = {
+                    if (isPickerMode) {
+                        IconButton(onClick = onPickerCancel) {
+                            Icon(Icons.Default.Close, contentDescription = stringResource(R.string.action_close))
+                        }
+                    }
+                },
                 actions = {
                     if (!isPickerMode) {
                         IconButton(onClick = onOpenOrganize) {
