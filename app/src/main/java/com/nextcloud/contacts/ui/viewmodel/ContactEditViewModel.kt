@@ -180,6 +180,10 @@ class ContactEditViewModel(
     private val _saved = MutableStateFlow(false)
     val saved: StateFlow<Boolean> = _saved.asStateFlow()
 
+    /** Room id from a successful create. Null when an existing contact was updated. */
+    private val _createdContactId = MutableStateFlow<Long?>(null)
+    val createdContactId: StateFlow<Long?> = _createdContactId.asStateFlow()
+
     private val _deleted = MutableStateFlow(false)
     val deleted: StateFlow<Boolean> = _deleted.asStateFlow()
 
@@ -1201,7 +1205,7 @@ class ContactEditViewModel(
                     _state.value = stateForSave
                 }
                 val input = stateForSave.toContactInput()
-                if (contactId == 0L) {
+                val createdId = if (contactId == 0L) {
                     repository.createContact(input, editFieldSyntaxEnabled = editFieldSyntaxEnabled)
                 } else {
                     repository.updateContact(
@@ -1209,8 +1213,10 @@ class ContactEditViewModel(
                         input,
                         editFieldSyntaxEnabled = editFieldSyntaxEnabled,
                     )
+                    null
                 }
                 SyncWorker.syncNow(getApplication(), localSave = true)
+                _createdContactId.value = createdId
                 _saved.value = true
             } finally {
                 _state.value = _state.value.copy(isLoading = false)

@@ -290,7 +290,17 @@ fun ContactsNavHost(
         ) {
             ContactEditScreen(
                 onBack = { navController.popBackStack() },
-                onSaved = { navController.popBackStack() },
+                onSaved = { createdContactId ->
+                    if (createdContactId != null) {
+                        // Create opens the editor from the list, so a pop would skip detail.
+                        // Show the new contact and remove the editor so Back returns to the list.
+                        navController.navigate(Routes.contactDetail(createdContactId)) {
+                            popUpTo(Routes.CONTACT_EDIT) { inclusive = true }
+                        }
+                    } else {
+                        navController.popBackStack()
+                    }
+                },
                 onDeleted = {
                     // Edit sits on the detail screen. Pop both so a deleted contact
                     // is not left as an empty detail page.

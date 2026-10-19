@@ -122,7 +122,7 @@ import com.nextcloud.contacts.ui.viewmodel.visibleSocialProfileIndices
 @Composable
 fun ContactEditScreen(
     onBack: () -> Unit,
-    onSaved: () -> Unit,
+    onSaved: (createdContactId: Long?) -> Unit,
     onDeleted: () -> Unit,
     viewModel: ContactEditViewModel = viewModel(),
 ) {
@@ -134,6 +134,7 @@ fun ContactEditScreen(
     val showFullFields = fieldMode.includesFullFields()
     val saved by viewModel.saved.collectAsState()
     val deleted by viewModel.deleted.collectAsState()
+    var navigatedAfterSave by remember { mutableStateOf(false) }
     var navigatedAfterDelete by remember { mutableStateOf(false) }
     val existingGroups by viewModel.existingGroups.collectAsState()
     val cloudUserSearch by viewModel.cloudUserSearch.collectAsState()
@@ -148,7 +149,10 @@ fun ContactEditScreen(
     fieldFocus.PendingRevealFocusEffect(state, fieldMode)
 
     LaunchedEffect(saved) {
-        if (saved) onSaved()
+        if (saved && !navigatedAfterSave) {
+            navigatedAfterSave = true
+            onSaved(viewModel.createdContactId.value)
+        }
     }
     LaunchedEffect(deleted) {
         if (deleted && !navigatedAfterDelete) {
